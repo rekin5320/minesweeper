@@ -1,10 +1,5 @@
-#include <QApplication>
-#include <QLabel>
-#include <QtCore>
-#include <QHBoxLayout>
-#include <QPushButton>
-#include <QMainWindow>
 #include <iostream>
+
 #include "minesweeperUI.hpp"
 
 

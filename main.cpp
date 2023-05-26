@@ -3,26 +3,21 @@
 #include <QtCore>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QMainWindow>
 #include <iostream>
+#include "minesweeperUI.hpp"
 
 
 int main(int argc, char **argv) {
     std::cout << "Qt version: " << qVersion() << std::endl;
 
     QApplication app(argc, argv);
+    QMainWindow window;
+    Ui::MainWindow ui;
+    ui.setupUi(&window);
 
-    QWidget window{};
-
-    QLabel label{"Hello, world!"};
-    QPushButton button{"Click"};
-    QApplication::connect(&button, &QPushButton::released, [&label](){label.setText("changed");});
-
-    QHBoxLayout layout{};
-    layout.addWidget(&label);
-    layout.addWidget(&button);
-    window.setLayout(&layout);
+    QApplication::connect(ui.button, &QPushButton::released, [&ui](){ui.label->setText("changed");});
 
     window.show();
-
     return app.exec();
 }

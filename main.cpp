@@ -16,5 +16,3 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
-
-// g++ $(pkg-config --cflags --libs Qt5Widgets) -fPIC main.cpp -o main

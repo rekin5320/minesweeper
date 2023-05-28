@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "minesweeperUI.hpp"
+#include "minesweeper_ui.hpp"
 
 
 int main(int argc, char **argv) {

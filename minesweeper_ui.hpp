@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'minesweeperUI.ui'
+** Form generated from reading UI file 'minesweeper_ui.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.15.9
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef MINESWEEPERUI_H
-#define MINESWEEPERUI_H
+#ifndef MINESWEEPER_UI_H
+#define MINESWEEPER_UI_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -83,7 +83,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Hello, world!", nullptr));
         button->setText(QCoreApplication::translate("MainWindow", "Click", nullptr));
@@ -99,4 +99,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // MINESWEEPERUI_H
+#endif // MINESWEEPER_UI_H

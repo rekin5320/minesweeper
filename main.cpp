@@ -1,21 +1,18 @@
-#include <QApplication>
-#include <QWidget>
-#include <QLabel>
-#include <QtCore>
 #include <iostream>
 
-int main(int argc, char **argv)
-{
+#include "minesweeper_ui.hpp"
+
+
+int main(int argc, char **argv) {
     std::cout << "Qt version: " << qVersion() << std::endl;
 
     QApplication app(argc, argv);
+    QMainWindow window;
+    Ui::MainWindow ui;
+    ui.setupUi(&window);
 
-    QLabel hello("Hello world!");
+    QApplication::connect(ui.button, &QPushButton::released, [&ui](){ui.label->setText("changed");});
 
-    hello.show();
-
+    window.show();
     return app.exec();
 }
-
-// g++ $(pkg-config --cflags --libs Qt5Widgets) -fPIC main.cpp -o main
-// g++ $(pkg-config --cflags Qt5Widgets) -fPIC main.cpp -o main $(pkg-config --libs Qt5Widgets)

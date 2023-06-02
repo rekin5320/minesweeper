@@ -17,8 +17,8 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Hello, world!</string>
+      <property name="pixmap">
+       <pixmap>/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/MINESWEEPER.png</pixmap>
       </property>
      </widget>
     </item>

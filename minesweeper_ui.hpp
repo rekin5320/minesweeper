@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.9
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -50,6 +50,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
+        label->setPixmap(QPixmap(QString::fromUtf8("/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/MINESWEEPER.png")));
 
         verticalLayout->addWidget(label);
 
@@ -85,7 +86,6 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Hello, world!", nullptr));
         button->setText(QCoreApplication::translate("MainWindow", "Click", nullptr));
         menuNew_game->setTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));

@@ -1,5 +1,7 @@
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
+#include <iostream>
 #include <QRandomGenerator>
 
 
@@ -135,26 +137,25 @@ class Game
 {
 public:
     Board board;
-
-    Game(Level level);
+    unsigned int num_bombs;
+    Game(Level level)
     {
         switch (level)
         {
         case BEGINNER:
             board = Board(9, 9);
-            unsigned int num_bombs = 10;
+            num_bombs = 10;
             break;
         case INTERMEDIATE:
             board = Board(16, 16);
-            unsigned int num_bombs = 40;
+            num_bombs = 40;
             break;
         case EXPERT:
             board = Board(30, 16);
-            unsigned int num_bombs = 99;
+            num_bombs = 99;
             break;
         case CUSTOM:
             unsigned int width, height;
-            unsigned int num_bombs;
             std::cout << "Enter width: ";
             std::cin >> width;
             std::cout << "Enter height: ";
@@ -172,7 +173,7 @@ public:
 
     void start()
     {
-        board.generate_bombs(num_bombs);
+        board.generate_bombs(Game::num_bombs);
         board.count_adjacent_bombs();
     }
 
@@ -220,7 +221,7 @@ public:
         }
         return true;
     }
-}
+};
 
 
 int main() {

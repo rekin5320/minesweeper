@@ -1,4 +1,5 @@
 // TODO split to header and source files; temporarily for convenience it's together
+#include <iostream>
 #include <stdexcept>
 #include <vector>
 #include <QRandomGenerator>
@@ -61,14 +62,17 @@ public:
 
     Tile& get_tile(unsigned int x, unsigned int y)
     {
+        if (x >= WIDTH || y >= HEIGHT) {
+            throw std::invalid_argument("Invalid coordinates");
+        }
         return Tiles[y][x];
     }
 
     QRandomGenerator random{};
     Tile& random_tile()
     {
-        unsigned int rand_x = random.bounded(WIDTH + 1);
-        unsigned int rand_y = random.bounded(HEIGHT + 1);
+        unsigned int rand_x = random.bounded(WIDTH);
+        unsigned int rand_y = random.bounded(HEIGHT);
         return get_tile(rand_x, rand_y);
     }
 
@@ -97,11 +101,15 @@ public:
                     unsigned int count = 0;
                     for (int dx = -1; dx <= 1; dx++) {
                         for (int dy = -1; dy <= 1; dy++) {
-                            unsigned int x = tile.x + dx;
-                            unsigned int y = tile.y + dy;
-                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < WIDTH && !(y == 0 && dy == -1) && y < HEIGHT) {
-                                if (get_tile(x, y).is_bomb) {
-                                    count++;
+                            if (!(dx == 0 && dy == 0)) {  // don't count self
+                                if ((!(tile.x == 0 && dx == -1)) && !(tile.y == 0 && dy == -1)) {  // left and top border
+                                    unsigned int x = tile.x + dx;
+                                    unsigned int y = tile.y + dy;
+                                    if (x < WIDTH && y < HEIGHT) {  // right and bottom border
+                                        if (get_tile(x, y).is_bomb) {
+                                            count++;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -111,4 +119,21 @@ public:
             }
         }
     };
+
+    void print_board() {
+        for (auto& row : Tiles) {
+            for (auto& tile : row) {
+                if (tile.is_flagged) {
+                    std::cout << (tile.is_bomb ? "F" : "f");
+                }
+                else if (tile.is_bomb) {
+                    std::cout << "X";
+                }
+                else {
+                    std::cout << tile.num_adjacent_bombs;
+                }
+            }
+            std::cout << "\n";
+        }
+    }
 };

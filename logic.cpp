@@ -104,7 +104,7 @@ public:
     {
         if (!get_tile(x, y).is_covered)
         {
-            throw std::invalid_argument("Tile is already uncovered");
+            throw std::invalid_argument("Tile is already flagged");
         }
         Tile& tile = get_tile(x, y);
         tile.is_flagged = true;
@@ -114,7 +114,7 @@ public:
     {
         if (!get_tile(x, y).is_covered)
         {
-            throw std::invalid_argument("Tile is already uncovered");
+            throw std::invalid_argument("Tile is already unflagged");
         }
         Tile& tile = get_tile(x, y);
         tile.is_flagged = false;

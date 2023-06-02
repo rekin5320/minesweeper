@@ -13,11 +13,24 @@ find_package(Qt5 REQUIRED COMPONENTS
     Widgets
 )
 
-add_executable(${PROJECT_NAME} main.cpp)
+list(APPEND QT_RESOURCES
+    resources/resources.qrc
+)
+
+set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-pedantic" "-fsanitize=undefined")
+add_compile_options(${COMPILE_OPTIONS})
+add_link_options(${COMPILE_OPTIONS})
+
+add_executable(${PROJECT_NAME} main.cpp ${QT_RESOURCES})
 target_link_libraries(${PROJECT_NAME}
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
 )
 
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -pedantic)  # -fsanitize=undefined for some reason doesn't work
+add_executable(logic logic.cpp)  # temporary
+target_link_libraries(logic
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+)

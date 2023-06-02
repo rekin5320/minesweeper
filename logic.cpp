@@ -2,26 +2,28 @@
 #include <vector>
 #include <QRandomGenerator>
 
+
 class Tile
 {
 public:
-    unsigned int x;
-    unsigned int y;
+    const unsigned int x;
+    const unsigned int y;
     bool is_bomb;
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false){};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0) {};
 };
+
 
 class Board
 {
 public:
-    unsigned int width, height;
+    const unsigned int WIDTH, HEIGHT;
     std::vector<std::vector<Tile>> Tiles;
 
-    Board(unsigned int width, unsigned int height) : width(width), height(height)
+    Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
         // Tiles.reserve()  // reserve space to avoid unnecessary relocations
         for (unsigned int y = 0; y < height; y++)
@@ -44,15 +46,15 @@ public:
     QRandomGenerator random{};
     Tile random_tile()
     {
-        unsigned int rand_x = random.bounded(width + 1);
-        unsigned int rand_y = random.bounded(height + 1);
+        unsigned int rand_x = random.bounded(WIDTH + 1);
+        unsigned int rand_y = random.bounded(HEIGHT + 1);
         Tile rand_tile = get_tile(rand_x, rand_y);
         return rand_tile;
     }
 
     void generate_bombs(unsigned int num_bombs)
     {
-        if (num_bombs > width * height)
+        if (num_bombs > WIDTH * HEIGHT)
         {
             throw std::invalid_argument("Too many bombs");
         }
@@ -68,26 +70,17 @@ public:
         }
     }
 
-    void count_adjacent_bombs(Tiles &board)
-    {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                Tile tile = board[i][j];
-                if (!tile.is_bomb)
-                {
-                    int count = 0;
-                    for (int ii = -1; ii <= 1; ii++)
-                    {
-                        for (int jj = -1; jj <= 1; jj++)
-                        {
-                            // to make sure we don't count the bombs that are out of bounds
-                            // current tile wont be counted
-                            if (i + ii >= 0 && i + ii < height && j + jj >= 0 && j + jj < width)
-                            {
-                                if (board[i + ii][j + jj].is_bomb)
-                                {
+    void count_adjacent_bombs() {
+        for (auto& row : Tiles) {
+            for (auto& tile : row) {
+                if (!tile.is_bomb) {
+                    unsigned int count = 0;
+                    for (int dx = -1; dx <= 1; dx++) {
+                        for (int dy = -1; dy <= 1; dy++) {
+                            unsigned int x = tile.x + dx;
+                            unsigned int y = tile.y + dy;
+                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < WIDTH && !(y == 0 && dy == -1) && y < HEIGHT) {
+                                if (get_tile(x, y).is_bomb) {
                                     count++;
                                 }
                             }
@@ -130,5 +123,13 @@ public:
     }
 
 
+};
+
+
+int main() {
+
+
+    return 0;
 }
+
 

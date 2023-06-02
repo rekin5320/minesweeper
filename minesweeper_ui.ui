@@ -27,7 +27,7 @@
     <item>
      <widget class="QLabel" name="label">
       <property name="pixmap">
-       <pixmap>/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/MINESWEEPER.png</pixmap>
+       <pixmap resource="resources/resources.qrc">:/logo</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -89,6 +89,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

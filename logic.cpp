@@ -4,7 +4,6 @@
 #include <iostream>
 #include <QRandomGenerator>
 
-
 class Tile
 {
 public:
@@ -15,15 +14,16 @@ public:
     bool is_flagged;
     unsigned int num_adjacent_bombs;
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0) {};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0){};
 };
-
 
 class Board
 {
 public:
-    const unsigned int WIDTH, HEIGHT;
+    unsigned int WIDTH, HEIGHT;
     std::vector<std::vector<Tile>> Tiles;
+
+    Board() : WIDTH(0), HEIGHT(0) {} // default constructor
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
@@ -39,13 +39,13 @@ public:
         }
     }
 
-    Tile& get_tile(unsigned int x, unsigned int y)
+    Tile &get_tile(unsigned int x, unsigned int y)
     {
         return Tiles[y][x];
     }
 
     QRandomGenerator random{};
-    Tile& random_tile()
+    Tile &random_tile()
     {
         unsigned int rand_x = random.bounded(WIDTH + 1);
         unsigned int rand_y = random.bounded(HEIGHT + 1);
@@ -61,7 +61,7 @@ public:
 
         while (num_bombs > 0)
         {
-            Tile& rand_tile = random_tile();
+            Tile &rand_tile = random_tile();
             if (!rand_tile.is_bomb)
             {
                 rand_tile.is_bomb = true;
@@ -70,17 +70,25 @@ public:
         }
     }
 
-    void count_adjacent_bombs() {
-        for (auto& row : Tiles) {
-            for (auto& tile : row) {
-                if (!tile.is_bomb) {
+    void count_adjacent_bombs()
+    {
+        for (auto &row : Tiles)
+        {
+            for (auto &tile : row)
+            {
+                if (!tile.is_bomb)
+                {
                     unsigned int count = 0;
-                    for (int dx = -1; dx <= 1; dx++) {
-                        for (int dy = -1; dy <= 1; dy++) {
+                    for (int dx = -1; dx <= 1; dx++)
+                    {
+                        for (int dy = -1; dy <= 1; dy++)
+                        {
                             unsigned int x = tile.x + dx;
                             unsigned int y = tile.y + dy;
-                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < WIDTH && !(y == 0 && dy == -1) && y < HEIGHT) {
-                                if (get_tile(x, y).is_bomb) {
+                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < WIDTH && !(y == 0 && dy == -1) && y < HEIGHT)
+                            {
+                                if (get_tile(x, y).is_bomb)
+                                {
                                     count++;
                                 }
                             }
@@ -98,7 +106,7 @@ public:
         {
             throw std::invalid_argument("Tile is already uncovered");
         }
-        Tile& tile = get_tile(x, y);
+        Tile &tile = get_tile(x, y);
         tile.is_covered = false;
     }
 
@@ -108,7 +116,7 @@ public:
         {
             throw std::invalid_argument("Tile is already flagged");
         }
-        Tile& tile = get_tile(x, y);
+        Tile &tile = get_tile(x, y);
         tile.is_flagged = true;
     }
 
@@ -118,11 +126,9 @@ public:
         {
             throw std::invalid_argument("Tile is already unflagged");
         }
-        Tile& tile = get_tile(x, y);
+        Tile &tile = get_tile(x, y);
         tile.is_flagged = false;
     }
-
-
 };
 
 enum Level
@@ -169,11 +175,9 @@ public:
         }
     }
 
-    Game(unsigned int width, unsigned int height) : board(width, height) {};
-
     void start()
     {
-        board.generate_bombs(Game::num_bombs);
+        board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
     }
 
@@ -194,9 +198,9 @@ public:
 
     bool is_game_over()
     {
-        for (auto& row : board.Tiles)
+        for (auto &row : board.Tiles)
         {
-            for (auto& tile : row)
+            for (auto &tile : row)
             {
                 if (tile.is_bomb && !tile.is_covered)
                 {
@@ -209,9 +213,9 @@ public:
 
     bool is_game_won()
     {
-        for (auto& row : board.Tiles)
+        for (auto &row : board.Tiles)
         {
-            for (auto& tile : row)
+            for (auto &tile : row)
             {
                 if (!tile.is_bomb && tile.is_covered)
                 {
@@ -223,8 +227,10 @@ public:
     }
 };
 
-
-int main() {
+int main()
+{
+    // Game game = Game(BEGINNER);
+    // game.start();
 
 
     return 0;

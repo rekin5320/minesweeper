@@ -51,6 +51,7 @@ public:
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setPixmap(QPixmap(QString::fromUtf8("/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/MINESWEEPER.png")));
+        label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label);
 

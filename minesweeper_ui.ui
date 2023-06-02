@@ -20,6 +20,9 @@
       <property name="pixmap">
        <pixmap>/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/MINESWEEPER.png</pixmap>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item>

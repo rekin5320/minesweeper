@@ -123,6 +123,105 @@ public:
 
 };
 
+enum Level
+{
+    BEGINNER,
+    INTERMEDIATE,
+    EXPERT,
+    CUSTOM
+};
+
+class Game
+{
+public:
+    Board board;
+
+    Game(Level level);
+    {
+        switch (level)
+        {
+        case BEGINNER:
+            board = Board(9, 9);
+            unsigned int num_bombs = 10;
+            break;
+        case INTERMEDIATE:
+            board = Board(16, 16);
+            unsigned int num_bombs = 40;
+            break;
+        case EXPERT:
+            board = Board(30, 16);
+            unsigned int num_bombs = 99;
+            break;
+        case CUSTOM:
+            unsigned int width, height;
+            unsigned int num_bombs;
+            std::cout << "Enter width: ";
+            std::cin >> width;
+            std::cout << "Enter height: ";
+            std::cin >> height;
+            std::cout << "Enter number of bombs: ";
+            std::cin >> num_bombs;
+            board = Board(width, height);
+            break;
+        default:
+            throw std::invalid_argument("Invalid level");
+        }
+    }
+
+    Game(unsigned int width, unsigned int height) : board(width, height) {};
+
+    void start()
+    {
+        board.generate_bombs(num_bombs);
+        board.count_adjacent_bombs();
+    }
+
+    void uncover_tile(unsigned int x, unsigned int y)
+    {
+        board.uncover_tile(x, y);
+    }
+
+    void flag_tile(unsigned int x, unsigned int y)
+    {
+        board.flag_tile(x, y);
+    }
+
+    void unflag_tile(unsigned int x, unsigned int y)
+    {
+        board.unflag_tile(x, y);
+    }
+
+    bool is_game_over()
+    {
+        for (auto& row : board.Tiles)
+        {
+            for (auto& tile : row)
+            {
+                if (tile.is_bomb && !tile.is_covered)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    bool is_game_won()
+    {
+        for (auto& row : board.Tiles)
+        {
+            for (auto& tile : row)
+            {
+                if (!tile.is_bomb && tile.is_covered)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
 
 int main() {
 

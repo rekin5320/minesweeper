@@ -1,3 +1,4 @@
+// TODO split to header and source files; temporarily for convenience it's together
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
@@ -14,7 +15,34 @@ public:
     bool is_flagged;
     unsigned int num_adjacent_bombs;
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0){};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0){};
+
+    void uncover()
+    {
+        if (!is_covered)
+        {
+            throw std::invalid_argument("Tile is already uncovered");
+        }
+        is_covered = false;
+    }
+
+    void flag()
+    {
+        if (is_flagged)
+        {
+            throw std::invalid_argument("Tile is already flagged");
+        }
+        is_flagged = true;
+    }
+
+    void unflag()
+    {
+        if (!is_flagged)
+        {
+            throw std::invalid_argument("Tile is already unflagged");
+        }
+        is_flagged = false;
+    }
 };
 
 class Board
@@ -99,36 +127,6 @@ public:
             }
         }
     };
-
-    void uncover_tile(unsigned int x, unsigned int y)
-    {
-        if (!get_tile(x, y).is_covered)
-        {
-            throw std::invalid_argument("Tile is already uncovered");
-        }
-        Tile &tile = get_tile(x, y);
-        tile.is_covered = false;
-    }
-
-    void flag_tile(unsigned int x, unsigned int y)
-    {
-        if (!get_tile(x, y).is_covered)
-        {
-            throw std::invalid_argument("Tile is already flagged");
-        }
-        Tile &tile = get_tile(x, y);
-        tile.is_flagged = true;
-    }
-
-    void unflag_tile(unsigned int x, unsigned int y)
-    {
-        if (!get_tile(x, y).is_covered)
-        {
-            throw std::invalid_argument("Tile is already unflagged");
-        }
-        Tile &tile = get_tile(x, y);
-        tile.is_flagged = false;
-    }
 };
 
 enum Level
@@ -226,12 +224,3 @@ public:
         return true;
     }
 };
-
-int main()
-{
-    // Game game = Game(BEGINNER);
-    // game.start();
-
-
-    return 0;
-}

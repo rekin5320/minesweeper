@@ -10,6 +10,8 @@ int main(int argc, char **argv) {
     QMainWindow window;
     Ui::MainWindow ui;
     ui.setupUi(&window);
+    // program shuts down after resizing the window
+    // window.setFixedSize(1080, 700);
 
     QApplication::connect(ui.button, &QPushButton::released, [&ui](){ui.label->setText("changed");});
 

@@ -179,21 +179,6 @@ public:
         board.count_adjacent_bombs();
     }
 
-    void uncover_tile(unsigned int x, unsigned int y)
-    {
-        board.uncover_tile(x, y);
-    }
-
-    void flag_tile(unsigned int x, unsigned int y)
-    {
-        board.flag_tile(x, y);
-    }
-
-    void unflag_tile(unsigned int x, unsigned int y)
-    {
-        board.unflag_tile(x, y);
-    }
-
     bool is_game_over()
     {
         for (auto &row : board.Tiles)

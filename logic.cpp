@@ -37,19 +37,17 @@ public:
         }
     }
 
-    Tile get_tile(unsigned int x, unsigned int y)
+    Tile& get_tile(unsigned int x, unsigned int y)
     {
-        Tile tile = Tiles[y][x];
-        return tile;
+        return Tiles[y][x];
     }
 
     QRandomGenerator random{};
-    Tile random_tile()
+    Tile& random_tile()
     {
         unsigned int rand_x = random.bounded(WIDTH + 1);
         unsigned int rand_y = random.bounded(HEIGHT + 1);
-        Tile rand_tile = get_tile(rand_x, rand_y);
-        return rand_tile;
+        return get_tile(rand_x, rand_y);
     }
 
     void generate_bombs(unsigned int num_bombs)
@@ -61,7 +59,7 @@ public:
 
         while (num_bombs > 0)
         {
-            Tile rand_tile = random_tile();
+            Tile& rand_tile = random_tile();
             if (!rand_tile.is_bomb)
             {
                 rand_tile.is_bomb = true;
@@ -98,7 +96,7 @@ public:
         {
             throw std::invalid_argument("Tile is already uncovered");
         }
-        Tile tile = get_tile(x, y);
+        Tile& tile = get_tile(x, y);
         tile.is_covered = false;
     }
 
@@ -108,7 +106,7 @@ public:
         {
             throw std::invalid_argument("Tile is already uncovered");
         }
-        Tile tile = get_tile(x, y);
+        Tile& tile = get_tile(x, y);
         tile.is_flagged = true;
     }
 
@@ -118,7 +116,7 @@ public:
         {
             throw std::invalid_argument("Tile is already uncovered");
         }
-        Tile tile = get_tile(x, y);
+        Tile& tile = get_tile(x, y);
         tile.is_flagged = false;
     }
 
@@ -131,5 +129,3 @@ int main() {
 
     return 0;
 }
-
-

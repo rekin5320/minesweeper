@@ -32,7 +32,6 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QPushButton *button;
-    QPushButton *newGameButton;
     QMenuBar *menubar;
     QMenu *menuNew_game;
     QStatusBar *statusbar;
@@ -42,7 +41,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1080, 700);
+        MainWindow->resize(715, 473);
         actionNew_game = new QAction(MainWindow);
         actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
@@ -60,16 +59,10 @@ public:
 
         verticalLayout->addWidget(button);
 
-        newGameButton = new QPushButton(centralwidget);
-        newGameButton->setObjectName(QString::fromUtf8("newGameButton"));
-
-        verticalLayout->addWidget(newGameButton);
-
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setNativeMenuBar(false);
-        menubar->setGeometry(QRect(0, 0, 1080, 21));
+        menubar->setGeometry(QRect(0, 0, 715, 21));
         menuNew_game = new QMenu(menubar);
         menuNew_game->setObjectName(QString::fromUtf8("menuNew_game"));
         MainWindow->setMenuBar(menubar);
@@ -93,15 +86,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
-        centralwidget->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
-"     QWidget#centralwidget {\n"
-"         background-image: url(/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/background.png);\n"
-"         background-repeat: no-repeat;\n"
-"         background-position: center;\n"
-"     }\n"
-"    ", nullptr));
         button->setText(QCoreApplication::translate("MainWindow", "Click", nullptr));
-        newGameButton->setText(QCoreApplication::translate("MainWindow", "New Game", nullptr));
         menuNew_game->setTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi

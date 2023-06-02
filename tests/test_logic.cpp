@@ -28,3 +28,34 @@ TEST_CASE("Tile") {
         REQUIRE_THROWS_AS(tile.unflag(), std::invalid_argument);
     }
 }
+
+TEST_CASE("Board") {
+    Board board(10, 10);
+    REQUIRE(board.WIDTH == 10);
+    REQUIRE(board.HEIGHT == 10);
+    REQUIRE(board.Tiles.size() == 10);
+    REQUIRE(board.Tiles[0].size() == 10);
+
+
+
+    SECTION("generate_bombs()") {
+        board.generate_bombs(10);
+        unsigned int num_bombs = 0;
+        for (unsigned int y = 0; y < board.HEIGHT; y++) {
+            for (unsigned int x = 0; x < board.WIDTH; x++) {
+                if (board.Tiles[y][x].is_bomb) {
+                    num_bombs++;
+                }
+            }
+        }
+        REQUIRE(num_bombs == 10);
+    }
+
+    SECTION("generate_bombs() but error") {
+        REQUIRE_THROWS_AS(board.generate_bombs(1000), std::invalid_argument);
+    }
+    board.count_adjacent_bombs( );
+    board.print_board();
+
+}
+

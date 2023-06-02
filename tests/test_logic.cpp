@@ -85,8 +85,8 @@ TEST_CASE("Board") {
             board.count_adjacent_bombs();
 
             // board.print_board();
-            // 122
-            // 1XX
+            // 1 2 2
+            // 1 X X
 
             REQUIRE(board.get_tile(0, 0).num_adjacent_bombs == 1);
             REQUIRE(board.get_tile(1, 0).num_adjacent_bombs == 2);
@@ -95,6 +95,7 @@ TEST_CASE("Board") {
             REQUIRE(board.get_tile(1, 1).is_bomb);
             REQUIRE(board.get_tile(2, 1).is_bomb);
         }
+        board.print_board();
     }
 
     SECTION("5×4") {
@@ -109,10 +110,10 @@ TEST_CASE("Board") {
             board.count_adjacent_bombs();
 
             // board.print_board();
-            // 00011
-            // 1102X
-            // X335X
-            // 2XXXX
+            // 0 0 0 1 1
+            // 1 1 0 2 X
+            // X 3 3 5 X
+            // 2 X X X X
 
             REQUIRE(board.get_tile(0, 0).num_adjacent_bombs == 0);
             REQUIRE(board.get_tile(1, 0).num_adjacent_bombs == 0);
@@ -138,5 +139,6 @@ TEST_CASE("Board") {
             REQUIRE(board.get_tile(3, 3).is_bomb);
             REQUIRE(board.get_tile(4, 3).is_bomb);
         }
+        board.print_board();
     }
 }

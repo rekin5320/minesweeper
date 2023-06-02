@@ -110,13 +110,13 @@ public:
     void print_board() {
         for (auto& tile: Tiles) {
             if (tile.is_flagged) {
-                std::cout << (tile.is_bomb ? "F" : "f");
+                std::cout << (tile.is_bomb ? "F " : "f ");
             }
             else if (tile.is_bomb) {
-                std::cout << "X";
+                std::cout << "X ";
             }
             else {
-                std::cout << tile.num_adjacent_bombs;
+                std::cout << tile.num_adjacent_bombs << " ";
             }
             if (tile.x == WIDTH - 1) {
                 std::cout << "\n";

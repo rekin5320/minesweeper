@@ -30,8 +30,5 @@ add_link_options(${COMPILE_OPTIONS})
 add_executable(${PROJECT_NAME} main.cpp ${QT_RESOURCES})
 target_link_libraries(${PROJECT_NAME} ${QT_LIBS})
 
-add_executable(logic logic.cpp)  # temporary
-target_link_libraries(logic ${QT_LIBS})
-
 add_executable(test tests/test_root.cpp tests/test_logic.cpp)
 target_link_libraries(test ${QT_LIBS})

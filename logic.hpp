@@ -1,3 +1,4 @@
+// TODO split to header and source files; temporarily for convenience it's together
 #include <stdexcept>
 #include <vector>
 #include <QRandomGenerator>
@@ -13,10 +14,10 @@ public:
     bool is_flagged;
     unsigned int num_adjacent_bombs;
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0) {};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0) {};
 
     void uncover() {
-        if (is_covered) {
+        if (!is_covered) {
             throw std::invalid_argument("Tile is already uncovered");
         }
         is_covered = false;
@@ -111,10 +112,3 @@ public:
         }
     };
 };
-
-
-int main() {
-
-
-    return 0;
-}

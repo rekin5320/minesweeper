@@ -13,7 +13,11 @@ find_package(Qt5 REQUIRED COMPONENTS
     Widgets
 )
 
-add_executable(${PROJECT_NAME} main.cpp)
+list(APPEND QT_RESOURCES
+    resources/resources.qrc
+)
+
+add_executable(${PROJECT_NAME} main.cpp ${QT_RESOURCES})
 target_link_libraries(${PROJECT_NAME}
     Qt5::Core
     Qt5::Gui

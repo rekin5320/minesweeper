@@ -98,4 +98,37 @@ public:
             }
         }
     };
+
+    void uncover_tile(unsigned int x, unsigned int y)
+    {
+        if (!get_tile(x, y).is_covered)
+        {
+            throw std::invalid_argument("Tile is already uncovered");
+        }
+        Tile tile = get_tile(x, y);
+        tile.is_covered = false;
+    }
+
+    void flag_tile(unsigned int x, unsigned int y)
+    {
+        if (!get_tile(x, y).is_covered)
+        {
+            throw std::invalid_argument("Tile is already uncovered");
+        }
+        Tile tile = get_tile(x, y);
+        tile.is_flagged = true;
+    }
+
+    void unflag_tile(unsigned int x, unsigned int y)
+    {
+        if (!get_tile(x, y).is_covered)
+        {
+            throw std::invalid_argument("Tile is already uncovered");
+        }
+        Tile tile = get_tile(x, y);
+        tile.is_flagged = false;
+    }
+
+
 }
+

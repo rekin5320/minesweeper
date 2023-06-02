@@ -6,8 +6,8 @@
 class Tile
 {
 public:
-    unsigned int x;
-    unsigned int y;
+    const unsigned int x;
+    const unsigned int y;
     bool is_bomb;
     bool is_covered;
     bool is_flagged;
@@ -20,10 +20,10 @@ public:
 class Board
 {
 public:
-    unsigned int width, height;
+    const unsigned int WIDTH, HEIGHT;
     std::vector<std::vector<Tile>> Tiles;
 
-    Board(unsigned int width, unsigned int height) : width(width), height(height)
+    Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
         // Tiles.reserve()  // reserve space to avoid unnecessary relocations
         for (unsigned int y = 0; y < height; y++)
@@ -46,15 +46,15 @@ public:
     QRandomGenerator random{};
     Tile random_tile()
     {
-        unsigned int rand_x = random.bounded(width + 1);
-        unsigned int rand_y = random.bounded(height + 1);
+        unsigned int rand_x = random.bounded(WIDTH + 1);
+        unsigned int rand_y = random.bounded(HEIGHT + 1);
         Tile rand_tile = get_tile(rand_x, rand_y);
         return rand_tile;
     }
 
     void generate_bombs(unsigned int num_bombs)
     {
-        if (num_bombs > width * height)
+        if (num_bombs > WIDTH * HEIGHT)
         {
             throw std::invalid_argument("Too many bombs");
         }
@@ -79,7 +79,7 @@ public:
                         for (int dy = -1; dy <= 1; dy++) {
                             unsigned int x = tile.x + dx;
                             unsigned int y = tile.y + dy;
-                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < width && !(y == 0 && dy == -1) && y < height) {
+                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < WIDTH && !(y == 0 && dy == -1) && y < HEIGHT) {
                                 if (get_tile(x, y).is_bomb) {
                                     count++;
                                 }

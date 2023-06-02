@@ -95,7 +95,6 @@ TEST_CASE("Board") {
             REQUIRE(board.get_tile(1, 1).is_bomb);
             REQUIRE(board.get_tile(2, 1).is_bomb);
         }
-        board.print_board();
     }
 
     SECTION("5×4") {
@@ -139,6 +138,5 @@ TEST_CASE("Board") {
             REQUIRE(board.get_tile(3, 3).is_bomb);
             REQUIRE(board.get_tile(4, 3).is_bomb);
         }
-        board.print_board();
     }
 }

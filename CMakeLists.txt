@@ -13,6 +13,12 @@ find_package(Qt5 REQUIRED COMPONENTS
     Widgets
 )
 
+list(APPEND QT_LIBS
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+)
+
 list(APPEND QT_RESOURCES
     resources/resources.qrc
 )
@@ -22,15 +28,10 @@ add_compile_options(${COMPILE_OPTIONS})
 add_link_options(${COMPILE_OPTIONS})
 
 add_executable(${PROJECT_NAME} main.cpp ${QT_RESOURCES})
-target_link_libraries(${PROJECT_NAME}
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Widgets
-)
+target_link_libraries(${PROJECT_NAME} ${QT_LIBS})
 
 add_executable(logic logic.cpp)  # temporary
-target_link_libraries(logic
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Widgets
-)
+target_link_libraries(logic ${QT_LIBS})
+
+add_executable(test tests/test_root.cpp tests/test_logic.cpp)
+target_link_libraries(test ${QT_LIBS})

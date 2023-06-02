@@ -127,6 +127,26 @@ public:
             }
         }
     };
+
+    void print_board()
+    {
+        for (auto& row : Tiles)
+        {
+            for (auto& tile : row)
+            {
+                if (tile.is_bomb)
+                {
+                    std::cout << "B ";
+                }
+                else
+                {
+                    std::cout << tile.num_adjacent_bombs << " ";
+                }
+            }
+            std::cout << std::endl;
+        }
+    }
+
 };
 
 enum Level

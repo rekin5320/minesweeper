@@ -27,3 +27,10 @@ target_link_libraries(${PROJECT_NAME}
     Qt5::Gui
     Qt5::Widgets
 )
+
+add_executable(logic logic.cpp)  # temporary
+target_link_libraries(logic
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+)

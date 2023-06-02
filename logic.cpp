@@ -2,6 +2,7 @@
 #include <vector>
 #include <QRandomGenerator>
 
+
 class Tile
 {
 public:
@@ -14,6 +15,7 @@ public:
 
     Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false){};
 };
+
 
 class Board
 {
@@ -68,34 +70,41 @@ public:
         }
     }
 
-    void count_adjacent_bombs(Tiles &board)
-    {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                Tile tile = board[i][j];
-                if (!tile.is_bomb)
-                {
-                    int count = 0;
-                    for (int ii = -1; ii <= 1; ii++)
-                    {
-                        for (int jj = -1; jj <= 1; jj++)
-                        {
-                            // to make sure we don't count the bombs that are out of bounds
-                            // current tile wont be counted
-                            if (i + ii >= 0 && i + ii < height && j + jj >= 0 && j + jj < width)
-                            {
-                                if (board[i + ii][j + jj].is_bomb)
-                                {
-                                    count++;
-                                }
-                            }
-                        }
-                    }
-                    tile.num_adjacent_bombs = count;
-                }
-            }
-        }
-    };
+    // void count_adjacent_bombs(Tiles &board)
+    // {
+    //     for (int i = 0; i < height; i++)
+    //     {
+    //         for (int j = 0; j < width; j++)
+    //         {
+    //             Tile tile = board[i][j];
+    //             if (!tile.is_bomb)
+    //             {
+    //                 int count = 0;
+    //                 for (int ii = -1; ii <= 1; ii++)
+    //                 {
+    //                     for (int jj = -1; jj <= 1; jj++)
+    //                     {
+    //                         // to make sure we don't count the bombs that are out of bounds
+    //                         // current tile wont be counted
+    //                         if (i + ii >= 0 && i + ii < height && j + jj >= 0 && j + jj < width)
+    //                         {
+    //                             if (board[i + ii][j + jj].is_bomb)
+    //                             {
+    //                                 count++;
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //                 tile.num_adjacent_bombs = count;
+    //             }
+    //         }
+    //     }
+    // };
+};
+
+
+int main() {
+
+
+    return 0;
 }

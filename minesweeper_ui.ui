@@ -6,14 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>715</width>
-    <height>473</height>
+    <width>1080</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Minesweeper</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string>
+     QWidget#centralwidget {
+         background-image: url(/home/penqv2/Studia_WSL/Semestr 2/PROI/Projekt/minesweeper/source_files/background.png);
+         background-repeat: no-repeat;
+         background-position: center;
+     }
+    </string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label">
@@ -32,14 +41,24 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="newGameButton">
+      <property name="text">
+       <string>New Game</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>715</width>
+     <width>1080</width>
      <height>21</height>
     </rect>
    </property>

@@ -13,7 +13,7 @@ public:
     bool is_flagged;
     unsigned int num_adjacent_bombs;
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false){};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(false), is_flagged(false), num_adjacent_bombs(0) {};
 };
 
 
@@ -70,36 +70,27 @@ public:
         }
     }
 
-    // void count_adjacent_bombs(Tiles &board)
-    // {
-    //     for (int i = 0; i < height; i++)
-    //     {
-    //         for (int j = 0; j < width; j++)
-    //         {
-    //             Tile tile = board[i][j];
-    //             if (!tile.is_bomb)
-    //             {
-    //                 int count = 0;
-    //                 for (int ii = -1; ii <= 1; ii++)
-    //                 {
-    //                     for (int jj = -1; jj <= 1; jj++)
-    //                     {
-    //                         // to make sure we don't count the bombs that are out of bounds
-    //                         // current tile wont be counted
-    //                         if (i + ii >= 0 && i + ii < height && j + jj >= 0 && j + jj < width)
-    //                         {
-    //                             if (board[i + ii][j + jj].is_bomb)
-    //                             {
-    //                                 count++;
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //                 tile.num_adjacent_bombs = count;
-    //             }
-    //         }
-    //     }
-    // };
+    void count_adjacent_bombs() {
+        for (auto& row : Tiles) {
+            for (auto& tile : row) {
+                if (!tile.is_bomb) {
+                    unsigned int count = 0;
+                    for (int dx = -1; dx <= 1; dx++) {
+                        for (int dy = -1; dy <= 1; dy++) {
+                            unsigned int x = tile.x + dx;
+                            unsigned int y = tile.y + dy;
+                            if (dx != 0 && dy != 0 && !(x == 0 && dx == -1) && x < width && !(y == 0 && dy == -1) && y < height) {
+                                if (get_tile(x, y).is_bomb) {
+                                    count++;
+                                }
+                            }
+                        }
+                    }
+                    tile.num_adjacent_bombs = count;
+                }
+            }
+        }
+    };
 };
 
 

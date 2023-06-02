@@ -43,18 +43,14 @@ public:
 class Board {
 public:
     unsigned int WIDTH, HEIGHT;
-    std::vector<std::vector<Tile>> Tiles;
+    std::vector<Tile> Tiles;
 
     Board(): WIDTH(0), HEIGHT(0) {} // default constructor
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height) {
-        // Tiles.reserve()  // reserve space to avoid unnecessary relocations
-        for (unsigned int y = 0; y < height; y++) {
-            std::vector<Tile> row;
-            for (unsigned int x = 0; x < width; x++) {
-                row.push_back(Tile(x, y));
-            }
-            Tiles.push_back(row); // std::move(row) ?
+        Tiles.reserve(WIDTH * HEIGHT);
+        for (unsigned int i = 0; i < WIDTH * HEIGHT; i++) {
+            Tiles.emplace_back(i % WIDTH, i / WIDTH);
         }
     }
 
@@ -62,7 +58,7 @@ public:
         if (x >= WIDTH || y >= HEIGHT) {
             throw std::invalid_argument("Invalid coordinates");
         }
-        return Tiles[y][x];
+        return Tiles[y * WIDTH + x];
     }
 
     QRandomGenerator random{};
@@ -87,46 +83,44 @@ public:
     }
 
     void count_adjacent_bombs() {
-        for (auto& row: Tiles) {
-            for (auto& tile: row) {
-                if (!tile.is_bomb) {
-                    unsigned int count = 0;
-                    for (int dx = -1; dx <= 1; dx++) {
-                        for (int dy = -1; dy <= 1; dy++) {
-                            if (!(dx == 0 && dy == 0)) {  // don't count self
-                                if ((!(tile.x == 0 && dx == -1)) &&
-                                    !(tile.y == 0 && dy == -1)) {  // left and top border
-                                    unsigned int x = tile.x + dx;
-                                    unsigned int y = tile.y + dy;
-                                    if (x < WIDTH && y < HEIGHT) {  // right and bottom border
-                                        if (get_tile(x, y).is_bomb) {
-                                            count++;
-                                        }
+        for (auto& tile: Tiles) {
+            if (!tile.is_bomb) {
+                unsigned int count = 0;
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dy = -1; dy <= 1; dy++) {
+                        if (!(dx == 0 && dy == 0)) {  // don't count self
+                            if ((!(tile.x == 0 && dx == -1)) &&
+                                !(tile.y == 0 && dy == -1)) {  // left and top border
+                                unsigned int x = tile.x + dx;
+                                unsigned int y = tile.y + dy;
+                                if (x < WIDTH && y < HEIGHT) {  // right and bottom border
+                                    if (get_tile(x, y).is_bomb) {
+                                        count++;
                                     }
                                 }
                             }
                         }
                     }
-                    tile.num_adjacent_bombs = count;
                 }
+                tile.num_adjacent_bombs = count;
             }
         }
     };
 
     void print_board() {
-        for (auto& row : Tiles) {
-            for (auto& tile : row) {
-                if (tile.is_flagged) {
-                    std::cout << (tile.is_bomb ? "F" : "f");
-                }
-                else if (tile.is_bomb) {
-                    std::cout << "X";
-                }
-                else {
-                    std::cout << tile.num_adjacent_bombs;
-                }
+        for (auto& tile: Tiles) {
+            if (tile.is_flagged) {
+                std::cout << (tile.is_bomb ? "F" : "f");
             }
-            std::cout << "\n";
+            else if (tile.is_bomb) {
+                std::cout << "X";
+            }
+            else {
+                std::cout << tile.num_adjacent_bombs;
+            }
+            if (tile.x == WIDTH - 1) {
+                std::cout << "\n";
+            }
         }
     }
 };
@@ -180,22 +174,18 @@ public:
     }
 
     bool is_game_over() {
-        for (auto& row: board.Tiles) {
-            for (auto& tile: row) {
-                if (tile.is_bomb && !tile.is_covered) {
-                    return true;
-                }
+        for (auto& tile: board.Tiles) {
+            if (tile.is_bomb && !tile.is_covered) {
+                return true;
             }
         }
         return false;
     }
 
     bool is_game_won() {
-        for (auto& row: board.Tiles) {
-            for (auto& tile: row) {
-                if (!tile.is_bomb && tile.is_covered) {
-                    return false;
-                }
+        for (auto& tile: board.Tiles) {
+            if (!tile.is_bomb && tile.is_covered) {
+                return false;
             }
         }
         return true;

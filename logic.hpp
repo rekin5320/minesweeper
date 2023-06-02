@@ -132,7 +132,7 @@ public:
 };
 
 
-enum Level {
+enum Difficulty {
     BEGINNER,
     INTERMEDIATE,
     EXPERT,
@@ -145,8 +145,8 @@ public:
     Board board;
     unsigned int num_bombs;
 
-    Game(Level level) {
-        switch (level) {
+    Game(Difficulty difficulty) {
+        switch (difficulty) {
             case BEGINNER:
                 board = Board(9, 9);
                 num_bombs = 10;
@@ -170,7 +170,7 @@ public:
                 board = Board(width, height);
                 break;
             default:
-                throw std::invalid_argument("Invalid level");
+                throw std::invalid_argument("Invalid difficulty");
         }
     }
 

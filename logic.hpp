@@ -3,6 +3,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
 #include <QRandomGenerator>
 
 class Tile
@@ -168,6 +171,10 @@ class Game
 public:
     Board board;
     unsigned int num_bombs;
+    std::chrono::steady_clock::time_point start_time;
+    std::chrono::steady_clock::time_point end_time;
+    std::chrono::minutes elapsed_minutes;
+    std::chrono::seconds elapsed_seconds;
 
     Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0)
     {
@@ -202,6 +209,7 @@ public:
     {
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
+        start_time = std::chrono::steady_clock::now();
     }
 
     bool is_game_over()
@@ -210,6 +218,10 @@ public:
         {
             if (tile.is_bomb && !tile.is_covered)
             {
+                end_time = std::chrono::steady_clock::now();
+                std::chrono::duration<double> elapsed_time = end_time - start_time;
+                elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
+                elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
                 return true;
             }
         }
@@ -222,9 +234,25 @@ public:
         {
             if (!tile.is_bomb && tile.is_covered)
             {
+                end_time = std::chrono::steady_clock::now();
+                std::chrono::duration<double> elapsed_time = end_time - start_time;
+                elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
+                elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
                 return false;
             }
         }
+        end_time = std::chrono::steady_clock::now();
+        std::chrono::duration<double> elapsed_time = end_time - start_time;
+        elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
+        elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
         return true;
+    }
+
+    std::string get_formatted_elapsed_time() const
+    {
+        std::ostringstream oss;
+        oss << std::setfill('0') << std::setw(2) << elapsed_minutes.count() << ":";
+        oss << std::setfill('0') << std::setw(2) << elapsed_seconds.count();
+        return oss.str();
     }
 };

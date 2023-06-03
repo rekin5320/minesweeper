@@ -243,24 +243,14 @@ public:
         }
     };
 
-    void click_button(unsigned int w, unsigned int h) {
-        get_tile(w, h).uncover();
-        get_tile(w, h).click_button();
-        if (get_tile(w, h).num_adjacent_bombs == 0 && !get_tile(w, h).is_bomb) {
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    if (!(dx == 0 && dy == 0)) { // don't count self
-                        if ((!(w == 0 && dx == -1)) &&
-                            !(h == 0 && dy == -1)) { // left and top border
-                            unsigned int x = w + dx;
-                            unsigned int y = h + dy;
-                            if (x < WIDTH && y < HEIGHT) { // right and bottom border
-                                if (get_tile(x, y).is_covered) {
-                                    click_button(x, y);
-                                }
-                            }
-                        }
-                    }
+    void click_button(unsigned int x, unsigned int y) {
+        Tile& tile = get_tile(x, y);
+        tile.click_button();
+        if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {
+            for (auto& position: tile_neighbours(tile)) {
+                Tile& neighbour = get_tile(position);
+                if (neighbour.is_covered) {
+                    click_button(position.x, position.y);
                 }
             }
         }

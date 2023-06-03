@@ -16,7 +16,7 @@ public:
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
-    std::shared_ptr<QPushButton> button;
+    std::unique_ptr<QPushButton> button;
 
     Tile(unsigned int x, unsigned y): x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0) {};
 
@@ -42,7 +42,7 @@ public:
     }
 
     void create_button() {
-        button = std::make_shared<QPushButton>();
+        button = std::make_unique<QPushButton>();
     }
 
     void click_button() {

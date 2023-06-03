@@ -41,6 +41,10 @@ public:
         is_flagged = false;
     }
 
+    void create_button() {
+        button = std::make_shared<QPushButton>();
+    }
+
     void click_button() {
         std::cout << x << " " << y << "\n";
         button->setText("C");

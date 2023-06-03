@@ -11,7 +11,7 @@ public:
 
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
-            tile.button = std::make_shared<QPushButton>();
+            tile.create_button();
             QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_button();});
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
         }

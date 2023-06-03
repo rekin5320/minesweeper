@@ -12,15 +12,10 @@ public:
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
             tile.button = std::make_shared<QPushButton>();
-            QApplication::connect(tile.button.get(), &QPushButton::released, [this, x = tile.x, y = tile.y](){this->click_button(x, y);});
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_button();});
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
         }
     };
-
-    void click_button(unsigned int x, unsigned int y) {
-        std::cout << x << " " << y << "\n";
-        game.board.get_tile(x, y).button->setText("C");
-    }
 };
 
 

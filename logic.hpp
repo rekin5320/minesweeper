@@ -40,6 +40,11 @@ public:
         }
         is_flagged = false;
     }
+
+    void click_button() {
+        std::cout << x << " " << y << "\n";
+        button->setText("C");
+    }
 };
 
 

@@ -221,6 +221,39 @@ TEST_CASE("Game")
         REQUIRE(count == 40);
     }
 
+    SECTION("left_bombs()")
+    {
+        Game game = Game(Difficulty::INTERMEDIATE);
+        game.start();
+
+        REQUIRE(game.left_bombs() == 40);
+
+        unsigned int count = 0;
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                if (game.board.get_tile(x, y).is_bomb)
+                {
+                    game.board.get_tile(x, y).flag();
+                    REQUIRE(game.left_bombs() == 40 - ++count);
+                }
+            }
+        }
+
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                if (game.board.get_tile(x, y).is_flagged)
+                {
+                    game.board.get_tile(x, y).unflag();
+                    REQUIRE(game.left_bombs() == 40 - --count);
+                }
+            }
+        }
+    }
+
     SECTION("is_game_over()")
     {
         Game game = Game(Difficulty::INTERMEDIATE);

@@ -207,6 +207,10 @@ public:
         return neighbours;
     }
 
+    std::vector<Position> tile_neighbours(const Tile& tile) {
+        return tile_neighbours(tile.x, tile.y);
+    }
+
     void generate_bombs(unsigned int num_bombs)
     {
         if (num_bombs > WIDTH * HEIGHT)
@@ -225,33 +229,13 @@ public:
         }
     }
 
-    void count_adjacent_bombs()
-    {
-        for (auto &tile : Tiles)
-        {
-            if (!tile.is_bomb)
-            {
+    void count_adjacent_bombs() {
+        for (auto& tile: Tiles) {
+            if (!tile.is_bomb) {
                 unsigned int count = 0;
-                for (int dx = -1; dx <= 1; dx++)
-                {
-                    for (int dy = -1; dy <= 1; dy++)
-                    {
-                        if (!(dx == 0 && dy == 0))
-                        { // don't count self
-                            if ((!(tile.x == 0 && dx == -1)) &&
-                                !(tile.y == 0 && dy == -1))
-                            { // left and top border
-                                unsigned int x = tile.x + dx;
-                                unsigned int y = tile.y + dy;
-                                if (x < WIDTH && y < HEIGHT)
-                                { // right and bottom border
-                                    if (get_tile(x, y).is_bomb)
-                                    {
-                                        count++;
-                                    }
-                                }
-                            }
-                        }
+                for (auto& position : tile_neighbours(tile)) {
+                    if (get_tile(position).is_bomb) {
+                        count++;
                     }
                 }
                 tile.num_adjacent_bombs = count;

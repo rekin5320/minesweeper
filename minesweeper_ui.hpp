@@ -18,7 +18,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,7 +27,7 @@ class Ui_MainWindow
 public:
     QAction *actionNew_game;
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayoutRoot;
     QLabel *label;
     QGridLayout *gridLayout;
     QMenuBar *menubar;
@@ -44,18 +43,19 @@ public:
         actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        gridLayoutRoot = new QGridLayout(centralwidget);
+        gridLayoutRoot->setObjectName(QString::fromUtf8("gridLayoutRoot"));
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout->addWidget(label);
+        gridLayoutRoot->addWidget(label, 0, 0, 1, 1);
 
         gridLayout = new QGridLayout();
+        gridLayout->setSpacing(0);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetFixedSize);
 
-        verticalLayout->addLayout(gridLayout);
+        gridLayoutRoot->addLayout(gridLayout, 1, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);

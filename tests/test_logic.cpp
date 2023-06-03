@@ -76,6 +76,21 @@ TEST_CASE("Board")
             REQUIRE(!board.random_tile().is_bomb);
         }
 
+        SECTION("tile_neighbours") {
+            SECTION("left top corner") {
+                std::vector<Position> neighbours = board.tile_neighbours(0, 0);
+                std::vector<Position> expected = {{1, 0}, {0, 1}, {1, 1}};
+                REQUIRE(neighbours.size() == 3);
+                REQUIRE(neighbours == expected);
+            }
+            SECTION("top") {
+                std::vector<Position> neighbours = board.tile_neighbours(1, 0);
+                std::vector<Position> expected = {{0, 0}, {2, 0}, {0, 1}, {1, 1}, {2, 1}};
+                REQUIRE(neighbours.size() == 5);
+                REQUIRE(neighbours == expected);
+            }
+        }
+
         SECTION("generate_bombs")
         {
             board.generate_bombs(4);
@@ -118,6 +133,21 @@ TEST_CASE("Board")
 
         REQUIRE(board.WIDTH == 5);
         REQUIRE(board.HEIGHT == 4);
+
+        SECTION("tile_neighbours") {
+            SECTION("middle") {
+                std::vector<Position> neighbours = board.tile_neighbours(1, 1);
+                std::vector<Position> expected = {{0, 0}, {1, 0}, {2, 0}, {0, 1}, {2, 1}, {0, 2}, {1, 2}, {2, 2}};
+                REQUIRE(neighbours.size() == 8);
+                REQUIRE(neighbours == expected);
+            }
+            SECTION("bottom right corner") {
+                std::vector<Position> neighbours = board.tile_neighbours(4, 3);
+                std::vector<Position> expected = {{3, 2}, {4, 2}, {3, 3}};
+                REQUIRE(neighbours.size() == 3);
+                REQUIRE(neighbours == expected);
+            }
+        }
 
         SECTION("count_adjacent_bombs")
         {

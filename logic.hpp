@@ -10,6 +10,22 @@
 #include <QPushButton>
 #include <QRandomGenerator>
 
+
+struct Position {
+    unsigned int x;
+    unsigned int y;
+
+    bool operator==(const Position& other) const {
+        return x == other.x && y == other.y;
+    }
+};
+
+std::ostream& operator<<(std::ostream& os, const Position& position) {
+    os << "(" << position.x << ", " << position.y << ")";
+    return os;
+}
+
+
 class Tile
 {
 public:
@@ -143,13 +159,15 @@ public:
         }
     }
 
-    Tile &get_tile(unsigned int x, unsigned int y)
-    {
-        if (x >= WIDTH || y >= HEIGHT)
-        {
+    Tile& get_tile(unsigned int x, unsigned int y) {
+        if (x >= WIDTH || y >= HEIGHT) {
             throw std::invalid_argument("Invalid coordinates");
         }
         return Tiles[y * WIDTH + x];
+    }
+
+    Tile& get_tile(Position position) {
+        return get_tile(position.x, position.y);
     }
 
     QRandomGenerator random{};
@@ -158,6 +176,35 @@ public:
         unsigned int rand_x = random.bounded(WIDTH);
         unsigned int rand_y = random.bounded(HEIGHT);
         return get_tile(rand_x, rand_y);
+    }
+
+    std::vector<Position> tile_neighbours(unsigned int x, unsigned int y) {
+        std::vector<Position> neighbours;
+        if (x > 0 && y > 0) {
+            neighbours.push_back({x - 1, y - 1});
+        }
+        if (y > 0) {
+            neighbours.push_back({x, y - 1});
+        }
+        if (y > 0 && x < WIDTH - 1) {
+            neighbours.push_back({x + 1, y - 1});
+        }
+        if (x > 0) {
+            neighbours.push_back({x - 1, y});
+        }
+        if (x < WIDTH - 1) {
+            neighbours.push_back({x + 1, y});
+        }
+        if (x > 0 && y < HEIGHT - 1) {
+            neighbours.push_back({x - 1, y + 1});
+        }
+        if (y < HEIGHT - 1) {
+            neighbours.push_back({x, y + 1});
+        }
+        if (x < WIDTH - 1 && y < HEIGHT - 1) {
+            neighbours.push_back({x + 1, y + 1});
+        }
+        return neighbours;
     }
 
     void generate_bombs(unsigned int num_bombs)

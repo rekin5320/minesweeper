@@ -153,8 +153,7 @@ public:
     {
         get_tile(w, h).uncover();
         get_tile(w, h).click_button();
-        std::cout << (get_tile(w, h).num_adjacent_bombs == 0) << "\n";
-        if (get_tile(w, h).num_adjacent_bombs == 0)
+        if (get_tile(w, h).num_adjacent_bombs == 0 && !get_tile(w, h).is_bomb)
         {
             for (int dx = -1; dx <= 1; dx++)
             {
@@ -171,7 +170,6 @@ public:
                             { // right and bottom border
                                 if (get_tile(x, y).is_covered)
                                 {
-                                    std::cout << "jest 0 \n";
                                     click_button(x, y);
                                 }
                             }

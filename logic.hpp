@@ -212,6 +212,19 @@ public:
         start_time = std::chrono::steady_clock::now();
     }
 
+    unsigned int left_bombs()
+    {
+        unsigned int count = 0;
+        for (auto &tile : board.Tiles)
+        {
+            if (tile.is_flagged)
+            {
+                count++;
+            }
+        }
+        return num_bombs - count;
+    }
+
     bool is_game_over()
     {
         for (auto &tile : board.Tiles)

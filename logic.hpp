@@ -172,7 +172,7 @@ public:
         return get_tile(rand_x, rand_y);
     }
 
-    std::vector<Position> tile_neighbours(unsigned int x, unsigned int y) {
+    std::vector<Position> tile_neighbours(unsigned int x, unsigned int y) const {
         std::vector<Position> neighbours;
         if (x > 0 && y > 0) {
             neighbours.push_back({x - 1, y - 1});
@@ -201,7 +201,7 @@ public:
         return neighbours;
     }
 
-    std::vector<Position> tile_neighbours(const Tile& tile) {
+    std::vector<Position> tile_neighbours(const Tile& tile) const {
         return tile_neighbours(tile.x, tile.y);
     }
 
@@ -250,24 +250,18 @@ public:
         }
     }
 
-    void print_board()
-    {
-        for (auto &tile : Tiles)
-        {
-            if (tile.is_flagged)
-            {
+    void print_board() const {
+        for (auto& tile: Tiles) {
+            if (tile.is_flagged) {
                 std::cout << (tile.is_bomb ? "F " : "f ");
             }
-            else if (tile.is_bomb)
-            {
+            else if (tile.is_bomb) {
                 std::cout << "B ";
             }
-            else
-            {
+            else {
                 std::cout << tile.num_adjacent_bombs << " ";
             }
-            if (tile.x == WIDTH - 1)
-            {
+            if (tile.x == WIDTH - 1) {
                 std::cout << "\n";
             }
         }

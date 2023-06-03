@@ -12,8 +12,8 @@ public:
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
             tile.create_button();
-            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_button();});
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_left_button();});
         }
     };
 };

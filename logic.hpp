@@ -19,9 +19,28 @@ public:
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
+    bool with_gui;
     std::unique_ptr<QPushButton> button;
+    const QString stylesheet_covered = R"(
+QPushButton {
+	border: 1px solid darkgray;
+	border-radius: 1px;
+	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #bbb);
+}
 
-    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0){};
+QPushButton::hover {
+    background-color: rgb(190, 190, 190);
+}
+)";
+    const QString stylesheet_uncovered = R"(
+QPushButton {
+	color: %1;
+	font-weight: bold;
+	border: 1px solid lightgray;
+};
+)";
+
+    Tile(unsigned int x, unsigned y): x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0), with_gui(false) {};
 
     void uncover()
     {
@@ -30,6 +49,49 @@ public:
             throw std::invalid_argument("Tile is already uncovered");
         }
         is_covered = false;
+        button->setChecked(true);
+        if (with_gui) {
+            std::cout << x << " " << y << (is_bomb ? " 💣" : "") << "\n";
+            QString color;
+            switch (num_adjacent_bombs) {
+                case 1:
+                    color = "blue";
+                    break;
+                case 2:
+                    color = "green";
+                    break;
+                case 3:
+                    color = "red";
+                    break;
+                case 4:
+                    color = "midnightblue";
+                    break;
+                case 5:
+                    color = "maroon";
+                    break;
+                case 6:
+                    color = "darkcyan";
+                    break;
+                case 7:
+                    color = "black";
+                    break;
+                case 8:
+                    color = "grey";
+                    break;
+                default:
+                    break;
+            }
+            button->setStyleSheet(stylesheet_uncovered.arg(color));
+
+            if (!is_bomb) {
+                if (num_adjacent_bombs) {
+                    button->setText(QString::number(num_adjacent_bombs));
+                }
+            }
+            else {
+                button->setText("💣");
+            }
+        }
     }
 
     void flag()
@@ -51,12 +113,15 @@ public:
     }
 
     void create_button() {
+        with_gui = true;
         button = std::make_unique<QPushButton>();
+        button->setStyleSheet(stylesheet_covered);
     }
 
-    void click_button() {
-        std::cout << x << " " << y << (is_bomb ? " 💣" : "") << "\n";
-        button->setText((is_bomb ? "💣" : QString::number(num_adjacent_bombs)));
+    void click_left_button() {
+        if (is_covered) {
+            uncover();
+        }
     }
 };
 

@@ -1,8 +1,10 @@
 // TODO split to header and source files; temporarily for convenience it's together
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <vector>
+#include <QPushButton>
 #include <QRandomGenerator>
 
 
@@ -14,6 +16,7 @@ public:
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
+    std::shared_ptr<QPushButton> button;
 
     Tile(unsigned int x, unsigned y): x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0) {};
 

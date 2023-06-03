@@ -1,6 +1,4 @@
 #include <iostream>
-#include <QtWidgets/QPushButton>
-
 #include "minesweeper_ui.hpp"
 #include "logic.hpp"
 
@@ -8,23 +6,20 @@
 class GameUI: public Ui::MainWindow {
 public:
     Game& game;
-    std::vector<QPushButton*> buttons;
 
     GameUI(Game& game): game(game) {};
 
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
-            auto *button = new QPushButton();
-            buttons.push_back(button);
-            unsigned int x = tile.x, y = tile.y;
-            QApplication::connect(button, &QPushButton::released, [this, x, y](){this->click_button(x, y);});
-            gridLayout->addWidget(button, tile.y, tile.x);
+            tile.button = std::make_shared<QPushButton>();
+            QApplication::connect(tile.button.get(), &QPushButton::released, [this, x = tile.x, y = tile.y](){this->click_button(x, y);});
+            gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
         }
     };
 
     void click_button(unsigned int x, unsigned int y) {
         std::cout << x << " " << y << "\n";
-        buttons[y * game.board.WIDTH + x]->setText("C");
+        game.board.get_tile(x, y).button->setText("C");
     }
 };
 

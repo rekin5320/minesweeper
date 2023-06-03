@@ -23,8 +23,8 @@ public:
     };
 
     void click_button(unsigned int x, unsigned int y) {
-        std::cout << x << " " << y << "\n";
-        buttons[y * game.board.WIDTH + x]->setText("C");
+        std::cout << x << " " << y << "\n"<< game.board.get_tile(x, y).is_bomb << "\n";
+         buttons[y * game.board.WIDTH + x]->setText(QString::number(game.board.get_tile(x, y).num_adjacent_bombs));
     }
 };
 

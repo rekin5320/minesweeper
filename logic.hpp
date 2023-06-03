@@ -50,11 +50,14 @@ public:
         is_flagged = false;
     }
 
-    void create_button() {
+    void create_button()
+    {
         button = std::make_unique<QPushButton>();
     }
 
-    void click_button() {
+    void click_button()
+    {
+        // uncover();
         std::cout << x << " " << y << (is_bomb ? " 💣" : "") << "\n";
         button->setText((is_bomb ? "💣" : QString::number(num_adjacent_bombs)));
     }
@@ -145,6 +148,39 @@ public:
             }
         }
     };
+
+    void click_button(unsigned int w, unsigned int h)
+    {
+        get_tile(w, h).uncover();
+        get_tile(w, h).click_button();
+        std::cout << (get_tile(w, h).num_adjacent_bombs == 0) << "\n";
+        if (get_tile(w, h).num_adjacent_bombs == 0)
+        {
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    if (!(dx == 0 && dy == 0))
+                    { // don't count self
+                        if ((!(w == 0 && dx == -1)) &&
+                            !(h == 0 && dy == -1))
+                        { // left and top border
+                            unsigned int x = w + dx;
+                            unsigned int y = h + dy;
+                            if (x < WIDTH && y < HEIGHT)
+                            { // right and bottom border
+                                if (get_tile(x, y).is_covered)
+                                {
+                                    std::cout << "jest 0 \n";
+                                    click_button(x, y);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     void print_board()
     {

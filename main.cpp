@@ -12,7 +12,7 @@ public:
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
             tile.create_button();
-            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_button();});
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile, &board](){board.click_button(tile.x, tile.y);});
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
         }
     };

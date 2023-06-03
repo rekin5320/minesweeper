@@ -11,11 +11,11 @@ public:
 
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
+            unsigned int x = tile.x, y = tile.y;
             tile.create_button();
-            gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
+            gridLayout->addWidget(tile.button.get(), y, x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile, &board](){board.click_button(tile.x, tile.y);});
-
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&board, x, y](){board.click_button(x, y);});
         }
     };
 };

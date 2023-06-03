@@ -25,7 +25,7 @@ public:
 QPushButton {
 	border: 1px solid darkgray;
 	border-radius: 1px;
-	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #bbb);
+	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #ccc);
 }
 
 QPushButton::hover {
@@ -115,6 +115,7 @@ QPushButton {
     void create_button() {
         with_gui = true;
         button = std::make_unique<QPushButton>();
+        button->setFixedSize(30,30);
         button->setStyleSheet(stylesheet_covered);
     }
 

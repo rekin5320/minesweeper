@@ -29,8 +29,8 @@ public:
     QAction *actionNew_game;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QGridLayout *gridLayout;
     QLabel *label;
+    QGridLayout *gridLayout;
     QMenuBar *menubar;
     QMenu *menuNew_game;
     QStatusBar *statusbar;
@@ -39,28 +39,28 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(715, 473);
+        MainWindow->resize(300, 300);
         actionNew_game = new QAction(MainWindow);
         actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        verticalLayout->addWidget(label);
+
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetFixedSize);
 
         verticalLayout->addLayout(gridLayout);
 
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        verticalLayout->addWidget(label);
-
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 715, 21));
+        menubar->setGeometry(QRect(0, 0, 300, 21));
         menuNew_game = new QMenu(menubar);
         menuNew_game->setObjectName(QString::fromUtf8("menuNew_game"));
         MainWindow->setMenuBar(menubar);

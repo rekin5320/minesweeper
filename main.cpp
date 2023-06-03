@@ -13,6 +13,9 @@ public:
         for (auto& tile : board.Tiles) {
             tile.create_button();
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
+            gridLayout->setHorizontalSpacing(0);
+            gridLayout->setVerticalSpacing(0);
+            tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
             QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_left_button();});
         }
     };

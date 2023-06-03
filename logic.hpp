@@ -49,7 +49,6 @@ QPushButton {
             throw std::invalid_argument("Tile is already uncovered");
         }
         is_covered = false;
-        button->setChecked(true);
         if (with_gui) {
             std::cout << x << " " << y << (is_bomb ? " 💣" : "") << "\n";
             QString color;
@@ -82,6 +81,7 @@ QPushButton {
                     break;
             }
             button->setStyleSheet(stylesheet_uncovered.arg(color));
+            button->setChecked(true);
 
             if (!is_bomb) {
                 if (num_adjacent_bombs) {

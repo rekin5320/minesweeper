@@ -1,11 +1,13 @@
 // TODO split to header and source files; temporarily for convenience it's together
 #include <algorithm>
-#include <iostream>
-#include <stdexcept>
-#include <vector>
 #include <chrono>
 #include <iomanip>
+#include <iostream>
+#include <memory>
 #include <sstream>
+#include <stdexcept>
+#include <vector>
+#include <QPushButton>
 #include <QRandomGenerator>
 
 class Tile
@@ -17,6 +19,7 @@ public:
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
+    std::unique_ptr<QPushButton> button;
 
     Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0){};
 
@@ -45,6 +48,15 @@ public:
             throw std::invalid_argument("Tile is already unflagged");
         }
         is_flagged = false;
+    }
+
+    void create_button() {
+        button = std::make_unique<QPushButton>();
+    }
+
+    void click_button() {
+        std::cout << x << " " << y << (is_bomb ? " B" : "") << "\n";
+        button->setText((is_bomb ? "B" : QString::number(num_adjacent_bombs)));
     }
 };
 

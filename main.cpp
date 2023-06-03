@@ -1,6 +1,22 @@
 #include <iostream>
-
 #include "minesweeper_ui.hpp"
+#include "logic.hpp"
+
+
+class GameUI: public Ui::MainWindow {
+public:
+    Game& game;
+
+    GameUI(Game& game): game(game) {};
+
+    void create_tiles(Board& board) {
+        for (auto& tile : board.Tiles) {
+            tile.create_button();
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_button();});
+            gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
+        }
+    };
+};
 
 
 int main(int argc, char **argv) {
@@ -8,10 +24,11 @@ int main(int argc, char **argv) {
 
     QApplication app(argc, argv);
     QMainWindow window;
-    Ui::MainWindow ui;
+    Game game{INTERMEDIATE};
+    GameUI ui{game};
     ui.setupUi(&window);
-
-    QApplication::connect(ui.button, &QPushButton::released, [&ui](){ui.label->setText("changed");});
+    game.start();
+    ui.create_tiles(game.board);
 
     window.show();
     return app.exec();

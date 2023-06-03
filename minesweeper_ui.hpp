@@ -12,13 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -30,12 +29,11 @@ public:
     QAction *actionNew_game;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout;
     QLabel *label;
-    QPushButton *button;
     QMenuBar *menubar;
     QMenu *menuNew_game;
     QStatusBar *statusbar;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -48,16 +46,16 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setSizeConstraint(QLayout::SetFixedSize);
+
+        verticalLayout->addLayout(gridLayout);
+
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setPixmap(QPixmap(QString::fromUtf8(":/logo")));
 
         verticalLayout->addWidget(label);
-
-        button = new QPushButton(centralwidget);
-        button->setObjectName(QString::fromUtf8("button"));
-
-        verticalLayout->addWidget(button);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -69,13 +67,9 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
-        toolBar = new QToolBar(MainWindow);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menubar->addAction(menuNew_game->menuAction());
         menuNew_game->addAction(actionNew_game);
-        toolBar->addAction(actionNew_game);
 
         retranslateUi(MainWindow);
 
@@ -86,9 +80,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
-        button->setText(QCoreApplication::translate("MainWindow", "Click", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         menuNew_game->setTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
-        toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
 };

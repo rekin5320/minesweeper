@@ -6,7 +6,7 @@ Work in progress...
 mkdir build
 cd build
 cmake ..
-make
+make minesweeper
 ```
 
 ## Regenerating UI `.hpp` file after modifications in Qt Designer

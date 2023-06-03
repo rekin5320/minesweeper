@@ -7,13 +7,25 @@
 
 class GameUI: public Ui::MainWindow {
 public:
+    Game& game;
+    std::vector<QPushButton*> buttons;
+
+    GameUI(Game& game): game(game) {};
+
     void create_tiles(Board& board) {
         for (auto& tile : board.Tiles) {
             auto *button = new QPushButton();
-            QApplication::connect(button, &QPushButton::released, [this](){this->label->setText("changed");});
+            buttons.push_back(button);
+            unsigned int x = tile.x, y = tile.y;
+            QApplication::connect(button, &QPushButton::released, [this, x, y](){this->click_button(x, y);});
             gridLayout->addWidget(button, tile.y, tile.x);
         }
     };
+
+    void click_button(unsigned int x, unsigned int y) {
+        std::cout << x << " " << y << "\n";
+        buttons[y * game.board.WIDTH + x]->setText("C");
+    }
 };
 
 
@@ -22,12 +34,11 @@ int main(int argc, char **argv) {
 
     QApplication app(argc, argv);
     QMainWindow window;
-    GameUI ui;
+    Game game{INTERMEDIATE};
+    GameUI ui{game};
     ui.setupUi(&window);
-    Board board{15, 10};
-    ui.create_tiles(board);
-
-    // QApplication::connect(ui.button, &QPushButton::released, [&ui](){ui.label->setText("changed");});
+    game.start();
+    ui.create_tiles(game.board);
 
     window.show();
     return app.exec();

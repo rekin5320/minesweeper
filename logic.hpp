@@ -144,7 +144,7 @@ public:
             }
             else if (tile.is_bomb)
             {
-                std::cout << "X ";
+                std::cout << "B ";
             }
             else
             {

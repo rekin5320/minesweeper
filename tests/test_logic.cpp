@@ -101,7 +101,7 @@ TEST_CASE("Board")
 
             // board.print_board();
             // 1 2 2
-            // 1 X X
+            // 1 B B
 
             REQUIRE(board.get_tile(0, 0).num_adjacent_bombs == 1);
             REQUIRE(board.get_tile(1, 0).num_adjacent_bombs == 2);
@@ -127,9 +127,9 @@ TEST_CASE("Board")
 
             // board.print_board();
             // 0 0 0 1 1
-            // 1 1 0 2 X
-            // X 3 3 5 X
-            // 2 X X X X
+            // 1 1 0 2 B
+            // B 3 3 5 B
+            // 2 B B B B
 
             REQUIRE(board.get_tile(0, 0).num_adjacent_bombs == 0);
             REQUIRE(board.get_tile(1, 0).num_adjacent_bombs == 0);

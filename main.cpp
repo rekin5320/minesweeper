@@ -14,7 +14,8 @@ public:
             tile.create_button();
             gridLayout->addWidget(tile.button.get(), tile.y, tile.x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile](){tile.click_left_button();});
+            QApplication::connect(tile.button.get(), &QPushButton::released, [&tile, &board](){board.click_button(tile.x, tile.y);});
+
         }
     };
 };

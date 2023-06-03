@@ -119,7 +119,7 @@ QPushButton {
         button->setStyleSheet(stylesheet_covered);
     }
 
-    void click_left_button() {
+    void click_button() {
         if (is_covered) {
             uncover();
         }
@@ -211,6 +211,29 @@ public:
             }
         }
     };
+
+    void click_button(unsigned int w, unsigned int h) {
+        get_tile(w, h).uncover();
+        get_tile(w, h).click_button();
+        if (get_tile(w, h).num_adjacent_bombs == 0 && !get_tile(w, h).is_bomb) {
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (!(dx == 0 && dy == 0)) { // don't count self
+                        if ((!(w == 0 && dx == -1)) &&
+                            !(h == 0 && dy == -1)) { // left and top border
+                            unsigned int x = w + dx;
+                            unsigned int y = h + dy;
+                            if (x < WIDTH && y < HEIGHT) { // right and bottom border
+                                if (get_tile(x, y).is_covered) {
+                                    click_button(x, y);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     void print_board()
     {

@@ -23,7 +23,7 @@ list(APPEND QT_RESOURCES
     resources/resources.qrc
 )
 
-set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-g" "-pedantic" "-fsanitize=undefined")
+set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-pedantic" "-fsanitize=undefined")
 add_compile_options(${COMPILE_OPTIONS})
 add_link_options(${COMPILE_OPTIONS})
 

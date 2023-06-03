@@ -1,6 +1,6 @@
 #include <iostream>
-#include "minesweeper_ui.hpp"
 #include "logic.hpp"
+#include "minesweeper_ui.hpp"
 
 
 class GameUI: public Ui::MainWindow {
@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
     std::cout << "Qt version: " << qVersion() << std::endl;
 
     QApplication app(argc, argv);
+
     QMainWindow window;
     Game game{INTERMEDIATE};
     GameUI ui{game};

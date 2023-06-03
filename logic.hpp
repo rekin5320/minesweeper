@@ -141,8 +141,9 @@ class Board
 public:
     unsigned int WIDTH, HEIGHT;
     std::vector<Tile> Tiles;
+    QRandomGenerator random{};
 
-    Board() : WIDTH(0), HEIGHT(0) {} // default constructor
+    Board(): WIDTH(0), HEIGHT(0) {};
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
@@ -164,7 +165,6 @@ public:
         return get_tile(position.x, position.y);
     }
 
-    QRandomGenerator random{};
     Tile &random_tile()
     {
         unsigned int rand_x = random.bounded(WIDTH);
@@ -240,7 +240,7 @@ public:
     void uncover_tile(unsigned int x, unsigned int y) {
         Tile& tile = get_tile(x, y);
         tile.uncover();
-        if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {
+        if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {  // uncover empty surround
             for (auto& position: tile_neighbours(tile)) {
                 Tile& neighbour = get_tile(position);
                 if (neighbour.is_covered) {

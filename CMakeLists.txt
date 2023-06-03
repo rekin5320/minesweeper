@@ -27,7 +27,7 @@ set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-pedantic" "-fsanitize=undefine
 add_compile_options(${COMPILE_OPTIONS})
 add_link_options(${COMPILE_OPTIONS})
 
-add_executable(${PROJECT_NAME} main.cpp ${QT_RESOURCES})
+add_executable(${PROJECT_NAME} main.cpp MyButton.hpp ${QT_RESOURCES})
 target_link_libraries(${PROJECT_NAME} ${QT_LIBS})
 
 add_executable(test tests/test_root.cpp tests/test_logic.cpp)

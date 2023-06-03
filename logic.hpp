@@ -9,6 +9,7 @@
 #include <vector>
 #include <QPushButton>
 #include <QRandomGenerator>
+#include "MyButton.hpp"
 
 
 struct Position {
@@ -36,20 +37,20 @@ public:
     bool is_flagged;
     unsigned int num_adjacent_bombs;
     bool with_gui;
-    std::unique_ptr<QPushButton> button;
+    std::unique_ptr<MyButton> button;
     const QString stylesheet_covered = R"(
-QPushButton {
+MyButton {
 	border: 1px solid darkgray;
 	border-radius: 1px;
 	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #ccc);
 }
 
-QPushButton::hover {
+MyButton::hover {
     background-color: rgb(190, 190, 190);
 }
 )";
     const QString stylesheet_uncovered = R"(
-QPushButton {
+MyButton {
 	color: %1;
 	font-weight: bold;
 	border: 1px solid lightgray;
@@ -130,7 +131,7 @@ QPushButton {
 
     void create_button() {
         with_gui = true;
-        button = std::make_unique<QPushButton>();
+        button = std::make_unique<MyButton>();
         button->setFixedSize(30,30);
         button->setStyleSheet(stylesheet_covered);
     }
@@ -248,6 +249,10 @@ public:
                 }
             }
         }
+    }
+
+    void flag_tile(unsigned int x, unsigned int y) {
+        std::cout << x << " " << y << " right click\n";
     }
 
     void print_board() const {

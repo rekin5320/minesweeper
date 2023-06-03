@@ -134,12 +134,6 @@ QPushButton {
         button->setFixedSize(30,30);
         button->setStyleSheet(stylesheet_covered);
     }
-
-    void click_button() {
-        if (is_covered) {
-            uncover();
-        }
-    }
 };
 
 class Board
@@ -243,14 +237,14 @@ public:
         }
     };
 
-    void click_button(unsigned int x, unsigned int y) {
+    void uncover_tile(unsigned int x, unsigned int y) {
         Tile& tile = get_tile(x, y);
-        tile.click_button();
+        tile.uncover();
         if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {
             for (auto& position: tile_neighbours(tile)) {
                 Tile& neighbour = get_tile(position);
                 if (neighbour.is_covered) {
-                    click_button(position.x, position.y);
+                    uncover_tile(position.x, position.y);
                 }
             }
         }

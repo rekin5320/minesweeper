@@ -46,8 +46,8 @@ public:
     }
 
     void click_button() {
-        std::cout << x << " " << y << "\n";
-        button->setText("C");
+        std::cout << x << " " << y << (is_bomb ? " B" : "") << "\n";
+        button->setText((is_bomb ? "B" : QString::number(num_adjacent_bombs)));
     }
 };
 

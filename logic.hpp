@@ -7,6 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector>
+#include <random>
 #include <QPushButton>
 #include <QRandomGenerator>
 #include "MyButton.hpp"
@@ -235,14 +236,18 @@ public:
             throw std::invalid_argument("Too many bombs");
         }
 
-        while (num_bombs > 0)
+        // Generate a sequence of indices from 0 to (WIDTH * HEIGHT - 1)
+        std::vector<unsigned int> indices(WIDTH * HEIGHT);
+        std::iota(indices.begin(), indices.end(), 0);
+
+        // Shuffle the indices randomly
+        std::shuffle(indices.begin(), indices.end(), std::mt19937(std::random_device()()));
+
+        // Mark the first num_bombs tiles as bomb positions
+        for (unsigned int i = 0; i < num_bombs; i++)
         {
-            Tile &rand_tile = random_tile();
-            if (!rand_tile.is_bomb)
-            {
-                rand_tile.is_bomb = true;
-                num_bombs--;
-            }
+            Tile &tile = Tiles[indices[i]];
+            tile.is_bomb = true;
         }
     }
 

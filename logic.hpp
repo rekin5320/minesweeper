@@ -79,37 +79,7 @@ QPushButton {
             is_covered = false;
             if (with_gui)
             {
-                QString color;
-                switch (num_adjacent_bombs)
-                {
-                case 1:
-                    color = "blue";
-                    break;
-                case 2:
-                    color = "green";
-                    break;
-                case 3:
-                    color = "red";
-                    break;
-                case 4:
-                    color = "midnightblue";
-                    break;
-                case 5:
-                    color = "maroon";
-                    break;
-                case 6:
-                    color = "darkcyan";
-                    break;
-                case 7:
-                    color = "black";
-                    break;
-                case 8:
-                    color = "grey";
-                    break;
-                default:
-                    break;
-                }
-                button->setStyleSheet(stylesheet_uncovered.arg(color));
+                button->setStyleSheet(stylesheet_uncovered.arg(get_color()));
                 button->setChecked(true);
 
                 if (!is_bomb)
@@ -125,6 +95,41 @@ QPushButton {
                 }
             }
         }
+    }
+
+    QString get_color() const
+    {
+        QString color;
+        switch (num_adjacent_bombs)
+        {
+            case 1:
+                color = "blue";
+                break;
+            case 2:
+                color = "green";
+                break;
+            case 3:
+                color = "red";
+                break;
+            case 4:
+                color = "midnightblue";
+                break;
+            case 5:
+                color = "maroon";
+                break;
+            case 6:
+                color = "darkcyan";
+                break;
+            case 7:
+                color = "black";
+                break;
+            case 8:
+                color = "grey";
+                break;
+            default:
+                break;
+        }
+        return color;
     }
 
     void flag()

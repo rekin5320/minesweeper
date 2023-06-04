@@ -292,11 +292,11 @@ public:
         }
     }
 
-    void uncover_all()
+    void uncover_bombs()
     {
         for (auto &tile : Tiles)
         {
-            if (tile.is_covered)
+            if (tile.is_covered && tile.is_bomb)
             {
                 tile.uncover();
             }
@@ -467,7 +467,7 @@ public:
                 std::chrono::duration<double> elapsed_time = end_time - start_time;
                 elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
                 elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
-                board.uncover_all();
+                board.uncover_bombs();
                 return true;
             }
         }

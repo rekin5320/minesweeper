@@ -162,6 +162,7 @@ public:
         {
             Tiles.emplace_back(i % WIDTH, i / WIDTH);
         }
+        random.seed(std::random_device()());
     }
 
     Tile &get_tile(unsigned int x, unsigned int y)

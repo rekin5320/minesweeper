@@ -129,7 +129,7 @@ TEST_CASE("Board")
 
         SECTION("count_adjacent_bombs")
         {
-            board.set_random_seed(37);
+            board.set_seed(37);
             board.generate_bombs(2);
             board.count_adjacent_bombs();
 
@@ -173,7 +173,7 @@ TEST_CASE("Board")
 
         SECTION("count_adjacent_bombs")
         {
-            board.set_random_seed(21);
+            board.set_seed(21);
             board.generate_bombs(7);
             board.count_adjacent_bombs();
 
@@ -210,7 +210,7 @@ TEST_CASE("Board")
 
         SECTION("uncover_tile")
         {
-            board.set_random_seed(21);
+            board.set_seed(21);
             board.generate_bombs(7);
             board.count_adjacent_bombs();
             board.uncover_tile(0, 0);
@@ -248,7 +248,7 @@ TEST_CASE("Board")
 
         SECTION("uncover_bombs")
         {
-            board.set_random_seed(21);
+            board.set_seed(21);
             board.generate_bombs(7);
             board.count_adjacent_bombs();
             board.uncover_bombs();
@@ -296,7 +296,7 @@ TEST_CASE("Board")
 
         SECTION("print_board")
         {
-            board.set_random_seed(21);
+            board.set_seed(21);
             board.generate_bombs(7);
             board.count_adjacent_bombs();
             board.get_tile(1, 0).flag();

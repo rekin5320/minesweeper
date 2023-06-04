@@ -174,10 +174,10 @@ public:
         {
             Tiles.emplace_back(i % WIDTH, i / WIDTH);
         }
-        set_random_seed(std::random_device()());
+        set_seed(std::random_device()());
     }
 
-    void set_random_seed(quint32 seed)
+    void set_seed(quint32 seed)
     {
         random.seed(seed);
     }

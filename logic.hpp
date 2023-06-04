@@ -343,13 +343,14 @@ class Game
 public:
     Board board;
     unsigned int num_bombs;
+    bool with_gui;
     Ui::MainWindow ui;
     std::chrono::steady_clock::time_point start_time;
     std::chrono::steady_clock::time_point end_time;
     std::chrono::minutes elapsed_minutes;
     std::chrono::seconds elapsed_seconds;
 
-    Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0)
+    Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0): with_gui(false)
     {
         switch (difficulty)
         {
@@ -387,6 +388,7 @@ public:
 
     void setupUi(QMainWindow& MainWindow) {
         ui.setupUi(&MainWindow);
+        with_gui = true;
     }
 
     void create_tiles() {
@@ -404,12 +406,16 @@ public:
         if (is_game_over())
         {
             std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!"<< std::endl;
-            ui.label->setText("Game over!");
+            if (with_gui) {
+                ui.label->setText("Game over!");
+            }
         }
         else if (is_game_won())
         {
             std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
-            ui.label->setText("Game won!");
+            if (with_gui) {
+                ui.label->setText("Game won!");
+            }
         }
     }
 

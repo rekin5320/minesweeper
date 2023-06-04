@@ -62,10 +62,6 @@ MyButton {
 
     void uncover()
     {
-        if (!is_covered)
-        {
-            throw std::invalid_argument("Tile is already uncovered");
-        }
         is_covered = false;
         if (with_gui) {
             QString color;
@@ -112,9 +108,6 @@ MyButton {
     }
 
     void flag() {
-        if (is_flagged) {
-            throw std::invalid_argument("Tile is already flagged");
-        }
         is_flagged = true;
         if (with_gui) {
             button->setText("🚩");
@@ -122,9 +115,6 @@ MyButton {
     }
 
     void unflag() {
-        if (!is_flagged) {
-            throw std::invalid_argument("Tile is already unflagged");
-        }
         is_flagged = false;
         if (with_gui) {
             button->setText("");

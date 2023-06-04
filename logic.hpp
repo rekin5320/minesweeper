@@ -277,6 +277,10 @@ public:
                 }
                 tile.num_adjacent_bombs = count;
             }
+            else
+            {
+                tile.num_adjacent_bombs = 0;
+            }
         }
     };
 

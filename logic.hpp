@@ -11,7 +11,6 @@
 #include <QRandomGenerator>
 #include "minesweeper_ui.hpp"
 
-
 struct Position
 {
     unsigned int x;
@@ -293,6 +292,17 @@ public:
         }
     }
 
+    void uncover_all()
+    {
+        for (auto &tile : Tiles)
+        {
+            if (tile.is_covered)
+            {
+                tile.uncover();
+            }
+        }
+    }
+
     void flag_or_unflag_tile(unsigned int x, unsigned int y)
     {
         Tile &tile = get_tile(x, y);
@@ -351,7 +361,7 @@ public:
     std::chrono::minutes elapsed_minutes;
     std::chrono::seconds elapsed_seconds;
 
-    Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0): with_gui(false)
+    Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0) : with_gui(false)
     {
         switch (difficulty)
         {
@@ -388,37 +398,46 @@ public:
         start_time = std::chrono::steady_clock::now();
     }
 
-    void setupUi(QMainWindow& MainWindow) {
+    void setupUi(QMainWindow &MainWindow)
+    {
         ui.setupUi(&MainWindow);
         with_gui = true;
     }
 
-    void create_tiles() {
-        for (auto& tile: board.Tiles) {
+    void create_tiles()
+    {
+        for (auto &tile : board.Tiles)
+        {
             unsigned int x = tile.x, y = tile.y;
             tile.create_button();
             ui.gridLayout->addWidget(tile.button.get(), y, x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]() {uncover_tile(x, y); });
+            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
+                             { uncover_tile(x, y); });
         }
     };
 
-    void uncover_tile(unsigned int x, unsigned int y) {
+    void uncover_tile(unsigned int x, unsigned int y)
+    {
         if (!has_ended)
         {
             board.uncover_tile(x, y);
-            if (is_game_over()) {
+            if (is_game_over())
+            {
                 has_ended = true;
                 std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
-                if (with_gui) {
+                if (with_gui)
+                {
                     ui.label->setText("Game over!");
                 }
             }
-            else if (is_game_won()) {
+            else if (is_game_won())
+            {
                 has_ended = true;
                 std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!"
                           << std::endl;
-                if (with_gui) {
+                if (with_gui)
+                {
                     ui.label->setText("Game won!");
                 }
             }
@@ -448,6 +467,7 @@ public:
                 std::chrono::duration<double> elapsed_time = end_time - start_time;
                 elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
                 elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
+                board.uncover_all();
                 return true;
             }
         }

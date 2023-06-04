@@ -77,6 +77,9 @@ public:
         mainbutton->setMinimumSize(QSize(75, 75));
         mainbutton->setMaximumSize(QSize(75, 75));
         mainbutton->setBaseSize(QSize(75, 75));
+        QFont font;
+        font.setPointSize(25);
+        mainbutton->setFont(font);
 
         horizontalLayout->addWidget(mainbutton);
 
@@ -128,7 +131,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
-        mainbutton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
         menuNew_game->setTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
     } // retranslateUi
 

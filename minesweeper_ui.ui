@@ -66,8 +66,13 @@
           <height>75</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>25</pointsize>
+         </font>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>🙂</string>
         </property>
        </widget>
       </item>

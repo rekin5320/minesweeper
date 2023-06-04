@@ -111,22 +111,24 @@ MyButton {
         }
     }
 
-    void flag()
-    {
-        if (is_flagged)
-        {
+    void flag() {
+        if (is_flagged) {
             throw std::invalid_argument("Tile is already flagged");
         }
         is_flagged = true;
+        if (with_gui) {
+            button->setText("🚩");
+        }
     }
 
-    void unflag()
-    {
-        if (!is_flagged)
-        {
+    void unflag() {
+        if (!is_flagged) {
             throw std::invalid_argument("Tile is already unflagged");
         }
         is_flagged = false;
+        if (with_gui) {
+            button->setText("");
+        }
     }
 
     void create_button() {
@@ -251,8 +253,15 @@ public:
         }
     }
 
-    void flag_tile(unsigned int x, unsigned int y) {
+    void flag_or_unflag_tile(unsigned int x, unsigned int y) {
         std::cout << x << " " << y << " right click\n";
+        Tile& tile = get_tile(x, y);
+        if (!tile.is_flagged) {
+            tile.flag();
+        }
+        else {
+            tile.unflag();
+        }
     }
 
     void print_board() const {

@@ -13,6 +13,19 @@ TEST_CASE("Tile")
     REQUIRE(!tile.is_flagged);
     REQUIRE(tile.num_adjacent_bombs == 0);
 
+    SECTION("uncover()")
+    {
+        tile.uncover();
+        REQUIRE(!tile.is_covered);
+    }
+
+    SECTION("flag() & unflag()")
+    {
+        tile.flag();
+        REQUIRE(tile.is_flagged);
+        tile.unflag();
+        REQUIRE(!tile.is_flagged);
+    }
 }
 
 TEST_CASE("Board")

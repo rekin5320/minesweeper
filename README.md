@@ -9,6 +9,15 @@ cmake ..
 make minesweeper
 ```
 
+## Running tests
+```sh
+mkdir build
+cd build
+cmake ..
+make test
+./test
+```
+
 ## Regenerating UI `.hpp` file after modifications in Qt Designer
 ```sh
 uic-qt5 minesweeperUI.ui -o minesweeperUI.hpp

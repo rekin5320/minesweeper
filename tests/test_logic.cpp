@@ -110,7 +110,7 @@ TEST_CASE("Board")
 
         SECTION("count_adjacent_bombs")
         {
-            board.random.seed(37);
+            board.set_random_seed(37);
             board.generate_bombs(2);
             board.count_adjacent_bombs();
 
@@ -151,7 +151,7 @@ TEST_CASE("Board")
 
         SECTION("count_adjacent_bombs")
         {
-            board.random.seed(21);
+            board.set_random_seed(21);
             board.generate_bombs(7);
             board.count_adjacent_bombs();
 

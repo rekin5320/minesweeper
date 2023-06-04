@@ -148,11 +148,12 @@ QPushButton {
 
 class Board
 {
+private:
+    QRandomGenerator random{};
+
 public:
     unsigned int WIDTH, HEIGHT;
     std::vector<Tile> Tiles;
-    QRandomGenerator random{};
-
     Board() : WIDTH(0), HEIGHT(0){};
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
@@ -162,7 +163,12 @@ public:
         {
             Tiles.emplace_back(i % WIDTH, i / WIDTH);
         }
-        random.seed(std::random_device()());
+        set_random_seed(std::random_device()());
+    }
+
+    void set_random_seed(quint32 seed)
+    {
+        random.seed(seed);
     }
 
     Tile &get_tile(unsigned int x, unsigned int y)

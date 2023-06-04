@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <sstream>
 
 #include "catch.hpp"
 #include "../logic.hpp"
@@ -290,6 +291,29 @@ TEST_CASE("Board")
             REQUIRE(board.get_tile(0, 0).is_flagged);
             board.flag_or_unflag_tile(0, 0);
             REQUIRE(!board.get_tile(0, 0).is_flagged);
+        }
+
+        SECTION("print_board")
+        {
+            board.set_random_seed(21);
+            board.generate_bombs(7);
+            board.count_adjacent_bombs();
+            board.get_tile(1, 0).flag();
+
+            std::ostringstream oss;
+            auto old_cout = std::cout.rdbuf();
+            std::cout.rdbuf(oss.rdbuf());
+
+            board.print_board();
+
+            std::cout.rdbuf(old_cout);
+
+            std::string expectedOutput = "0 f 0 1 1 \n"
+                                         "1 1 0 2 B \n"
+                                         "B 3 3 5 B \n"
+                                         "2 B B B B \n";
+
+            REQUIRE(oss.str() == expectedOutput);
         }
     }
 }

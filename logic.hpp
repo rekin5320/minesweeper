@@ -253,6 +253,14 @@ public:
         }
     }
 
+    void clear_bombs()
+    {
+        for (auto &tile : Tiles)
+        {
+            tile.is_bomb = false;
+        }
+    }
+
     void count_adjacent_bombs()
     {
         for (auto &tile : Tiles)
@@ -355,6 +363,7 @@ public:
     unsigned int num_bombs;
     bool with_gui;
     bool has_ended;
+    bool first_click = false;
     Ui::MainWindow ui;
     std::chrono::steady_clock::time_point start_time;
     std::chrono::steady_clock::time_point end_time;
@@ -413,7 +422,19 @@ public:
             ui.gridLayout->addWidget(tile.button.get(), y, x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
             QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
-                             { uncover_tile(x, y); });
+                             {
+                                 if (!first_click)
+                                 {
+                                     while ((board.get_tile(x, y).is_bomb || board.get_tile(x, y).num_adjacent_bombs > 0))
+                                     {
+                                         board.clear_bombs();
+                                         start();
+                                     }
+                                 }
+
+                                 first_click = true;
+                                 uncover_tile(x, y);
+                             });
         }
     };
 

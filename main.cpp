@@ -1,39 +1,18 @@
 #include <iostream>
 #include "logic.hpp"
-#include "minesweeper_ui.hpp"
 
-class GameUI : public Ui::MainWindow
-{
-public:
-    Game &game;
-
-    GameUI(Game &game) : game(game){};
-
-    void create_tiles()
-    {
-        for (auto &tile : game.board.Tiles)
-        {
-            unsigned int x = tile.x, y = tile.y;
-            tile.create_button();
-            gridLayout->addWidget(tile.button.get(), y, x);
-            tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y](){game.uncover_tile(x, y);});
-        }
-    };
-};
 
 int main(int argc, char **argv)
 {
     std::cout << "Qt version: " << qVersion() << std::endl;
 
     QApplication app(argc, argv);
-
     QMainWindow window;
+
     Game game{EXPERT};
-    GameUI ui{game};
-    ui.setupUi(&window);
+    game.setupUi(window);
     game.start();
-    ui.create_tiles();
+    game.create_tiles();
 
     window.show();
 

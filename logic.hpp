@@ -9,6 +9,7 @@
 #include <vector>
 #include <QPushButton>
 #include <QRandomGenerator>
+#include "minesweeper_ui.hpp"
 
 
 struct Position
@@ -342,6 +343,7 @@ class Game
 public:
     Board board;
     unsigned int num_bombs;
+    Ui::MainWindow ui;
     std::chrono::steady_clock::time_point start_time;
     std::chrono::steady_clock::time_point end_time;
     std::chrono::minutes elapsed_minutes;
@@ -382,6 +384,20 @@ public:
         board.count_adjacent_bombs();
         start_time = std::chrono::steady_clock::now();
     }
+
+    void setupUi(QMainWindow& MainWindow) {
+        ui.setupUi(&MainWindow);
+    }
+
+    void create_tiles() {
+        for (auto& tile: board.Tiles) {
+            unsigned int x = tile.x, y = tile.y;
+            tile.create_button();
+            ui.gridLayout->addWidget(tile.button.get(), y, x);
+            tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]() {uncover_tile(x, y); });
+        }
+    };
 
     void uncover_tile(unsigned int x, unsigned int y) {
         board.uncover_tile(x, y);

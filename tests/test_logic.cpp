@@ -1,6 +1,5 @@
 #include <stdexcept>
 #include <sstream>
-#include <chrono>
 
 #include "catch.hpp"
 #include "../logic.hpp"

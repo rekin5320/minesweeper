@@ -11,21 +11,22 @@
 #include <QRandomGenerator>
 #include "MyButton.hpp"
 
-
-struct Position {
+struct Position
+{
     unsigned int x;
     unsigned int y;
 
-    bool operator==(const Position& other) const {
+    bool operator==(const Position &other) const
+    {
         return x == other.x && y == other.y;
     }
 };
 
-std::ostream& operator<<(std::ostream& os, const Position& position) {
+std::ostream &operator<<(std::ostream &os, const Position &position)
+{
     os << "(" << position.x << ", " << position.y << ")";
     return os;
 }
-
 
 class Tile
 {
@@ -58,14 +59,18 @@ MyButton {
 };
 )";
 
-    Tile(unsigned int x, unsigned y): x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0), with_gui(false) {};
+    Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0), with_gui(false){};
 
     void uncover()
     {
-        is_covered = false;
-        if (with_gui) {
-            QString color;
-            switch (num_adjacent_bombs) {
+        if (!is_flagged)
+        {
+            is_covered = false;
+            if (with_gui)
+            {
+                QString color;
+                switch (num_adjacent_bombs)
+                {
                 case 1:
                     color = "blue";
                     break;
@@ -92,41 +97,51 @@ MyButton {
                     break;
                 default:
                     break;
-            }
-            button->setStyleSheet(stylesheet_uncovered.arg(color));
-            button->setChecked(true);
-
-            if (!is_bomb) {
-                if (num_adjacent_bombs) {
-                    button->setText(QString::number(num_adjacent_bombs));
                 }
-            }
-            else {
-                button->setText("💣");
+                button->setStyleSheet(stylesheet_uncovered.arg(color));
+                button->setChecked(true);
+
+                if (!is_bomb)
+                {
+                    if (num_adjacent_bombs)
+                    {
+                        button->setText(QString::number(num_adjacent_bombs));
+                    }
+                }
+                else
+                {
+                    button->setText("💣");
+                }
             }
         }
     }
 
-    void flag() {
-        if (is_covered) {
+    void flag()
+    {
+        if (is_covered)
+        {
             is_flagged = true;
-            if (with_gui) {
+            if (with_gui)
+            {
                 button->setText("🚩");
             }
         }
     }
 
-    void unflag() {
+    void unflag()
+    {
         is_flagged = false;
-        if (with_gui) {
+        if (with_gui)
+        {
             button->setText("");
         }
     }
 
-    void create_button() {
+    void create_button()
+    {
         with_gui = true;
         button = std::make_unique<MyButton>();
-        button->setFixedSize(30,30);
+        button->setFixedSize(30, 30);
         button->setStyleSheet(stylesheet_covered);
     }
 };
@@ -138,7 +153,7 @@ public:
     std::vector<Tile> Tiles;
     QRandomGenerator random{};
 
-    Board(): WIDTH(0), HEIGHT(0) {};
+    Board() : WIDTH(0), HEIGHT(0){};
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
@@ -149,14 +164,17 @@ public:
         }
     }
 
-    Tile& get_tile(unsigned int x, unsigned int y) {
-        if (x >= WIDTH || y >= HEIGHT) {
+    Tile &get_tile(unsigned int x, unsigned int y)
+    {
+        if (x >= WIDTH || y >= HEIGHT)
+        {
             throw std::invalid_argument("Invalid coordinates");
         }
         return Tiles[y * WIDTH + x];
     }
 
-    Tile& get_tile(Position position) {
+    Tile &get_tile(Position position)
+    {
         return get_tile(position.x, position.y);
     }
 
@@ -167,36 +185,46 @@ public:
         return get_tile(rand_x, rand_y);
     }
 
-    std::vector<Position> tile_neighbours(unsigned int x, unsigned int y) const {
+    std::vector<Position> tile_neighbours(unsigned int x, unsigned int y) const
+    {
         std::vector<Position> neighbours;
-        if (x > 0 && y > 0) {
+        if (x > 0 && y > 0)
+        {
             neighbours.push_back({x - 1, y - 1});
         }
-        if (y > 0) {
+        if (y > 0)
+        {
             neighbours.push_back({x, y - 1});
         }
-        if (y > 0 && x < WIDTH - 1) {
+        if (y > 0 && x < WIDTH - 1)
+        {
             neighbours.push_back({x + 1, y - 1});
         }
-        if (x > 0) {
+        if (x > 0)
+        {
             neighbours.push_back({x - 1, y});
         }
-        if (x < WIDTH - 1) {
+        if (x < WIDTH - 1)
+        {
             neighbours.push_back({x + 1, y});
         }
-        if (x > 0 && y < HEIGHT - 1) {
+        if (x > 0 && y < HEIGHT - 1)
+        {
             neighbours.push_back({x - 1, y + 1});
         }
-        if (y < HEIGHT - 1) {
+        if (y < HEIGHT - 1)
+        {
             neighbours.push_back({x, y + 1});
         }
-        if (x < WIDTH - 1 && y < HEIGHT - 1) {
+        if (x < WIDTH - 1 && y < HEIGHT - 1)
+        {
             neighbours.push_back({x + 1, y + 1});
         }
         return neighbours;
     }
 
-    std::vector<Position> tile_neighbours(const Tile& tile) const {
+    std::vector<Position> tile_neighbours(const Tile &tile) const
+    {
         return tile_neighbours(tile.x, tile.y);
     }
 
@@ -218,12 +246,17 @@ public:
         }
     }
 
-    void count_adjacent_bombs() {
-        for (auto& tile: Tiles) {
-            if (!tile.is_bomb) {
+    void count_adjacent_bombs()
+    {
+        for (auto &tile : Tiles)
+        {
+            if (!tile.is_bomb)
+            {
                 unsigned int count = 0;
-                for (auto& position : tile_neighbours(tile)) {
-                    if (get_tile(position).is_bomb) {
+                for (auto &position : tile_neighbours(tile))
+                {
+                    if (get_tile(position).is_bomb)
+                    {
                         count++;
                     }
                 }
@@ -232,14 +265,19 @@ public:
         }
     };
 
-    void uncover_tile(unsigned int x, unsigned int y) {
-        Tile& tile = get_tile(x, y);
-        if (tile.is_covered) {
+    void uncover_tile(unsigned int x, unsigned int y)
+    {
+        Tile &tile = get_tile(x, y);
+        if (tile.is_covered)
+        {
             tile.uncover();
-            if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {  // uncover empty surround
-                for (auto& position: tile_neighbours(tile)) {
-                    Tile& neighbour = get_tile(position);
-                    if (neighbour.is_covered) {
+            if (tile.num_adjacent_bombs == 0 && !tile.is_bomb)
+            { // uncover empty surround
+                for (auto &position : tile_neighbours(tile))
+                {
+                    Tile &neighbour = get_tile(position);
+                    if (neighbour.is_covered)
+                    {
                         uncover_tile(position.x, position.y);
                     }
                 }
@@ -247,28 +285,37 @@ public:
         }
     }
 
-    void flag_or_unflag_tile(unsigned int x, unsigned int y) {
-        Tile& tile = get_tile(x, y);
-        if (!tile.is_flagged) {
+    void flag_or_unflag_tile(unsigned int x, unsigned int y)
+    {
+        Tile &tile = get_tile(x, y);
+        if (!tile.is_flagged)
+        {
             tile.flag();
         }
-        else {
+        else
+        {
             tile.unflag();
         }
     }
 
-    void print_board() const {
-        for (auto& tile: Tiles) {
-            if (tile.is_flagged) {
+    void print_board() const
+    {
+        for (auto &tile : Tiles)
+        {
+            if (tile.is_flagged)
+            {
                 std::cout << (tile.is_bomb ? "F " : "f ");
             }
-            else if (tile.is_bomb) {
+            else if (tile.is_bomb)
+            {
                 std::cout << "B ";
             }
-            else {
+            else
+            {
                 std::cout << tile.num_adjacent_bombs << " ";
             }
-            if (tile.x == WIDTH - 1) {
+            if (tile.x == WIDTH - 1)
+            {
                 std::cout << "\n";
             }
         }

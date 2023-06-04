@@ -427,15 +427,15 @@ public:
 
     unsigned int left_bombs()
     {
-        unsigned int count = 0;
+        unsigned int count = num_bombs;
         for (auto &tile : board.Tiles)
         {
-            if (tile.is_flagged)
+            if (tile.is_flagged && tile.is_bomb)
             {
-                count++;
+                count--;
             }
         }
-        return num_bombs - count;
+        return count;
     }
 
     bool is_game_over()

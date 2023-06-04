@@ -404,10 +404,12 @@ public:
         if (is_game_over())
         {
             std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!"<< std::endl;
+            ui.label->setText("Game over!");
         }
         else if (is_game_won())
         {
             std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
+            ui.label->setText("Game won!");
         }
     }
 

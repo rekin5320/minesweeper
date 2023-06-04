@@ -495,7 +495,7 @@ TEST_CASE("Game")
         {
             for (unsigned int y = 0; y < game.board.WIDTH; y++)
             {
-                game.board.get_tile(x, y).uncover();
+                game.uncover_tile(x, y);
             }
         }
 

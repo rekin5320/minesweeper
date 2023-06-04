@@ -108,9 +108,11 @@ MyButton {
     }
 
     void flag() {
-        is_flagged = true;
-        if (with_gui) {
-            button->setText("🚩");
+        if (is_covered) {
+            is_flagged = true;
+            if (with_gui) {
+                button->setText("🚩");
+            }
         }
     }
 

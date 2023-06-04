@@ -241,12 +241,14 @@ public:
 
     void uncover_tile(unsigned int x, unsigned int y) {
         Tile& tile = get_tile(x, y);
-        tile.uncover();
-        if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {  // uncover empty surround
-            for (auto& position: tile_neighbours(tile)) {
-                Tile& neighbour = get_tile(position);
-                if (neighbour.is_covered) {
-                    uncover_tile(position.x, position.y);
+        if (tile.is_covered) {
+            tile.uncover();
+            if (tile.num_adjacent_bombs == 0 && !tile.is_bomb) {  // uncover empty surround
+                for (auto& position: tile_neighbours(tile)) {
+                    Tile& neighbour = get_tile(position);
+                    if (neighbour.is_covered) {
+                        uncover_tile(position.x, position.y);
+                    }
                 }
             }
         }

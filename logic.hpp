@@ -446,7 +446,7 @@ public:
             if (is_game_over())
             {
                 has_ended = true;
-                std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
+                std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!\n";
                 if (with_gui)
                 {
                     ui.label->setText("Game over!");
@@ -455,8 +455,7 @@ public:
             else if (is_game_won())
             {
                 has_ended = true;
-                std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!"
-                          << std::endl;
+                std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!\n";
                 if (with_gui)
                 {
                     ui.label->setText("Game won!");

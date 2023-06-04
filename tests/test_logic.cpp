@@ -12,7 +12,6 @@ TEST_CASE("Tile")
     REQUIRE(tile.is_covered);
     REQUIRE(!tile.is_flagged);
     REQUIRE(tile.num_adjacent_bombs == 0);
-
 }
 
 TEST_CASE("Board")
@@ -191,6 +190,44 @@ TEST_CASE("Board")
             REQUIRE(board.get_tile(2, 3).is_bomb);
             REQUIRE(board.get_tile(3, 3).is_bomb);
             REQUIRE(board.get_tile(4, 3).is_bomb);
+        }
+
+        SECTION("uncover_tile")
+        {
+            board.set_random_seed(21);
+            board.generate_bombs(7);
+            board.count_adjacent_bombs();
+            board.uncover_tile(0, 0);
+
+            // board.print_board();
+            // 0 0 0 1 1
+            // 1 1 0 2 B
+            // B 3 3 5 B
+            // 2 B B B B
+
+            REQUIRE(!board.get_tile(0, 0).is_covered);
+            REQUIRE(!board.get_tile(1, 0).is_covered);
+            REQUIRE(!board.get_tile(2, 0).is_covered);
+            REQUIRE(!board.get_tile(3, 0).is_covered);
+            REQUIRE(board.get_tile(4, 0).is_covered);
+
+            REQUIRE(!board.get_tile(0, 1).is_covered);
+            REQUIRE(!board.get_tile(1, 1).is_covered);
+            REQUIRE(!board.get_tile(2, 1).is_covered);
+            REQUIRE(!board.get_tile(3, 1).is_covered);
+            REQUIRE(board.get_tile(4, 1).is_covered);
+
+            REQUIRE(board.get_tile(0, 2).is_covered);
+            REQUIRE(!board.get_tile(1, 2).is_covered);
+            REQUIRE(!board.get_tile(2, 2).is_covered);
+            REQUIRE(!board.get_tile(3, 2).is_covered);
+            REQUIRE(board.get_tile(4, 2).is_covered);
+
+            REQUIRE(board.get_tile(0, 3).is_covered);
+            REQUIRE(board.get_tile(1, 3).is_covered);
+            REQUIRE(board.get_tile(2, 3).is_covered);
+            REQUIRE(board.get_tile(3, 3).is_covered);
+            REQUIRE(board.get_tile(4, 3).is_covered);
         }
     }
 }

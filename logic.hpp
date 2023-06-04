@@ -67,7 +67,6 @@ MyButton {
         }
         is_covered = false;
         if (with_gui) {
-            std::cout << x << " " << y << (is_bomb ? " 💣" : "") << "\n";
             QString color;
             switch (num_adjacent_bombs) {
                 case 1:
@@ -254,7 +253,6 @@ public:
     }
 
     void flag_or_unflag_tile(unsigned int x, unsigned int y) {
-        std::cout << x << " " << y << " right click\n";
         Tile& tile = get_tile(x, y);
         if (!tile.is_flagged) {
             tile.flag();

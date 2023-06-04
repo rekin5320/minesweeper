@@ -451,9 +451,22 @@ public:
         start_time = std::chrono::steady_clock::now();
     }
 
+    void play_again()
+    {
+        board.clear_bombs();
+        board.unflag_all();
+        board.cover_all();
+        start();
+        if (with_gui)
+        {
+            ui.mainbutton->setText("🙂");
+        }
+    }
+
     void setupUi(QMainWindow &MainWindow)
     {
         ui.setupUi(&MainWindow);
+        QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
         with_gui = true;
     }
 
@@ -563,13 +576,5 @@ public:
         oss << std::setfill('0') << std::setw(2) << elapsed_minutes.count() << ":";
         oss << std::setfill('0') << std::setw(2) << elapsed_seconds.count();
         return oss.str();
-    }
-
-    void play_again()
-    {
-        board.clear_bombs();
-        board.unflag_all();
-        board.cover_all();
-        start();
     }
 };

@@ -282,6 +282,15 @@ TEST_CASE("Board")
             REQUIRE(!board.get_tile(4, 3).is_covered);
         }
 
+        SECTION("flag_or_unflag_tile")
+        {
+
+            REQUIRE(!board.get_tile(0, 0).is_flagged);
+            board.flag_or_unflag_tile(0, 0);
+            REQUIRE(board.get_tile(0, 0).is_flagged);
+            board.flag_or_unflag_tile(0, 0);
+            REQUIRE(!board.get_tile(0, 0).is_flagged);
+        }
     }
 }
 

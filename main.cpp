@@ -9,15 +9,15 @@ public:
 
     GameUI(Game &game) : game(game){};
 
-    void create_tiles(Board &board)
+    void create_tiles()
     {
-        for (auto &tile : board.Tiles)
+        for (auto &tile : game.board.Tiles)
         {
             unsigned int x = tile.x, y = tile.y;
             tile.create_button();
             gridLayout->addWidget(tile.button.get(), y, x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QObject::connect(tile.button.get(), &QPushButton::released, [&board, x, y](){board.uncover_tile(x, y);});
+            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y](){game.uncover_tile(x, y);});
         }
     };
 };
@@ -33,23 +33,9 @@ int main(int argc, char **argv)
     GameUI ui{game};
     ui.setupUi(&window);
     game.start();
-    ui.create_tiles(game.board);
+    ui.create_tiles();
 
     window.show();
-
-    while (!game.is_game_over() && !game.is_game_won())
-    {
-        app.processEvents();
-    }
-
-    if (game.is_game_won())
-    {
-        std::cout << "Congratulations! You won the game in: " << game.get_formatted_elapsed_time() << "!" << std::endl;
-    }
-    else
-    {
-        std::cout << "Game over! You lost the game in: " << game.get_formatted_elapsed_time() << "!"<< std::endl;
-    }
 
     return app.exec();
 }

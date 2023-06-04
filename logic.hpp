@@ -383,6 +383,18 @@ public:
         start_time = std::chrono::steady_clock::now();
     }
 
+    void uncover_tile(unsigned int x, unsigned int y) {
+        board.uncover_tile(x, y);
+        if (is_game_over())
+        {
+            std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!"<< std::endl;
+        }
+        else if (is_game_won())
+        {
+            std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
+        }
+    }
+
     unsigned int left_bombs()
     {
         unsigned int count = 0;

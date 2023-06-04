@@ -42,16 +42,17 @@ public:
 MyButton {
 	border: 1px solid darkgray;
 	border-radius: 1px;
-	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #ccc);
+	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #c5c5c5);
 }
 
 MyButton::hover {
-    background-color: rgb(190, 190, 190);
+    background-color: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #dddddd, stop: 1 #b8b8b8);
 }
 )";
     const QString stylesheet_uncovered = R"(
 MyButton {
 	color: %1;
+    font-size: 18px;
 	font-weight: bold;
 	border: 1px solid lightgray;
 };

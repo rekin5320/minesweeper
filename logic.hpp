@@ -7,8 +7,10 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector>
+#include <QDateTime>
 #include <QPushButton>
 #include <QRandomGenerator>
+#include <QTimer>
 #include "minesweeper_ui.hpp"
 
 struct Position
@@ -412,6 +414,8 @@ public:
     std::chrono::steady_clock::time_point end_time;
     std::chrono::minutes elapsed_minutes;
     std::chrono::seconds elapsed_seconds;
+    QDateTime qstart_time;
+    QTimer timer{};
 
     Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0) : with_gui(false)
     {
@@ -449,6 +453,9 @@ public:
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
         start_time = std::chrono::steady_clock::now();
+        qstart_time = QDateTime::currentDateTime();
+        timer.start(1000);  // update every 1000 milliseconds (1 second)
+        ui.lcdNumber_right->display(0);
     }
 
     void play_again()
@@ -467,6 +474,7 @@ public:
     {
         ui.setupUi(&MainWindow);
         QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
+        QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
         with_gui = true;
     }
 
@@ -482,6 +490,15 @@ public:
                              { uncover_tile(x, y); });
         }
     };
+
+    void update_timer() {
+        if (!has_ended)
+        {
+            QDateTime current_time = QDateTime::currentDateTime();
+            int seconds_passed = static_cast<int>(qstart_time.secsTo(current_time));
+            ui.lcdNumber_right->display(seconds_passed);
+        }
+    }
 
     void uncover_tile(unsigned int x, unsigned int y)
     {

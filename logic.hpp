@@ -344,6 +344,7 @@ public:
     Board board;
     unsigned int num_bombs;
     bool with_gui;
+    bool has_ended;
     Ui::MainWindow ui;
     std::chrono::steady_clock::time_point start_time;
     std::chrono::steady_clock::time_point end_time;
@@ -381,6 +382,7 @@ public:
 
     void start()
     {
+        has_ended = false;
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
         start_time = std::chrono::steady_clock::now();
@@ -402,19 +404,23 @@ public:
     };
 
     void uncover_tile(unsigned int x, unsigned int y) {
-        board.uncover_tile(x, y);
-        if (is_game_over())
+        if (!has_ended)
         {
-            std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!"<< std::endl;
-            if (with_gui) {
-                ui.label->setText("Game over!");
+            board.uncover_tile(x, y);
+            if (is_game_over()) {
+                has_ended = true;
+                std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
+                if (with_gui) {
+                    ui.label->setText("Game over!");
+                }
             }
-        }
-        else if (is_game_won())
-        {
-            std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!" << std::endl;
-            if (with_gui) {
-                ui.label->setText("Game won!");
+            else if (is_game_won()) {
+                has_ended = true;
+                std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!"
+                          << std::endl;
+                if (with_gui) {
+                    ui.label->setText("Game won!");
+                }
             }
         }
     }

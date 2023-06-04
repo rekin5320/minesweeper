@@ -456,7 +456,10 @@ public:
         board.unflag_all();
         board.cover_all();
         start();
-        ui.mainbutton->setText("🙂");
+        if (with_gui)
+        {
+            ui.mainbutton->setText("🙂");
+        }
     }
 
     void setupUi(QMainWindow &MainWindow)

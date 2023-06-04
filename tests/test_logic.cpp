@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <sstream>
+#include <chrono>
 
 #include "catch.hpp"
 #include "../logic.hpp"
@@ -367,6 +368,9 @@ TEST_CASE("Game")
         Game game = Game(Difficulty::INTERMEDIATE);
         game.start();
 
+        REQUIRE(!game.has_ended);
+        REQUIRE(game.first_click);
+
         unsigned int count = 0;
         for (unsigned int x = 0; x < game.board.HEIGHT; x++)
         {
@@ -421,6 +425,17 @@ TEST_CASE("Game")
         Game game = Game(Difficulty::INTERMEDIATE);
         game.start();
 
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                if (game.board.get_tile(x, y).is_bomb)
+                {
+                    REQUIRE(game.board.get_tile(x, y).is_covered);
+                }
+            }
+        }
+
         REQUIRE_FALSE(game.is_game_over());
 
         for (unsigned int x = 0; x < game.board.HEIGHT; x++)
@@ -435,6 +450,19 @@ TEST_CASE("Game")
             }
         }
         REQUIRE(game.is_game_over());
+
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                if (game.board.get_tile(x, y).is_bomb)
+                {
+                    REQUIRE_FALSE(game.board.get_tile(x, y).is_covered);
+                }
+            }
+        }
+
+        REQUIRE((game.end_time - game.start_time).count() > 0);
     }
 
     SECTION("is_game_won()")

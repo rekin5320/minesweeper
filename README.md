@@ -13,3 +13,10 @@ make minesweeper
 ```sh
 uic-qt5 minesweeperUI.ui -o minesweeperUI.hpp
 ```
+
+## Note about font for emojis
+A system font capable of displaying emojis is required. On Ubuntu such font can be installed with:
+
+```sh
+sudo apt-get install fonts-noto-color-emoji
+```

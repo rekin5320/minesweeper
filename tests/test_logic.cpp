@@ -329,8 +329,6 @@ TEST_CASE("Game")
             }
         }
 
-        game.board.get_tile(3, 4).flag(); // player may also flag tile without bomb
-
         REQUIRE(game.left_bombs() == 0);
 
         for (unsigned int x = 0; x < game.board.HEIGHT; x++)
@@ -340,10 +338,7 @@ TEST_CASE("Game")
                 if (game.board.get_tile(x, y).is_flagged)
                 {
                     game.board.get_tile(x, y).unflag();
-                    if (game.board.get_tile(x, y).is_bomb)
-                    {
-                        REQUIRE(game.left_bombs() == 40 - --count);
-                    }
+                    REQUIRE(game.left_bombs() == 40 - --count);
                 }
             }
         }

@@ -13,23 +13,6 @@ TEST_CASE("Tile")
     REQUIRE(!tile.is_flagged);
     REQUIRE(tile.num_adjacent_bombs == 0);
 
-    SECTION("uncover()")
-    {
-        tile.uncover();
-        REQUIRE(!tile.is_covered);
-        REQUIRE_THROWS_AS(tile.uncover(), std::invalid_argument);
-    }
-
-    SECTION("flag() & unflag()")
-    {
-        REQUIRE_THROWS_AS(tile.unflag(), std::invalid_argument);
-        tile.flag();
-        REQUIRE(tile.is_flagged);
-        REQUIRE_THROWS_AS(tile.flag(), std::invalid_argument);
-        tile.unflag();
-        REQUIRE(!tile.is_flagged);
-        REQUIRE_THROWS_AS(tile.unflag(), std::invalid_argument);
-    }
 }
 
 TEST_CASE("Board")

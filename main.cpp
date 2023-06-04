@@ -32,12 +32,27 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
 
     QMainWindow window;
-    Game game{INTERMEDIATE};
+    Game game{EXPERT};
     GameUI ui{game};
     ui.setupUi(&window);
     game.start();
     ui.create_tiles(game.board);
 
     window.show();
+
+    while (!game.is_game_over() && !game.is_game_won())
+    {
+        app.processEvents();
+    }
+
+    if (game.is_game_won())
+    {
+        std::cout << "Congratulations! You won the game in: " << game.get_formatted_elapsed_time() << "!" << std::endl;
+    }
+    else
+    {
+        std::cout << "Game over! You lost the game in: " << game.get_formatted_elapsed_time() << "!"<< std::endl;
+    }
+
     return app.exec();
 }

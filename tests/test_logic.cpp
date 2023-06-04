@@ -484,4 +484,38 @@ TEST_CASE("Game")
         }
         REQUIRE(game.is_game_won());
     }
+
+    SECTION("play_again()")
+    {
+        Game game = Game(Difficulty::INTERMEDIATE);
+        game.start();
+
+        game.board.get_tile(0, 0).flag();
+
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                game.board.get_tile(x, y).uncover();
+            }
+        }
+
+        REQUIRE(game.is_game_over());
+        REQUIRE(game.has_ended);
+        REQUIRE_FALSE(game.first_click);
+
+        game.play_again();
+
+        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        {
+            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            {
+                REQUIRE(game.board.get_tile(x, y).is_covered);
+                REQUIRE(!game.board.get_tile(x, y).is_flagged);
+            }
+        }
+
+        REQUIRE_FALSE(game.has_ended);
+        REQUIRE(game.first_click);
+    }
 }

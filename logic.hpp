@@ -452,7 +452,7 @@ public:
                 std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!\n";
                 if (with_gui)
                 {
-                    ui.label->setText("Game over!");
+                    ui.mainbutton->setText("Game over!");
                 }
             }
             else if (is_game_won())
@@ -461,7 +461,7 @@ public:
                 std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!\n";
                 if (with_gui)
                 {
-                    ui.label->setText("Game won!");
+                    ui.mainbutton->setText("Game won!");
                 }
             }
         }

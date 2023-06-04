@@ -61,6 +61,17 @@ QPushButton {
 
     Tile(unsigned int x, unsigned y) : x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0), with_gui(false){};
 
+    void cover()
+    {
+        is_covered = true;
+        if (with_gui)
+        {
+            button->setStyleSheet(stylesheet_covered);
+            button->setChecked(false);
+            button->setText("");
+        }
+    }
+
     void uncover()
     {
         if (!is_flagged)
@@ -315,6 +326,17 @@ public:
         }
     }
 
+    void cover_all()
+    {
+        for (auto &tile : Tiles)
+        {
+            if (!tile.is_covered)
+            {
+                tile.cover();
+            }
+        }
+    }
+
     void flag_or_unflag_tile(unsigned int x, unsigned int y)
     {
         Tile &tile = get_tile(x, y);
@@ -325,6 +347,17 @@ public:
         else
         {
             tile.unflag();
+        }
+    }
+
+    void unflag_all()
+    {
+        for (auto &tile : Tiles)
+        {
+            if (tile.is_flagged)
+            {
+                tile.unflag();
+            }
         }
     }
 
@@ -426,7 +459,8 @@ public:
             tile.create_button();
             ui.gridLayout->addWidget(tile.button.get(), y, x);
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y](){uncover_tile(x, y);});
+            QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
+                             { uncover_tile(x, y); });
         }
     };
 
@@ -523,5 +557,14 @@ public:
         oss << std::setfill('0') << std::setw(2) << elapsed_minutes.count() << ":";
         oss << std::setfill('0') << std::setw(2) << elapsed_seconds.count();
         return oss.str();
+    }
+
+    void play_again()
+    {
+        board.clear_bombs();
+        board.unflag_all();
+        board.cover_all();
+        start();
+        ui.mainbutton->setText("😀");
     }
 };

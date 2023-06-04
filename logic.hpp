@@ -565,6 +565,5 @@ public:
         board.unflag_all();
         board.cover_all();
         start();
-        ui.mainbutton->setText("😀");
     }
 };

@@ -93,26 +93,25 @@ TEST_CASE("Board")
 
         SECTION("generate_bombs")
         {
+            SECTION("valid number of bombs")
+            {
+                board.generate_bombs(2);
+                unsigned int count = 0;
+                for (unsigned int x = 0; x < 3; x++) {
+                    for (unsigned int y = 0; y < 2; y++) {
+                        if (board.get_tile(x, y).is_bomb) {
+                            count++;
+                        }
+                    }
+                }
+                REQUIRE(count == 2);
+            }
+
             SECTION("too many bombs")
             {
                 REQUIRE_NOTHROW(board.generate_bombs(3));
                 REQUIRE_THROWS_AS(board.generate_bombs(4), std::invalid_argument);
-                board.clear_bombs();
             }
-
-            board.generate_bombs(2);
-            unsigned int count = 0;
-            for (unsigned int x = 0; x < 3; x++)
-            {
-                for (unsigned int y = 0; y < 2; y++)
-                {
-                    if (board.get_tile(x, y).is_bomb)
-                    {
-                        count++;
-                    }
-                }
-            }
-            REQUIRE(count == 2);
         }
 
         SECTION("clear_bombs")

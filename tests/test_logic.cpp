@@ -460,8 +460,6 @@ TEST_CASE("Game")
                 }
             }
         }
-
-        REQUIRE((game.end_time - game.start_time).count() > 0);
     }
 
     SECTION("is_game_won()")

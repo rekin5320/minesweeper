@@ -410,11 +410,8 @@ public:
     bool has_ended;
     bool first_click;
     Ui::MainWindow ui;
-    std::chrono::steady_clock::time_point start_time;
-    std::chrono::steady_clock::time_point end_time;
-    std::chrono::minutes elapsed_minutes;
-    std::chrono::seconds elapsed_seconds;
-    QDateTime qstart_time;
+    QDateTime start_time;
+    qint64 game_time_seconds;
     QTimer timer{};
 
     Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0) : with_gui(false)
@@ -452,8 +449,7 @@ public:
         first_click = true;
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
-        start_time = std::chrono::steady_clock::now();
-        qstart_time = QDateTime::currentDateTime();
+        start_time = QDateTime::currentDateTime();
         timer.start(1000);  // update every 1000 milliseconds (1 second)
         if (with_gui)
         {
@@ -498,7 +494,7 @@ public:
         if (!has_ended)
         {
             QDateTime current_time = QDateTime::currentDateTime();
-            int seconds_passed = static_cast<int>(qstart_time.secsTo(current_time));
+            int seconds_passed = static_cast<int>(start_time.secsTo(current_time));
             ui.lcdNumber_right->display(seconds_passed);
         }
     }
@@ -553,16 +549,19 @@ public:
         return num_bombs - count;
     }
 
+    void count_game_time()
+    {
+        QDateTime current_time = QDateTime::currentDateTime();
+        game_time_seconds = start_time.secsTo(current_time);
+    }
+
     bool is_game_over()
     {
         for (auto &tile : board.Tiles)
         {
             if (tile.is_bomb && !tile.is_covered)
             {
-                end_time = std::chrono::steady_clock::now();
-                std::chrono::duration<double> elapsed_time = end_time - start_time;
-                elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
-                elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
+                count_game_time();
                 board.uncover_bombs();
                 return true;
             }
@@ -576,25 +575,18 @@ public:
         {
             if (!tile.is_bomb && tile.is_covered)
             {
-                end_time = std::chrono::steady_clock::now();
-                std::chrono::duration<double> elapsed_time = end_time - start_time;
-                elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
-                elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
                 return false;
             }
         }
-        end_time = std::chrono::steady_clock::now();
-        std::chrono::duration<double> elapsed_time = end_time - start_time;
-        elapsed_minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsed_time);
-        elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsed_time) - elapsed_minutes;
+        count_game_time();
         return true;
     }
 
     std::string get_formatted_elapsed_time() const
     {
         std::ostringstream oss;
-        oss << std::setfill('0') << std::setw(2) << elapsed_minutes.count() << ":";
-        oss << std::setfill('0') << std::setw(2) << elapsed_seconds.count();
+        oss << std::setfill('0') << std::setw(2) << game_time_seconds / 60 << ":";
+        oss << std::setfill('0') << std::setw(2) << game_time_seconds % 60;
         return oss.str();
     }
 };

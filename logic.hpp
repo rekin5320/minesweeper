@@ -543,8 +543,12 @@ public:
                                 }
                                 else if (tool == FLAG)
                                 {
-                                    flag_or_unflag_tile(x, y);
-                                } });
+                                    if (!first_click)
+                                    {
+                                        flag_or_unflag_tile(x, y);
+                                    }
+                                }
+                            });
         }
     };
 

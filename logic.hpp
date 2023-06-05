@@ -42,15 +42,16 @@ public:
     std::unique_ptr<QPushButton> button;
     const QString stylesheet_covered = R"(
 QPushButton {
-	border: 1px solid darkgray;
-	border-radius: 1px;
-	background: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #fff, stop: 1 #c5c5c5);
+    border: 1px solid darkgray;
+    border-radius: 1px;
+    background: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(255, 255, 255, 0.7), stop: 1 rgba(197, 197, 197, 0.7));
 }
 
-QPushButton::hover {
-    background-color: qradialgradient(cx : 0.4, cy : -0.1, fx : 0.4, fy : -0.1, radius : 1.35, stop : 0 #dddddd, stop: 1 #b8b8b8);
+QPushButton:hover {
+    background-color: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(221, 221, 221, 0.7), stop: 1 rgba(184, 184, 184, 0.7));
 }
 )";
+
     const QString stylesheet_uncovered = R"(
 QPushButton {
 	color: %1;
@@ -103,32 +104,32 @@ QPushButton {
         QString color;
         switch (num_adjacent_bombs)
         {
-            case 1:
-                color = "blue";
-                break;
-            case 2:
-                color = "green";
-                break;
-            case 3:
-                color = "red";
-                break;
-            case 4:
-                color = "midnightblue";
-                break;
-            case 5:
-                color = "maroon";
-                break;
-            case 6:
-                color = "darkcyan";
-                break;
-            case 7:
-                color = "black";
-                break;
-            case 8:
-                color = "grey";
-                break;
-            default:
-                break;
+        case 1:
+            color = "blue";
+            break;
+        case 2:
+            color = "green";
+            break;
+        case 3:
+            color = "red";
+            break;
+        case 4:
+            color = "midnightblue";
+            break;
+        case 5:
+            color = "maroon";
+            break;
+        case 6:
+            color = "darkcyan";
+            break;
+        case 7:
+            color = "black";
+            break;
+        case 8:
+            color = "grey";
+            break;
+        default:
+            break;
         }
         return color;
     }
@@ -480,25 +481,29 @@ public:
     void setupUi(QMainWindow &MainWindow)
     {
         ui.setupUi(&MainWindow);
-        QObject::connect(ui.beginnerButton, &QPushButton::released, [this](){
+        QObject::connect(ui.beginnerButton, &QPushButton::released, [this]()
+                         {
             set_level(BEGINNER);
             start();
-            create_tiles();
-        });
-        QObject::connect(ui.intermediateButton, &QPushButton::released, [this](){
+            create_tiles(); });
+        QObject::connect(ui.intermediateButton, &QPushButton::released, [this]()
+                         {
             set_level(INTERMEDIATE);
             start();
-            create_tiles();
-            });
-        QObject::connect(ui.expertButton, &QPushButton::released, [this](){
+            create_tiles(); });
+        QObject::connect(ui.expertButton, &QPushButton::released, [this]()
+                         {
             set_level(EXPERT);
             start();
-            create_tiles();
-            });
-        QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
-        QObject::connect(ui.uncoverButton, &QPushButton::released, [this](){set_tool_uncover();});
-        QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag();});
-        QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
+            create_tiles(); });
+        QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
+                         { play_again(); });
+        QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()
+                         { set_tool_uncover(); });
+        QObject::connect(ui.flagButton, &QPushButton::released, [this]()
+                         { set_tool_flag(); });
+        QObject::connect(&timer, &QTimer::timeout, [this]()
+                         { update_timer(); });
         with_gui = true;
         set_tool_uncover();
     }
@@ -520,8 +525,7 @@ public:
                                 else if (tool == FLAG)
                                 {
                                     board.flag_or_unflag_tile(x, y);
-                                }
-                              });
+                                } });
         }
     };
 

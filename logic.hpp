@@ -496,6 +496,20 @@ public:
             set_level(EXPERT);
             start();
             create_tiles(); });
+        QObject::connect(ui.customButton, &QPushButton::released, [this]()
+                         {
+            unsigned int width;
+            unsigned int height;
+            unsigned int bombs;
+            std::cout << "Enter width: ";
+            std::cin >> width;
+            std::cout << "Enter height: ";
+            std::cin >> height;
+            std::cout << "Enter bombs: ";
+            std::cin >> bombs;
+            set_level(CUSTOM, width, height, bombs);
+            start();
+            create_tiles(); });
         QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
                          { play_again(); });
         QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()

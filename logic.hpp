@@ -507,6 +507,7 @@ public:
                                 else if (tool == FLAG)
                                 {
                                     board.flag_or_unflag_tile(x, y);
+                                    update_bombs_left();
                                 }
                               });
         }

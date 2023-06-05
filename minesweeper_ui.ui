@@ -14,6 +14,16 @@
    <string>Minesweeper</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+     <property name="styleSheet">
+    <string>
+     QWidget#centralwidget {
+         background-image: url(:/background);
+         background-repeat: no-repeat;
+         background-position: center;
+     }
+    </string>
+   </property>
+
    <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
      <widget class="QLabel" name="label">

@@ -209,6 +209,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
+        centralwidget->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"     QWidget#centralwidget {\n"
+"         background-image: url(:/background);\n"
+"         background-repeat: no-repeat;\n"
+"         background-position: center;\n"
+"     }\n"
+"    ", nullptr));
         flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
         uncoverButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));

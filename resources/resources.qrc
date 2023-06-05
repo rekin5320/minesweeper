@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 	<qresource>
 		<file alias="logo">images/MINESWEEPER.png</file>
+		<file alias="background">images/background.png</file>
 	</qresource>
 </RCC>

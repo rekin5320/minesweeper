@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.9
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -239,20 +239,64 @@ public:
         lcdNumber_left->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
 "                QLCDNumber {\n"
 "                    background-color: white;\n"
+"                    border-radius: 10px;\n"
 "                }\n"
 "            ", nullptr));
         flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
+        flagButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
+        mainbutton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         uncoverButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
+        uncoverButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         lcdNumber_right->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
 "                QLCDNumber {\n"
 "                    background-color: white;\n"
+"                    border-radius: 10px;\n"
 "                }\n"
 "            ", nullptr));
         beginnerButton->setText(QCoreApplication::translate("MainWindow", "BEGINNER", nullptr));
+        beginnerButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         intermediateButton->setText(QCoreApplication::translate("MainWindow", "INTERMEDIATE", nullptr));
+        intermediateButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         expertButton->setText(QCoreApplication::translate("MainWindow", "EXPERT", nullptr));
+        expertButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
         customButton->setText(QCoreApplication::translate("MainWindow", "CUSTOM", nullptr));
+        customButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QPushButton {\n"
+"                    background-color: white;\n"
+"                    border-radius: 10px;\n"
+"                }\n"
+"            ", nullptr));
     } // retranslateUi
 
 };

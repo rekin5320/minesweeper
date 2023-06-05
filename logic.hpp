@@ -544,17 +544,17 @@ public:
         update_bombs_left();
     }
 
-    unsigned int left_bombs()
+    int left_bombs()
     {
-        unsigned int count = 0;
+        int count = static_cast<int>(num_bombs);
         for (auto &tile : board.Tiles)
         {
             if (tile.is_flagged)
             {
-                count++;
+                count--;
             }
         }
-        return num_bombs - count;
+        return count;
     }
 
     bool is_game_over()

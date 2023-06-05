@@ -391,7 +391,7 @@ TEST_CASE("Game")
 
         REQUIRE(game.left_bombs() == 40);
 
-        unsigned int count = 0;
+        int count = 0;
         for (unsigned int x = 0; x < game.board.HEIGHT; x++)
         {
             for (unsigned int y = 0; y < game.board.WIDTH; y++)

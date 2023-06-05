@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.9
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -36,7 +36,9 @@ public:
     QLCDNumber *lcdNumber_left;
     QSpacerItem *horizontalSpacer;
     QPushButton *flagButton;
+    QSpacerItem *horizontalSpacer_4;
     QPushButton *mainbutton;
+    QSpacerItem *horizontalSpacer_3;
     QPushButton *uncoverButton;
     QSpacerItem *horizontalSpacer_2;
     QLCDNumber *lcdNumber_right;
@@ -106,6 +108,10 @@ public:
 
         horizontalLayout->addWidget(flagButton);
 
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_4);
+
         mainbutton = new QPushButton(centralwidget);
         mainbutton->setObjectName(QString::fromUtf8("mainbutton"));
         sizePolicy.setHeightForWidth(mainbutton->sizePolicy().hasHeightForWidth());
@@ -116,6 +122,10 @@ public:
         mainbutton->setFont(font);
 
         horizontalLayout->addWidget(mainbutton);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
 
         uncoverButton = new QPushButton(centralwidget);
         uncoverButton->setObjectName(QString::fromUtf8("uncoverButton"));

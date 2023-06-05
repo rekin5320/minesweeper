@@ -1,7 +1,7 @@
 # Minesweeper
 Work in progress...
 
-[![Github Releases](https://img.shields.io/badge/release-v1.0-brightgreen)]
+[![Github Releases](https://img.shields.io/badge/release-v1.0-brightgreen)](https://gitlab-stud.elka.pw.edu.pl/mmachnik/minesweeper)
 
 ## Building
 ```sh

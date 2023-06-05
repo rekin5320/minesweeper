@@ -483,6 +483,7 @@ public:
         QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag();});
         QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
         with_gui = true;
+        set_tool_uncover();
     }
 
     void create_tiles()
@@ -511,15 +512,21 @@ public:
     void set_tool_uncover()
     {
         tool = UNCOVER;
-        ui.uncoverButton->setEnabled(false);
-        ui.flagButton->setEnabled(true);
+        if (with_gui)
+        {
+            ui.uncoverButton->setEnabled(false);
+            ui.flagButton->setEnabled(true);
+        }
     }
 
     void set_tool_flag()
     {
         tool = FLAG;
-        ui.uncoverButton->setEnabled(true);
-        ui.flagButton->setEnabled(false);
+        if (with_gui)
+        {
+            ui.uncoverButton->setEnabled(true);
+            ui.flagButton->setEnabled(false);
+        }
     }
 
     void update_bombs_left()

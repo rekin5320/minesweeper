@@ -450,11 +450,6 @@ public:
         }
     }
 
-    void set_tool(Tool tool)
-    {
-        this->tool = tool;
-    }
-
     void start()
     {
         has_ended = false;
@@ -485,14 +480,10 @@ public:
     void setupUi(QMainWindow &MainWindow)
     {
         ui.setupUi(&MainWindow);
-        QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
-                         { play_again(); });
-        QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()
-                         { set_tool(UNCOVER); });
-        QObject::connect(ui.flagButton, &QPushButton::released, [this]()
-                         { set_tool(FLAG); });
-        QObject::connect(&timer, &QTimer::timeout, [this]()
-                         { update_timer(); });
+        QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
+        QObject::connect(ui.uncoverButton, &QPushButton::released, [this](){set_tool_uncover();});
+        QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag();});
+        QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
         with_gui = true;
     }
 
@@ -517,6 +508,20 @@ public:
                                 } });
         }
     };
+
+    void set_tool_uncover()
+    {
+        tool = UNCOVER;
+        ui.uncoverButton->setEnabled(false);
+        ui.flagButton->setEnabled(true);
+    }
+
+    void set_tool_flag()
+    {
+        tool = FLAG;
+        ui.uncoverButton->setEnabled(true);
+        ui.flagButton->setEnabled(false);
+    }
 
     void update_bombs_left()
     {

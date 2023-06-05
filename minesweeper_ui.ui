@@ -136,9 +136,6 @@
           <pointsize>25</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>🚩</string>
-        </property>
         <property name="styleSheet">
          <string>
                 QPushButton {
@@ -146,6 +143,9 @@
                     border-radius: 10px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>🚩</string>
         </property>
        </widget>
       </item>
@@ -180,9 +180,6 @@
           <pointsize>25</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>🙂</string>
-        </property>
         <property name="styleSheet">
          <string>
                 QPushButton {
@@ -190,6 +187,9 @@
                     border-radius: 10px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>🙂</string>
         </property>
        </widget>
       </item>
@@ -224,9 +224,6 @@
           <pointsize>25</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>⛏️</string>
-        </property>
         <property name="styleSheet">
          <string>
                 QPushButton {
@@ -234,6 +231,9 @@
                     border-radius: 10px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>⛏️</string>
         </property>
        </widget>
       </item>
@@ -334,14 +334,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="baseSize">
@@ -355,16 +355,16 @@
           <pointsize>12</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>BEGINNER</string>
-        </property>
         <property name="styleSheet">
-         <string>
+         <string notr="true">
                 QPushButton {
                     background-color: white;
-                    border-radius: 10px;
+                    border-radius: 6px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>BEGINNER</string>
         </property>
        </widget>
       </item>
@@ -378,14 +378,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="baseSize">
@@ -399,16 +399,16 @@
           <pointsize>12</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>INTERMEDIATE</string>
-        </property>
         <property name="styleSheet">
-         <string>
+         <string notr="true">
                 QPushButton {
                     background-color: white;
-                    border-radius: 10px;
+                    border-radius: 6px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>INTERMEDIATE</string>
         </property>
        </widget>
       </item>
@@ -422,14 +422,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="baseSize">
@@ -443,16 +443,16 @@
           <pointsize>12</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>EXPERT</string>
-        </property>
         <property name="styleSheet">
-         <string>
+         <string notr="true">
                 QPushButton {
                     background-color: white;
-                    border-radius: 10px;
+                    border-radius: 6px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>EXPERT</string>
         </property>
        </widget>
       </item>
@@ -466,14 +466,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
-          <height>30</height>
+          <width>135</width>
+          <height>32</height>
          </size>
         </property>
         <property name="baseSize">
@@ -487,16 +487,16 @@
           <pointsize>12</pointsize>
          </font>
         </property>
-        <property name="text">
-         <string>CUSTOM</string>
-        </property>
         <property name="styleSheet">
-         <string>
+         <string notr="true">
                 QPushButton {
                     background-color: white;
-                    border-radius: 10px;
+                    border-radius: 6px;
                 }
             </string>
+        </property>
+        <property name="text">
+         <string>CUSTOM</string>
         </property>
        </widget>
       </item>

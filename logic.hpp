@@ -103,32 +103,32 @@ QPushButton {
         QString color;
         switch (num_adjacent_bombs)
         {
-        case 1:
-            color = "blue";
-            break;
-        case 2:
-            color = "green";
-            break;
-        case 3:
-            color = "red";
-            break;
-        case 4:
-            color = "midnightblue";
-            break;
-        case 5:
-            color = "maroon";
-            break;
-        case 6:
-            color = "darkcyan";
-            break;
-        case 7:
-            color = "black";
-            break;
-        case 8:
-            color = "grey";
-            break;
-        default:
-            break;
+            case 1:
+                color = "blue";
+                break;
+            case 2:
+                color = "green";
+                break;
+            case 3:
+                color = "red";
+                break;
+            case 4:
+                color = "midnightblue";
+                break;
+            case 5:
+                color = "maroon";
+                break;
+            case 6:
+                color = "darkcyan";
+                break;
+            case 7:
+                color = "black";
+                break;
+            case 8:
+                color = "grey";
+                break;
+            default:
+                break;
         }
         return color;
     }
@@ -500,6 +500,7 @@ public:
         QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag();});
         QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
         with_gui = true;
+        set_tool_uncover();
     }
 
     void create_tiles()
@@ -519,23 +520,29 @@ public:
                                 else if (tool == FLAG)
                                 {
                                     board.flag_or_unflag_tile(x, y);
-                                    update_bombs_left();
-                                } });
+                                }
+                              });
         }
     };
 
     void set_tool_uncover()
     {
         tool = UNCOVER;
-        ui.uncoverButton->setEnabled(false);
-        ui.flagButton->setEnabled(true);
+        if (with_gui)
+        {
+            ui.uncoverButton->setEnabled(false);
+            ui.flagButton->setEnabled(true);
+        }
     }
 
     void set_tool_flag()
     {
         tool = FLAG;
-        ui.uncoverButton->setEnabled(true);
-        ui.flagButton->setEnabled(false);
+        if (with_gui)
+        {
+            ui.uncoverButton->setEnabled(true);
+            ui.flagButton->setEnabled(false);
+        }
     }
 
     void update_bombs_left()

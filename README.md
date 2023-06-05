@@ -1,6 +1,8 @@
 # Minesweeper
 Work in progress...
 
+[![Github Releases](https://img.shields.io/badge/release-v1.0-brightgreen)]
+
 ## Building
 ```sh
 mkdir build

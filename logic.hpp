@@ -451,6 +451,7 @@ public:
         timer.start(1000);  // update every 1000 milliseconds (1 second)
         if (with_gui)
         {
+            update_bombs_left();
             ui.lcdNumber_right->display(0);
         }
     }
@@ -487,6 +488,11 @@ public:
                              { uncover_tile(x, y); });
         }
     };
+
+    void update_bombs_left()
+    {
+        ui.lcdNumber_left->display(static_cast<int>(left_bombs()));
+    }
 
     void update_timer() {
         if (!has_ended)
@@ -530,6 +536,12 @@ public:
                 }
             }
         }
+    }
+
+    void flag_or_unflag_tile(unsigned int x, unsigned int y)
+    {
+        board.flag_or_unflag_tile(x, y);
+        update_bombs_left();
     }
 
     unsigned int left_bombs()

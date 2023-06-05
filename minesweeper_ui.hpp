@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.9
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -53,7 +53,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(300, 300);
+        MainWindow->resize(638, 300);
         actionNew_game = new QAction(MainWindow);
         actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
@@ -64,7 +64,10 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         lcdNumber_left = new QLCDNumber(centralwidget);
         lcdNumber_left->setObjectName(QString::fromUtf8("lcdNumber_left"));
+        lcdNumber_left->setMinimumSize(QSize(80, 0));
         lcdNumber_left->setMaximumSize(QSize(16777215, 75));
+        lcdNumber_left->setDigitCount(4);
+        lcdNumber_left->setSegmentStyle(QLCDNumber::Flat);
 
         horizontalLayout->addWidget(lcdNumber_left);
 
@@ -94,7 +97,10 @@ public:
 
         lcdNumber_right = new QLCDNumber(centralwidget);
         lcdNumber_right->setObjectName(QString::fromUtf8("lcdNumber_right"));
+        lcdNumber_right->setMinimumSize(QSize(80, 0));
         lcdNumber_right->setMaximumSize(QSize(16777215, 75));
+        lcdNumber_right->setDigitCount(4);
+        lcdNumber_right->setSegmentStyle(QLCDNumber::Flat);
 
         horizontalLayout->addWidget(lcdNumber_right);
 
@@ -167,7 +173,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 300, 21));
+        menubar->setGeometry(QRect(0, 0, 638, 21));
         menuNew_game = new QMenu(menubar);
         menuNew_game->setObjectName(QString::fromUtf8("menuNew_game"));
         MainWindow->setMenuBar(menubar);

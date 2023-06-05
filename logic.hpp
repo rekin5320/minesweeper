@@ -44,11 +44,11 @@ public:
 QPushButton {
     border: 1px solid darkgray;
     border-radius: 1px;
-    background: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(255, 255, 255, 0.7), stop: 1 rgba(197, 197, 197, 0.7));
+    background: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(255, 255, 255, 0.8), stop: 1 rgba(197, 197, 197, 0.8));
 }
 
 QPushButton:hover {
-    background-color: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(221, 221, 221, 0.7), stop: 1 rgba(184, 184, 184, 0.7));
+    background-color: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(221, 221, 221, 0.8), stop: 1 rgba(184, 184, 184, 0.8));
 }
 )";
 

@@ -414,6 +414,7 @@ public:
     unsigned int num_bombs;
     bool with_gui;
     bool has_ended;
+    bool has_started = false;
     bool first_click;
     Ui::MainWindow ui;
     int game_time_seconds;
@@ -454,6 +455,7 @@ public:
     void start()
     {
         has_ended = false;
+        has_started = true;
         first_click = true;
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
@@ -468,13 +470,16 @@ public:
 
     void play_again()
     {
-        board.clear_bombs();
-        board.unflag_all();
-        board.cover_all();
-        start();
-        if (with_gui)
+        if (has_started)
         {
-            ui.mainbutton->setText("🙂");
+            board.clear_bombs();
+            board.unflag_all();
+            board.cover_all();
+            start();
+            if (with_gui)
+            {
+                ui.mainbutton->setText("🙂");
+            }
         }
     }
 

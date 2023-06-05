@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.9
+** Created by: Qt User Interface Compiler version 5.15.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,17 +10,14 @@
 #define MINESWEEPER_UI_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -29,13 +26,14 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionNew_game;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
     QLCDNumber *lcdNumber_left;
     QSpacerItem *horizontalSpacer;
+    QPushButton *flagButton;
     QPushButton *mainbutton;
+    QPushButton *shovelButton;
     QSpacerItem *horizontalSpacer_2;
     QLCDNumber *lcdNumber_right;
     QHBoxLayout *horizontalLayout_3;
@@ -46,16 +44,12 @@ public:
     QPushButton *expertButton;
     QPushButton *customButton;
     QMenuBar *menubar;
-    QMenu *menuNew_game;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(558, 300);
-        actionNew_game = new QAction(MainWindow);
-        actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
@@ -75,21 +69,43 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        mainbutton = new QPushButton(centralwidget);
-        mainbutton->setObjectName(QString::fromUtf8("mainbutton"));
+        flagButton = new QPushButton(centralwidget);
+        flagButton->setObjectName(QString::fromUtf8("flagButton"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(flagButton->sizePolicy().hasHeightForWidth());
+        flagButton->setSizePolicy(sizePolicy);
+        flagButton->setMinimumSize(QSize(75, 75));
+        flagButton->setMaximumSize(QSize(75, 75));
+        flagButton->setBaseSize(QSize(75, 75));
+        QFont font;
+        font.setPointSize(25);
+        flagButton->setFont(font);
+
+        horizontalLayout->addWidget(flagButton);
+
+        mainbutton = new QPushButton(centralwidget);
+        mainbutton->setObjectName(QString::fromUtf8("mainbutton"));
         sizePolicy.setHeightForWidth(mainbutton->sizePolicy().hasHeightForWidth());
         mainbutton->setSizePolicy(sizePolicy);
         mainbutton->setMinimumSize(QSize(75, 75));
         mainbutton->setMaximumSize(QSize(75, 75));
         mainbutton->setBaseSize(QSize(75, 75));
-        QFont font;
-        font.setPointSize(25);
         mainbutton->setFont(font);
 
         horizontalLayout->addWidget(mainbutton);
+
+        shovelButton = new QPushButton(centralwidget);
+        shovelButton->setObjectName(QString::fromUtf8("shovelButton"));
+        sizePolicy.setHeightForWidth(shovelButton->sizePolicy().hasHeightForWidth());
+        shovelButton->setSizePolicy(sizePolicy);
+        shovelButton->setMinimumSize(QSize(75, 75));
+        shovelButton->setMaximumSize(QSize(75, 75));
+        shovelButton->setBaseSize(QSize(75, 75));
+        shovelButton->setFont(font);
+
+        horizontalLayout->addWidget(shovelButton);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -162,7 +178,7 @@ public:
         customButton->setSizePolicy(sizePolicy);
         customButton->setMinimumSize(QSize(130, 30));
         customButton->setMaximumSize(QSize(130, 30));
-        customButton->setBaseSize(QSize(150, 30));
+        customButton->setBaseSize(QSize(100, 30));
         customButton->setFont(font1);
 
         buttonLayout->addWidget(customButton);
@@ -173,16 +189,8 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 558, 21));
-        menuNew_game = new QMenu(menubar);
-        menuNew_game->setObjectName(QString::fromUtf8("menuNew_game"));
+        menubar->setGeometry(QRect(0, 0, 558, 24));
         MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        MainWindow->setStatusBar(statusbar);
-
-        menubar->addAction(menuNew_game->menuAction());
-        menuNew_game->addAction(actionNew_game);
 
         retranslateUi(MainWindow);
 
@@ -192,13 +200,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
-        actionNew_game->setText(QCoreApplication::translate("MainWindow", "New game", nullptr));
+        flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
+        shovelButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
         beginnerButton->setText(QCoreApplication::translate("MainWindow", "BEGINNER", nullptr));
         intermediateButton->setText(QCoreApplication::translate("MainWindow", "INTERMEDIATE", nullptr));
         expertButton->setText(QCoreApplication::translate("MainWindow", "EXPERT", nullptr));
         customButton->setText(QCoreApplication::translate("MainWindow", "CUSTOM", nullptr));
-        menuNew_game->setTitle(QCoreApplication::translate("MainWindow", "Game", nullptr));
     } // retranslateUi
 
 };

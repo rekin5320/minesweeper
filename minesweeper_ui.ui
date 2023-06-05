@@ -53,6 +53,42 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="flagButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>25</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>🚩</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="mainbutton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -85,6 +121,42 @@
         </property>
         <property name="text">
          <string>🙂</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="shovelButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>75</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>25</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>⛏️</string>
         </property>
        </widget>
       </item>
@@ -271,7 +343,7 @@
         </property>
         <property name="baseSize">
          <size>
-          <width>150</width>
+          <width>100</width>
           <height>30</height>
          </size>
         </property>
@@ -295,26 +367,11 @@
      <x>0</x>
      <y>0</y>
      <width>558</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuNew_game">
-    <property name="title">
-     <string>Game</string>
-    </property>
-    <addaction name="actionNew_game"/>
-   </widget>
-   <addaction name="menuNew_game"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionNew_game">
-   <property name="text">
-    <string>New game</string>
-   </property>
-  </action>
  </widget>
- <resources>
-  <include location="resources/resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

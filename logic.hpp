@@ -400,6 +400,12 @@ enum Difficulty
     CUSTOM
 };
 
+enum Tool
+{
+    FLAG,
+    SHOVEL
+};
+
 class Game
 {
 public:
@@ -411,6 +417,7 @@ public:
     Ui::MainWindow ui;
     int game_time_seconds;
     QTimer timer{};
+    Tool tool = SHOVEL;
 
     Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0) : with_gui(false)
     {
@@ -439,6 +446,11 @@ public:
         default:
             throw std::invalid_argument("Invalid difficulty");
         }
+    }
+
+    void set_tool(Tool tool)
+    {
+        this->tool = tool;
     }
 
     void start()
@@ -472,6 +484,8 @@ public:
     {
         ui.setupUi(&MainWindow);
         QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
+        QObject::connect(ui.shovelButton, &QPushButton::released, [this](){set_tool(SHOVEL);});
+        QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool(FLAG);});
         QObject::connect(&timer, &QTimer::timeout, [this](){update_timer();});
         with_gui = true;
     }
@@ -485,7 +499,16 @@ public:
             ui.gridLayout->addWidget(tile.button.get(), static_cast<int>(y), static_cast<int>(x));
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
             QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
-                             { uncover_tile(x, y); });
+                             {
+                                if (tool == SHOVEL)
+                                {
+                                    uncover_tile(x, y);
+                                }
+                                else if (tool == FLAG)
+                                {
+                                    board.flag_or_unflag_tile(x, y);
+                                }
+                              });
         }
     };
 

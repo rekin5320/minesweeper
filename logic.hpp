@@ -103,32 +103,32 @@ QPushButton {
         QString color;
         switch (num_adjacent_bombs)
         {
-        case 1:
-            color = "blue";
-            break;
-        case 2:
-            color = "green";
-            break;
-        case 3:
-            color = "red";
-            break;
-        case 4:
-            color = "midnightblue";
-            break;
-        case 5:
-            color = "maroon";
-            break;
-        case 6:
-            color = "darkcyan";
-            break;
-        case 7:
-            color = "black";
-            break;
-        case 8:
-            color = "grey";
-            break;
-        default:
-            break;
+            case 1:
+                color = "blue";
+                break;
+            case 2:
+                color = "green";
+                break;
+            case 3:
+                color = "red";
+                break;
+            case 4:
+                color = "midnightblue";
+                break;
+            case 5:
+                color = "maroon";
+                break;
+            case 6:
+                color = "darkcyan";
+                break;
+            case 7:
+                color = "black";
+                break;
+            case 8:
+                color = "grey";
+                break;
+            default:
+                break;
         }
         return color;
     }
@@ -506,7 +506,8 @@ public:
                                 {
                                     board.flag_or_unflag_tile(x, y);
                                     update_bombs_left();
-                                } });
+                                }
+                              });
         }
     };
 

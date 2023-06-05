@@ -104,6 +104,14 @@ public:
         QFont font;
         font.setPointSize(25);
         flagButton->setFont(font);
+        flagButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         horizontalLayout->addWidget(flagButton);
 
@@ -115,6 +123,14 @@ public:
         mainbutton->setMaximumSize(QSize(75, 75));
         mainbutton->setBaseSize(QSize(75, 75));
         mainbutton->setFont(font);
+        mainbutton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         horizontalLayout->addWidget(mainbutton);
 
@@ -126,6 +142,14 @@ public:
         uncoverButton->setMaximumSize(QSize(75, 75));
         uncoverButton->setBaseSize(QSize(75, 75));
         uncoverButton->setFont(font);
+        uncoverButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         horizontalLayout->addWidget(uncoverButton);
 
@@ -177,12 +201,14 @@ public:
         QFont font1;
         font1.setPointSize(12);
         beginnerButton->setFont(font1);
-        beginnerButton->setStyleSheet(QString::fromUtf8("\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 6px;\n"
-"                }\n"
-"            "));
+        beginnerButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         buttonLayout->addWidget(beginnerButton);
 
@@ -194,12 +220,14 @@ public:
         intermediateButton->setMaximumSize(QSize(135, 32));
         intermediateButton->setBaseSize(QSize(100, 30));
         intermediateButton->setFont(font1);
-        intermediateButton->setStyleSheet(QString::fromUtf8("\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 6px;\n"
-"                }\n"
-"            "));
+        intermediateButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         buttonLayout->addWidget(intermediateButton);
 
@@ -211,12 +239,14 @@ public:
         expertButton->setMaximumSize(QSize(135, 32));
         expertButton->setBaseSize(QSize(150, 30));
         expertButton->setFont(font1);
-        expertButton->setStyleSheet(QString::fromUtf8("\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 6px;\n"
-"                }\n"
-"            "));
+        expertButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         buttonLayout->addWidget(expertButton);
 
@@ -228,12 +258,14 @@ public:
         customButton->setMaximumSize(QSize(135, 32));
         customButton->setBaseSize(QSize(100, 30));
         customButton->setFont(font1);
-        customButton->setStyleSheet(QString::fromUtf8("\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 6px;\n"
-"                }\n"
-"            "));
+        customButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
 
         buttonLayout->addWidget(customButton);
 
@@ -267,26 +299,8 @@ public:
 "                    border-radius: 10px;\n"
 "                }\n"
 "            ", nullptr));
-        flagButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 10px;\n"
-"                }\n"
-"            ", nullptr));
         flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
-        mainbutton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 10px;\n"
-"                }\n"
-"            ", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
-        uncoverButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
-"                QPushButton {\n"
-"                    background-color: white;\n"
-"                    border-radius: 10px;\n"
-"                }\n"
-"            ", nullptr));
         uncoverButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
         lcdNumber_right->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
 "                QLCDNumber {\n"

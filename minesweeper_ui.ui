@@ -140,12 +140,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string>
-                QPushButton {
-                    background-color: white;
-                    border-radius: 10px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>🚩</string>
@@ -184,12 +186,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string>
-                QPushButton {
-                    background-color: white;
-                    border-radius: 10px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>🙂</string>
@@ -228,12 +232,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string>
-                QPushButton {
-                    background-color: white;
-                    border-radius: 10px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>⛏️</string>
@@ -359,12 +365,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-                QPushButton {
-                    background-color: white;
-                    border-radius: 6px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>BEGINNER</string>
@@ -403,12 +411,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-                QPushButton {
-                    background-color: white;
-                    border-radius: 6px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>INTERMEDIATE</string>
@@ -447,12 +457,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-                QPushButton {
-                    background-color: white;
-                    border-radius: 6px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>EXPERT</string>
@@ -491,12 +503,14 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-                QPushButton {
-                    background-color: white;
-                    border-radius: 6px;
-                }
-            </string>
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 10px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
         </property>
         <property name="text">
          <string>CUSTOM</string>

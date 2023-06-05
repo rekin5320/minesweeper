@@ -31,24 +31,30 @@ TEST_CASE("Tile")
 
 TEST_CASE("Board")
 {
-    SECTION("3×2")
+    SECTION("3×2 (invalid)")
     {
-        Board board{3, 2};
+        REQUIRE_THROWS_AS((Board{3, 2}), std::invalid_argument);
+    }
 
-        REQUIRE(board.WIDTH == 3);
-        REQUIRE(board.HEIGHT == 2);
+    SECTION("5×4")
+    {
+        Board board{5, 4};
 
-        for (unsigned int x = 0; x < 3; x++)
+        REQUIRE(board.WIDTH == 5);
+        REQUIRE(board.HEIGHT == 4);
+
+        SECTION("tiles initial state")
         {
-            for (unsigned int y = 0; y < 2; y++)
-            {
-                Tile &tile = board.get_tile(x, y);
-                REQUIRE(tile.x == x);
-                REQUIRE(tile.y == y);
-                REQUIRE(!tile.is_bomb);
-                REQUIRE(tile.is_covered);
-                REQUIRE(!tile.is_flagged);
-                REQUIRE(tile.num_adjacent_bombs == 0);
+            for (unsigned int x = 0; x < 3; x++) {
+                for (unsigned int y = 0; y < 2; y++) {
+                    Tile& tile = board.get_tile(x, y);
+                    REQUIRE(tile.x == x);
+                    REQUIRE(tile.y == y);
+                    REQUIRE(!tile.is_bomb);
+                    REQUIRE(tile.is_covered);
+                    REQUIRE(!tile.is_flagged);
+                    REQUIRE(tile.num_adjacent_bombs == 0);
+                }
             }
         }
 
@@ -63,8 +69,8 @@ TEST_CASE("Board")
             SECTION("invalid coordinates")
             {
                 REQUIRE_THROWS_AS(board.get_tile(10, 20), std::invalid_argument);
-                REQUIRE_THROWS_AS(board.get_tile(1, 2), std::invalid_argument);
-                REQUIRE_THROWS_AS(board.get_tile(3, 1), std::invalid_argument);
+                REQUIRE_THROWS_AS(board.get_tile(1, 4), std::invalid_argument);
+                REQUIRE_THROWS_AS(board.get_tile(5, 1), std::invalid_argument);
             }
         }
 
@@ -82,11 +88,28 @@ TEST_CASE("Board")
                 REQUIRE(neighbours.size() == 3);
                 REQUIRE(neighbours == expected);
             }
+
             SECTION("top")
             {
                 std::vector<Position> neighbours = board.tile_neighbours(1, 0);
                 std::vector<Position> expected = {{0, 0}, {2, 0}, {0, 1}, {1, 1}, {2, 1}};
                 REQUIRE(neighbours.size() == 5);
+                REQUIRE(neighbours == expected);
+            }
+
+            SECTION("middle")
+            {
+                std::vector<Position> neighbours = board.tile_neighbours(1, 1);
+                std::vector<Position> expected = {{0, 0}, {1, 0}, {2, 0}, {0, 1}, {2, 1}, {0, 2}, {1, 2}, {2, 2}};
+                REQUIRE(neighbours.size() == 8);
+                REQUIRE(neighbours == expected);
+            }
+
+            SECTION("bottom right corner")
+            {
+                std::vector<Position> neighbours = board.tile_neighbours(4, 3);
+                std::vector<Position> expected = {{3, 2}, {4, 2}, {3, 3}};
+                REQUIRE(neighbours.size() == 3);
                 REQUIRE(neighbours == expected);
             }
         }
@@ -95,22 +118,22 @@ TEST_CASE("Board")
         {
             SECTION("valid number of bombs")
             {
-                board.generate_bombs(2);
+                board.generate_bombs(7);
                 unsigned int count = 0;
-                for (unsigned int x = 0; x < 3; x++) {
-                    for (unsigned int y = 0; y < 2; y++) {
+                for (unsigned int x = 0; x < 5; x++) {
+                    for (unsigned int y = 0; y < 4; y++) {
                         if (board.get_tile(x, y).is_bomb) {
                             count++;
                         }
                     }
                 }
-                REQUIRE(count == 2);
+                REQUIRE(count == 7);
             }
 
             SECTION("too many bombs")
             {
-                REQUIRE_NOTHROW(board.generate_bombs(3));
-                REQUIRE_THROWS_AS(board.generate_bombs(4), std::invalid_argument);
+                REQUIRE_NOTHROW(board.generate_bombs(10));
+                REQUIRE_THROWS_AS(board.generate_bombs(11), std::invalid_argument);
             }
         }
 
@@ -119,9 +142,9 @@ TEST_CASE("Board")
             board.generate_bombs(2);
             board.clear_bombs();
             unsigned int count = 0;
-            for (unsigned int x = 0; x < 3; x++)
+            for (unsigned int x = 0; x < 5; x++)
             {
-                for (unsigned int y = 0; y < 2; y++)
+                for (unsigned int y = 0; y < 4; y++)
                 {
                     if (board.get_tile(x, y).is_bomb)
                     {
@@ -130,56 +153,6 @@ TEST_CASE("Board")
                 }
             }
             REQUIRE(count == 0);
-        }
-
-        SECTION("count_adjacent_bombs")
-        {
-            board.set_seed(37);
-            board.generate_bombs(2);
-            board.count_adjacent_bombs();
-
-            // board.print_board();
-            // 1 2 2
-            // 1 B B
-
-            REQUIRE(board.get_tile(0, 0).num_adjacent_bombs == 1);
-            REQUIRE(board.get_tile(1, 0).num_adjacent_bombs == 2);
-            REQUIRE(board.get_tile(2, 0).num_adjacent_bombs == 2);
-            REQUIRE(board.get_tile(0, 1).num_adjacent_bombs == 1);
-            REQUIRE(board.get_tile(1, 1).is_bomb);
-            REQUIRE(board.get_tile(2, 1).is_bomb);
-        }
-    }
-
-    SECTION("5×4")
-    {
-        Board board{5, 4};
-
-        REQUIRE(board.WIDTH == 5);
-        REQUIRE(board.HEIGHT == 4);
-
-        SECTION("too many bombs")
-        {
-            REQUIRE_NOTHROW(board.generate_bombs(10));
-            REQUIRE_THROWS_AS(board.generate_bombs(11), std::invalid_argument);
-        }
-
-        SECTION("tile_neighbours")
-        {
-            SECTION("middle")
-            {
-                std::vector<Position> neighbours = board.tile_neighbours(1, 1);
-                std::vector<Position> expected = {{0, 0}, {1, 0}, {2, 0}, {0, 1}, {2, 1}, {0, 2}, {1, 2}, {2, 2}};
-                REQUIRE(neighbours.size() == 8);
-                REQUIRE(neighbours == expected);
-            }
-            SECTION("bottom right corner")
-            {
-                std::vector<Position> neighbours = board.tile_neighbours(4, 3);
-                std::vector<Position> expected = {{3, 2}, {4, 2}, {3, 3}};
-                REQUIRE(neighbours.size() == 3);
-                REQUIRE(neighbours == expected);
-            }
         }
 
         SECTION("count_adjacent_bombs")

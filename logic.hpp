@@ -176,6 +176,11 @@ public:
 
     Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
     {
+        if (width < 4 || height < 4)
+        {
+            throw std::invalid_argument("Board dimensions must be at least 4x4.");
+        }
+
         Tiles.reserve(WIDTH * HEIGHT);
         for (unsigned int i = 0; i < WIDTH * HEIGHT; i++)
         {
@@ -547,8 +552,7 @@ public:
                                     {
                                         flag_or_unflag_tile(x, y);
                                     }
-                                }
-                            });
+                                } });
         }
     };
 

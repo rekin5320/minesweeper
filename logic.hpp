@@ -465,7 +465,6 @@ public:
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
         game_time_seconds = 0;
-        timer.start(1000); // update every 1000 milliseconds (1 second)
         if (with_gui)
         {
             update_bombs_left();
@@ -583,7 +582,7 @@ public:
 
     void update_timer()
     {
-        if (!has_ended)
+        if (!first_click && !has_ended)
         {
             ui.lcdNumber_right->display(++game_time_seconds);
         }
@@ -594,11 +593,12 @@ public:
         if (first_click)
         {
             while ((board.get_tile(x, y).is_bomb || board.get_tile(x, y).num_adjacent_bombs > 0))
-            {
+            { // regenerate bombs to ensure safe first click
                 board.clear_bombs();
                 board.generate_bombs(num_bombs);
                 board.count_adjacent_bombs();
             }
+            timer.start(1000); // update every 1000 milliseconds (1 second)
             first_click = false;
         }
 

@@ -216,9 +216,19 @@ public:
 "         background-position: center;\n"
 "     }\n"
 "    ", nullptr));
+        lcdNumber_left->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QLCDNumber {\n"
+"                    background-color: white;\n"
+"                }\n"
+"            ", nullptr));
         flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
         uncoverButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
+        lcdNumber_right->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+"                QLCDNumber {\n"
+"                    background-color: white;\n"
+"                }\n"
+"            ", nullptr));
         beginnerButton->setText(QCoreApplication::translate("MainWindow", "BEGINNER", nullptr));
         intermediateButton->setText(QCoreApplication::translate("MainWindow", "INTERMEDIATE", nullptr));
         expertButton->setText(QCoreApplication::translate("MainWindow", "EXPERT", nullptr));

@@ -385,8 +385,11 @@ TEST_CASE("Game")
     {
         Game game;
         game.set_level(Difficulty::INTERMEDIATE);
+
+        REQUIRE(!game.has_started);
         game.start();
 
+        REQUIRE(game.has_started);
         REQUIRE(!game.has_ended);
         REQUIRE(game.first_click);
 
@@ -521,11 +524,13 @@ TEST_CASE("Game")
             }
         }
 
+        REQUIRE(game.has_started);
         REQUIRE(game.is_game_over());
         REQUIRE(game.has_ended);
         REQUIRE_FALSE(game.first_click);
 
         game.play_again();
+        REQUIRE(game.has_started);
 
         for (unsigned int x = 0; x < game.board.HEIGHT; x++)
         {

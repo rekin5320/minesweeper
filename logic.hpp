@@ -7,7 +7,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector>
-#include <QDateTime>
 #include <QPushButton>
 #include <QRandomGenerator>
 #include <QTimer>
@@ -410,8 +409,7 @@ public:
     bool has_ended;
     bool first_click;
     Ui::MainWindow ui;
-    QDateTime start_time;
-    qint64 game_time_seconds;
+    int game_time_seconds;
     QTimer timer{};
 
     Game(Difficulty difficulty, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0) : with_gui(false)
@@ -449,7 +447,7 @@ public:
         first_click = true;
         board.generate_bombs(num_bombs);
         board.count_adjacent_bombs();
-        start_time = QDateTime::currentDateTime();
+        game_time_seconds = 0;
         timer.start(1000);  // update every 1000 milliseconds (1 second)
         if (with_gui)
         {
@@ -493,9 +491,7 @@ public:
     void update_timer() {
         if (!has_ended)
         {
-            QDateTime current_time = QDateTime::currentDateTime();
-            int seconds_passed = static_cast<int>(start_time.secsTo(current_time));
-            ui.lcdNumber_right->display(seconds_passed);
+            ui.lcdNumber_right->display(++game_time_seconds);
         }
     }
 
@@ -549,19 +545,12 @@ public:
         return num_bombs - count;
     }
 
-    void count_game_time()
-    {
-        QDateTime current_time = QDateTime::currentDateTime();
-        game_time_seconds = start_time.secsTo(current_time);
-    }
-
     bool is_game_over()
     {
         for (auto &tile : board.Tiles)
         {
             if (tile.is_bomb && !tile.is_covered)
             {
-                count_game_time();
                 board.uncover_bombs();
                 return true;
             }
@@ -578,7 +567,6 @@ public:
                 return false;
             }
         }
-        count_game_time();
         return true;
     }
 

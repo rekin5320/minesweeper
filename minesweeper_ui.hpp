@@ -53,7 +53,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(638, 300);
+        MainWindow->resize(558, 300);
         actionNew_game = new QAction(MainWindow);
         actionNew_game->setObjectName(QString::fromUtf8("actionNew_game"));
         centralwidget = new QWidget(MainWindow);
@@ -125,8 +125,8 @@ public:
         beginnerButton->setObjectName(QString::fromUtf8("beginnerButton"));
         sizePolicy.setHeightForWidth(beginnerButton->sizePolicy().hasHeightForWidth());
         beginnerButton->setSizePolicy(sizePolicy);
-        beginnerButton->setMinimumSize(QSize(150, 30));
-        beginnerButton->setMaximumSize(QSize(150, 30));
+        beginnerButton->setMinimumSize(QSize(130, 30));
+        beginnerButton->setMaximumSize(QSize(130, 30));
         beginnerButton->setBaseSize(QSize(150, 30));
         QFont font1;
         font1.setPointSize(12);
@@ -138,8 +138,8 @@ public:
         intermediateButton->setObjectName(QString::fromUtf8("intermediateButton"));
         sizePolicy.setHeightForWidth(intermediateButton->sizePolicy().hasHeightForWidth());
         intermediateButton->setSizePolicy(sizePolicy);
-        intermediateButton->setMinimumSize(QSize(150, 30));
-        intermediateButton->setMaximumSize(QSize(150, 30));
+        intermediateButton->setMinimumSize(QSize(130, 30));
+        intermediateButton->setMaximumSize(QSize(130, 30));
         intermediateButton->setBaseSize(QSize(100, 30));
         intermediateButton->setFont(font1);
 
@@ -149,8 +149,8 @@ public:
         expertButton->setObjectName(QString::fromUtf8("expertButton"));
         sizePolicy.setHeightForWidth(expertButton->sizePolicy().hasHeightForWidth());
         expertButton->setSizePolicy(sizePolicy);
-        expertButton->setMinimumSize(QSize(150, 30));
-        expertButton->setMaximumSize(QSize(150, 30));
+        expertButton->setMinimumSize(QSize(130, 30));
+        expertButton->setMaximumSize(QSize(130, 30));
         expertButton->setBaseSize(QSize(150, 30));
         expertButton->setFont(font1);
 
@@ -160,8 +160,8 @@ public:
         customButton->setObjectName(QString::fromUtf8("customButton"));
         sizePolicy.setHeightForWidth(customButton->sizePolicy().hasHeightForWidth());
         customButton->setSizePolicy(sizePolicy);
-        customButton->setMinimumSize(QSize(150, 30));
-        customButton->setMaximumSize(QSize(150, 30));
+        customButton->setMinimumSize(QSize(130, 30));
+        customButton->setMaximumSize(QSize(130, 30));
         customButton->setBaseSize(QSize(150, 30));
         customButton->setFont(font1);
 
@@ -173,7 +173,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 638, 21));
+        menubar->setGeometry(QRect(0, 0, 558, 21));
         menuNew_game = new QMenu(menubar);
         menuNew_game->setObjectName(QString::fromUtf8("menuNew_game"));
         MainWindow->setMenuBar(menubar);

@@ -482,7 +482,7 @@ public:
         {
             unsigned int x = tile.x, y = tile.y;
             tile.create_button();
-            ui.gridLayout->addWidget(tile.button.get(), y, x);
+            ui.gridLayout->addWidget(tile.button.get(), static_cast<int>(y), static_cast<int>(x));
             tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
             QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
                              { uncover_tile(x, y); });

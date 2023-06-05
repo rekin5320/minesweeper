@@ -480,6 +480,21 @@ public:
     void setupUi(QMainWindow &MainWindow)
     {
         ui.setupUi(&MainWindow);
+        QObject::connect(ui.beginnerButton, &QPushButton::released, [this](){
+            set_level(BEGINNER);
+            start();
+            create_tiles();
+        });
+        QObject::connect(ui.intermediateButton, &QPushButton::released, [this](){
+            set_level(INTERMEDIATE);
+            start();
+            create_tiles();
+            });
+        QObject::connect(ui.expertButton, &QPushButton::released, [this](){
+            set_level(EXPERT);
+            start();
+            create_tiles();
+            });
         QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again();});
         QObject::connect(ui.uncoverButton, &QPushButton::released, [this](){set_tool_uncover();});
         QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag();});

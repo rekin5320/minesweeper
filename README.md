@@ -33,7 +33,7 @@ uic-qt5 minesweeperUI.ui -o minesweeperUI.hpp
 ## Usage terms
 This project uses the following libraries:
 * [Qt](https://www.qt.io/) - [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.en.html)
-* [Catch2]
+* [Catch2](https://github.com/catchorg/Catch2)
 
 The logo used in this project is from [textcraft](https://textcraft.net) and is licensed by free for commercial or non-commercial use.
 

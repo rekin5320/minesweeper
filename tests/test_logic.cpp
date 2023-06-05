@@ -93,7 +93,14 @@ TEST_CASE("Board")
 
         SECTION("generate_bombs")
         {
-            board.generate_bombs(4);
+            SECTION("too many bombs")
+            {
+                REQUIRE_NOTHROW(board.generate_bombs(3));
+                REQUIRE_THROWS_AS(board.generate_bombs(4), std::invalid_argument);
+                board.clear_bombs();
+            }
+
+            board.generate_bombs(2);
             unsigned int count = 0;
             for (unsigned int x = 0; x < 3; x++)
             {
@@ -105,12 +112,12 @@ TEST_CASE("Board")
                     }
                 }
             }
-            REQUIRE(count == 4);
+            REQUIRE(count == 2);
         }
 
         SECTION("clear_bombs")
         {
-            board.generate_bombs(4);
+            board.generate_bombs(2);
             board.clear_bombs();
             unsigned int count = 0;
             for (unsigned int x = 0; x < 3; x++)
@@ -151,6 +158,12 @@ TEST_CASE("Board")
 
         REQUIRE(board.WIDTH == 5);
         REQUIRE(board.HEIGHT == 4);
+
+        SECTION("too many bombs")
+        {
+            REQUIRE_NOTHROW(board.generate_bombs(10));
+            REQUIRE_THROWS_AS(board.generate_bombs(11), std::invalid_argument);
+        }
 
         SECTION("tile_neighbours")
         {

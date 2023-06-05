@@ -455,7 +455,10 @@ public:
         start_time = std::chrono::steady_clock::now();
         qstart_time = QDateTime::currentDateTime();
         timer.start(1000);  // update every 1000 milliseconds (1 second)
-        ui.lcdNumber_right->display(0);
+        if (with_gui)
+        {
+            ui.lcdNumber_right->display(0);
+        }
     }
 
     void play_again()

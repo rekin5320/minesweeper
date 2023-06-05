@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.9
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -33,7 +33,7 @@ public:
     QSpacerItem *horizontalSpacer;
     QPushButton *flagButton;
     QPushButton *mainbutton;
-    QPushButton *shovelButton;
+    QPushButton *uncoverButton;
     QSpacerItem *horizontalSpacer_2;
     QLCDNumber *lcdNumber_right;
     QHBoxLayout *horizontalLayout_3;
@@ -96,16 +96,16 @@ public:
 
         horizontalLayout->addWidget(mainbutton);
 
-        shovelButton = new QPushButton(centralwidget);
-        shovelButton->setObjectName(QString::fromUtf8("shovelButton"));
-        sizePolicy.setHeightForWidth(shovelButton->sizePolicy().hasHeightForWidth());
-        shovelButton->setSizePolicy(sizePolicy);
-        shovelButton->setMinimumSize(QSize(75, 75));
-        shovelButton->setMaximumSize(QSize(75, 75));
-        shovelButton->setBaseSize(QSize(75, 75));
-        shovelButton->setFont(font);
+        uncoverButton = new QPushButton(centralwidget);
+        uncoverButton->setObjectName(QString::fromUtf8("uncoverButton"));
+        sizePolicy.setHeightForWidth(uncoverButton->sizePolicy().hasHeightForWidth());
+        uncoverButton->setSizePolicy(sizePolicy);
+        uncoverButton->setMinimumSize(QSize(75, 75));
+        uncoverButton->setMaximumSize(QSize(75, 75));
+        uncoverButton->setBaseSize(QSize(75, 75));
+        uncoverButton->setFont(font);
 
-        horizontalLayout->addWidget(shovelButton);
+        horizontalLayout->addWidget(uncoverButton);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -202,7 +202,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Minesweeper", nullptr));
         flagButton->setText(QCoreApplication::translate("MainWindow", "\360\237\232\251", nullptr));
         mainbutton->setText(QCoreApplication::translate("MainWindow", "\360\237\231\202", nullptr));
-        shovelButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
+        uncoverButton->setText(QCoreApplication::translate("MainWindow", "\342\233\217\357\270\217", nullptr));
         beginnerButton->setText(QCoreApplication::translate("MainWindow", "BEGINNER", nullptr));
         intermediateButton->setText(QCoreApplication::translate("MainWindow", "INTERMEDIATE", nullptr));
         expertButton->setText(QCoreApplication::translate("MainWindow", "EXPERT", nullptr));

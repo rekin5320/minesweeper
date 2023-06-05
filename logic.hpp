@@ -256,7 +256,7 @@ public:
     void generate_bombs(unsigned int num_bombs)
     {
         // to make sure that there is a least one empty tile
-        if (num_bombs > WIDTH * HEIGHT / 4)
+        if (num_bombs > WIDTH * HEIGHT / 2)
         {
             throw std::invalid_argument("Too many bombs");
         }

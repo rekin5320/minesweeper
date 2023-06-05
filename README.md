@@ -40,4 +40,4 @@ This project uses the following libraries:
 
 The logo used in this project comes from [textcraft](https://textcraft.net) and [is licensed free of charge for commercial or non-commercial use](https://textcraft.net/privacy.php).
 
-The background image used in this project is from [RareGALLERY](https://rare-gallery.com)and is licensed free of charge for commercial or non-commercial use.
+The background image used in this project is from [RareGALLERY](https://rare-gallery.com) and is licensed free of charge for commercial or non-commercial use.

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minesweeper_ui.ui'
 **
-** Created by: Qt User Interface Compiler version 5.15.3
+** Created by: Qt User Interface Compiler version 5.15.9
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -29,7 +29,9 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout_2;
+    QSpacerItem *verticalSpacer_4;
     QLabel *label;
+    QSpacerItem *verticalSpacer_3;
     QHBoxLayout *horizontalLayout;
     QLCDNumber *lcdNumber_left;
     QSpacerItem *horizontalSpacer;
@@ -38,8 +40,10 @@ public:
     QPushButton *uncoverButton;
     QSpacerItem *horizontalSpacer_2;
     QLCDNumber *lcdNumber_right;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QGridLayout *gridLayout;
+    QSpacerItem *verticalSpacer_2;
     QHBoxLayout *buttonLayout;
     QPushButton *beginnerButton;
     QPushButton *intermediateButton;
@@ -51,17 +55,25 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(558, 300);
+        MainWindow->resize(650, 450);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer_4);
+
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
         label->setPixmap(QPixmap(QString::fromUtf8(":/logo")));
         label->setAlignment(Qt::AlignCenter);
 
         verticalLayout_2->addWidget(label);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer_3);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -132,6 +144,10 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer);
+
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         gridLayout = new QGridLayout();
@@ -143,6 +159,10 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout_3);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer_2);
 
         buttonLayout = new QHBoxLayout();
         buttonLayout->setObjectName(QString::fromUtf8("buttonLayout"));
@@ -198,7 +218,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 558, 24));
+        menubar->setGeometry(QRect(0, 0, 650, 21));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);

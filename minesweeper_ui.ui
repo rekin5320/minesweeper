@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>558</width>
-    <height>300</height>
+    <width>650</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Minesweeper</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-     <property name="styleSheet">
+   <property name="styleSheet">
     <string>
      QWidget#centralwidget {
          background-image: url(:/background);
@@ -23,9 +23,21 @@
      }
     </string>
    </property>
-
    <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
+    <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <widget class="QLabel" name="label">
       <property name="pixmap">
        <pixmap resource="resources/resources.qrc">:/logo</pixmap>
@@ -36,36 +48,49 @@
      </widget>
     </item>
     <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
-<item>
-    <widget class="QLCDNumber" name="lcdNumber_left">
+      <item>
+       <widget class="QLCDNumber" name="lcdNumber_left">
         <property name="minimumSize">
-            <size>
-                <width>80</width>
-                <height>0</height>
-            </size>
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
         </property>
         <property name="maximumSize">
-            <size>
-                <width>16777215</width>
-                <height>75</height>
-            </size>
-        </property>
-        <property name="digitCount">
-            <number>4</number>
-        </property>
-        <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
+         <size>
+          <width>16777215</width>
+          <height>75</height>
+         </size>
         </property>
         <property name="styleSheet">
-            <string>
+         <string>
                 QLCDNumber {
                     background-color: white;
                 }
             </string>
         </property>
-    </widget>
-</item>
+        <property name="digitCount">
+         <number>4</number>
+        </property>
+        <property name="segmentStyle">
+         <enum>QLCDNumber::Flat</enum>
+        </property>
+       </widget>
+      </item>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -214,22 +239,35 @@
           <height>75</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string>
+                QLCDNumber {
+                    background-color: white;
+                }
+            </string>
+        </property>
         <property name="digitCount">
          <number>4</number>
         </property>
         <property name="segmentStyle">
          <enum>QLCDNumber::Flat</enum>
         </property>
-                <property name="styleSheet">
-            <string>
-                QLCDNumber {
-                    background-color: white;
-                }
-            </string>
-        </property>
        </widget>
       </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -244,6 +282,19 @@
        </layout>
       </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
      <layout class="QHBoxLayout" name="buttonLayout">
@@ -400,13 +451,12 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>558</width>
-     <height>24</height>
+     <width>650</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
  </widget>
- <resources/>
  <resources>
   <include location="resources/resources.qrc"/>
  </resources>

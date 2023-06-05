@@ -32,11 +32,12 @@ sudo apt-get install fonts-noto-color-emoji
 uic-qt5 minesweeperUI.ui -o minesweeperUI.hpp
 ```
 
-## Usage terms
+## Credits
 This project uses the following libraries:
-* [Qt](https://www.qt.io/) - [LGPLv3](https://www.gnu.org/licenses/lgpl-3.0.en.html)
-* [Catch2](https://github.com/catchorg/Catch2)
 
-The logo used in this project is from [textcraft](https://textcraft.net) and is licensed by free for commercial or non-commercial use.
+* [Qt](https://www.qt.io/) ([LGPLv3 license](https://www.gnu.org/licenses/lgpl-3.0.en.html))
+* [Catch2](https://github.com/catchorg/Catch2) ([BSL-1.0 license](https://github.com/catchorg/Catch2/blob/devel/LICENSE.txt))
 
-The background image used in this project is from [RareGALLERY](https://rare-gallery.com)and is licensed by free for commercial or non-commercial use.
+The logo used in this project comes from [textcraft](https://textcraft.net) and [is licensed free of charge for commercial or non-commercial use](https://textcraft.net/privacy.php).
+
+The background image used in this project is from [RareGALLERY](https://rare-gallery.com)and is licensed free of charge for commercial or non-commercial use.

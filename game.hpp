@@ -41,8 +41,8 @@ private:
     QTimer timer{};
     Tool tool = UNCOVER;
     Difficulty difficulty;
-public:
 
+public:
     // Default constructor
     Game() : with_gui(false) {}
 

@@ -318,7 +318,7 @@ void Game::save_game_result() const {
 
     QJsonObject gameResult;
 
-    gameResult["level"] = difficultyToString(difficulty);
+    gameResult["level"] = difficulty;  // save enum value
 
     if (difficulty == CUSTOM)
     {

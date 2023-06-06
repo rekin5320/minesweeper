@@ -1,7 +1,6 @@
 #include "board.hpp"
 
-
-Board::Board(unsigned int width, unsigned int height): width(width), height(height)
+Board::Board(unsigned int width, unsigned int height) : width(width), height(height)
 {
     if (width < 4 || height < 4)
     {
@@ -16,11 +15,13 @@ Board::Board(unsigned int width, unsigned int height): width(width), height(heig
     set_seed(std::random_device()());
 }
 
-void Board::set_seed(quint32 seed) {
+void Board::set_seed(quint32 seed)
+{
     random.seed(seed);
 }
 
-Tile& Board::get_tile(unsigned int x, unsigned int y) {
+Tile &Board::get_tile(unsigned int x, unsigned int y)
+{
     if (x >= width || y >= height)
     {
         throw std::invalid_argument("Invalid coordinates");
@@ -28,17 +29,20 @@ Tile& Board::get_tile(unsigned int x, unsigned int y) {
     return Tiles[y * width + x];
 }
 
-Tile& Board::get_tile(Position position) {
+Tile &Board::get_tile(Position position)
+{
     return get_tile(position.x, position.y);
 }
 
-Tile& Board::random_tile() {
+Tile &Board::random_tile()
+{
     unsigned int rand_x = random.bounded(width);
     unsigned int rand_y = random.bounded(height);
     return get_tile(rand_x, rand_y);
 }
 
-std::vector<Position> Board::tile_neighbours(unsigned int x, unsigned int y) const {
+std::vector<Position> Board::tile_neighbours(unsigned int x, unsigned int y) const
+{
     std::vector<Position> neighbours;
     if (x > 0 && y > 0)
     {
@@ -75,13 +79,15 @@ std::vector<Position> Board::tile_neighbours(unsigned int x, unsigned int y) con
     return neighbours;
 }
 
-std::vector<Position> Board::tile_neighbours(const Tile& tile) const {
+std::vector<Position> Board::tile_neighbours(const Tile &tile) const
+{
     return tile_neighbours(tile.x, tile.y);
 }
 
-void Board::generate_bombs(unsigned int num_bombs) {
+void Board::generate_bombs(unsigned int num_bombs)
+{
     if (num_bombs > width * height / 2)
-    {  // to make sure that there are enough empty tiles
+    { // to make sure that there are enough empty tiles
         throw std::invalid_argument("Too many bombs");
     }
 
@@ -96,14 +102,16 @@ void Board::generate_bombs(unsigned int num_bombs) {
     }
 }
 
-void Board::clear_bombs() {
+void Board::clear_bombs()
+{
     for (auto &tile : Tiles)
     {
         tile.is_bomb = false;
     }
 }
 
-void Board::count_adjacent_bombs() {
+void Board::count_adjacent_bombs()
+{
     for (auto &tile : Tiles)
     {
         unsigned int count = 0;
@@ -118,7 +126,8 @@ void Board::count_adjacent_bombs() {
     }
 }
 
-void Board::uncover_tile(unsigned int x, unsigned int y) {
+void Board::uncover_tile(unsigned int x, unsigned int y)
+{
     Tile &tile = get_tile(x, y);
     if (tile.is_covered)
     {
@@ -137,7 +146,8 @@ void Board::uncover_tile(unsigned int x, unsigned int y) {
     }
 }
 
-void Board::uncover_bombs() {
+void Board::uncover_bombs()
+{
     for (auto &tile : Tiles)
     {
         if (tile.is_covered && tile.is_bomb)
@@ -147,7 +157,8 @@ void Board::uncover_bombs() {
     }
 }
 
-void Board::cover_all() {
+void Board::cover_all()
+{
     for (auto &tile : Tiles)
     {
         if (!tile.is_covered)
@@ -157,7 +168,8 @@ void Board::cover_all() {
     }
 }
 
-void Board::flag_or_unflag_tile(unsigned int x, unsigned int y) {
+void Board::flag_or_unflag_tile(unsigned int x, unsigned int y)
+{
     Tile &tile = get_tile(x, y);
     if (!tile.is_flagged)
     {
@@ -169,7 +181,8 @@ void Board::flag_or_unflag_tile(unsigned int x, unsigned int y) {
     }
 }
 
-void Board::unflag_all() {
+void Board::unflag_all()
+{
     for (auto &tile : Tiles)
     {
         if (tile.is_flagged)
@@ -179,7 +192,8 @@ void Board::unflag_all() {
     }
 }
 
-void Board::print_board() const {
+void Board::print_board() const
+{
     for (auto &tile : Tiles)
     {
         if (tile.is_flagged)

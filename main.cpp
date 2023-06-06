@@ -1,7 +1,6 @@
 #include <iostream>
 #include "game.hpp"
 
-
 int main(int argc, char **argv)
 {
     std::cout << "Qt version: " << qVersion() << std::endl;

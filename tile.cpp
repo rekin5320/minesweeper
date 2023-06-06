@@ -1,6 +1,5 @@
 #include "tile.hpp"
 
-
 const QString stylesheet_covered = R"(
 QPushButton {
     border: 1px solid darkgray;
@@ -34,7 +33,8 @@ void Tile::cover()
     }
 }
 
-void Tile::uncover() {
+void Tile::uncover()
+{
     if (!is_flagged)
     {
         is_covered = false;
@@ -58,18 +58,20 @@ void Tile::uncover() {
     }
 }
 
-QString Tile::get_color() const {
+QString Tile::get_color() const
+{
     if (tile_colors.contains(num_adjacent_bombs))
     {
         return tile_colors.at(num_adjacent_bombs);
     }
     else
     {
-        return "";  // no color
+        return ""; // no color
     }
 }
 
-void Tile::flag() {
+void Tile::flag()
+{
     if (is_covered)
     {
         is_flagged = true;
@@ -80,7 +82,8 @@ void Tile::flag() {
     }
 }
 
-void Tile::unflag() {
+void Tile::unflag()
+{
     is_flagged = false;
     if (with_gui)
     {
@@ -88,7 +91,8 @@ void Tile::unflag() {
     }
 }
 
-void Tile::create_button() {
+void Tile::create_button()
+{
     with_gui = true;
     button = std::make_unique<QPushButton>();
     button->setFixedSize(30, 30);

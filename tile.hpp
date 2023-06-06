@@ -3,12 +3,11 @@
 #include <QPushButton>
 #include <QString>
 
-
 extern const QString stylesheet_covered;
 
 extern const QString stylesheet_uncovered;
 
-const std::map<unsigned int, QString> tile_colors {
+const std::map<unsigned int, QString> tile_colors{
     {1, "blue"},
     {2, "green"},
     {3, "red"},
@@ -16,9 +15,7 @@ const std::map<unsigned int, QString> tile_colors {
     {5, "maroon"},
     {6, "darkcyan"},
     {7, "black"},
-    {8, "grey"}
-};
-
+    {8, "grey"}};
 
 class Tile
 {
@@ -34,7 +31,7 @@ public:
     unsigned int num_adjacent_bombs;
     std::unique_ptr<QPushButton> button;
 
-    Tile(unsigned int x, unsigned y) : with_gui(false), x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0) {};
+    Tile(unsigned int x, unsigned y) : with_gui(false), x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0){};
 
     void cover();
 

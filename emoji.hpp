@@ -1,12 +1,12 @@
 #pragma once
-#include <string>
+#include <QString>
 
 namespace Emoji
 {
-    extern const std::string SmileyFace;
-    extern const std::string SadFace;
-    extern const std::string CoolFace;
-    extern const std::string Flag;
-    extern const std::string Pickaxe;
-    extern const std::string Bomb;
+    extern const QString SmileyFace;
+    extern const QString SadFace;
+    extern const QString CoolFace;
+    extern const QString Flag;
+    extern const QString Pickaxe;
+    extern const QString Bomb;
 }

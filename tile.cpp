@@ -53,7 +53,7 @@ void Tile::uncover()
             }
             else
             {
-                button->setText(QString::fromStdString(Emoji::Bomb));
+                button->setText(Emoji::Bomb);
             }
         }
     }
@@ -78,7 +78,7 @@ void Tile::flag()
         is_flagged = true;
         if (with_gui)
         {
-            button->setText(QString::fromStdString(Emoji::Flag));
+            button->setText(Emoji::Flag);
         }
     }
 }

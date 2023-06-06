@@ -131,7 +131,7 @@ void Game::play_again()
         start();
         if (with_gui)
         {
-            ui.mainbutton->setText(QString::fromStdString(Emoji::SmileyFace));
+            ui.mainbutton->setText(Emoji::SmileyFace);
         }
     }
 }
@@ -277,7 +277,7 @@ void Game::uncover_tile(unsigned int x, unsigned int y)
             std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!\n";
             if (with_gui)
             {
-                ui.mainbutton->setText(QString::fromStdString(Emoji::SadFace));
+                ui.mainbutton->setText(Emoji::SadFace);
             }
         }
         else if (is_game_won())
@@ -286,7 +286,7 @@ void Game::uncover_tile(unsigned int x, unsigned int y)
             std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!\n";
             if (with_gui)
             {
-                ui.mainbutton->setText(QString::fromStdString(Emoji::CoolFace));
+                ui.mainbutton->setText(Emoji::CoolFace);
             }
         }
     }

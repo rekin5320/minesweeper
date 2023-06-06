@@ -7,6 +7,11 @@ Board::Board(unsigned int width, unsigned int height) : width(width), height(hei
         throw std::invalid_argument("Board dimensions must be at least 4x4.");
     }
 
+    if (width > 40 || height > 20)
+    {
+        throw std::invalid_argument("Board dimensions must be at most 40x20.");
+    }
+
     Tiles.reserve(width * height);
     for (unsigned int i = 0; i < width * height; i++)
     {

@@ -1,5 +1,5 @@
 #include <iomanip>
-#include "emoji.h"
+#include "emoji.hpp"
 #include "game.hpp"
 
 // Getters

@@ -1,5 +1,5 @@
 #include "tile.hpp"
-#include "emoji.h"
+#include "emoji.hpp"
 
 const QString stylesheet_covered = R"(
 QPushButton {

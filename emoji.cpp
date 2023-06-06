@@ -1,4 +1,4 @@
-#include "emoji.h"
+#include "emoji.hpp"
 
 namespace Emoji
 {

@@ -29,10 +29,10 @@ add_link_options(${COMPILE_OPTIONS})
 
 add_library(minesweeper_lib SHARED
     position.hpp position.cpp
+    emoji.hpp emoji.cpp
     tile.hpp tile.cpp
     board.hpp board.cpp
     game.hpp game.cpp
-    emoji.h emoji.cpp
 )
 target_link_libraries(minesweeper_lib ${QT_LIBS})
 

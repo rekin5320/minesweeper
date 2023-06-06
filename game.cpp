@@ -297,16 +297,19 @@ QString Game::difficultyToString(Difficulty difficulty_input) {
 }
 
 void Game::save_game_result() const {
-    QDir dir;
-    if (!dir.exists(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
-        dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    if (!QDir().mkpath(dataDir))
+    {
+        std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";
+        return;
+    }
 
-    QString filePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/game_results.json";
+    QString filePath = dataDir + "/game_results.json";
 
     QFile file(filePath);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
-        qDebug() << "Failed to open file for writing:" << file.errorString();
+        std::cerr << "Failed to open file for writing: " << file.errorString().toStdString() << "\n";
         return;
     }
 

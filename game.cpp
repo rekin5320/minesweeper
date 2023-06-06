@@ -246,7 +246,6 @@ void Game::custom_difficulty_dialog(const QString& error_message)
 
     dialog.setLayout(&formLayout);
     dialog.setWindowTitle("Custom parameters");
-    dialog.resize(300, 150);
     dialog.exec();
 }
 

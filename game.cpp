@@ -75,7 +75,7 @@ void Game::set_difficulty(Difficulty difficulty_to_set, unsigned int width, unsi
     case CUSTOM:
         if (width == 0 || height == 0 || bombs == 0)
         {
-            throw std::invalid_argument("Missing parameters for custom difficulty");
+            throw std::invalid_argument("Invalid parameters for custom difficulty");
         }
         board = Board(width, height);
         num_bombs = bombs;
@@ -204,15 +204,21 @@ void Game::update_timer()
     }
 }
 
-void Game::custom_difficulty_dialog()
+void Game::custom_difficulty_dialog(const QString& error_message)
 {
     QDialog dialog;
     QFormLayout formLayout(&dialog);
+    QLabel label;
     QLineEdit widthLineEdit;
     QLineEdit heightLineEdit;
     QLineEdit bombsLineEdit;
     QPushButton startButton("Start");
 
+    if (error_message.length())
+    {
+        label.setText(error_message);
+        formLayout.addRow("Error:", &label);
+    }
     formLayout.addRow("Width:", &widthLineEdit);
     formLayout.addRow("Height:", &heightLineEdit);
     formLayout.addRow("Bombs:", &bombsLineEdit);
@@ -220,15 +226,22 @@ void Game::custom_difficulty_dialog()
 
     QObject::connect(&startButton, &QPushButton::released, [&]()
     {
+        dialog.close();
+
         unsigned int width = widthLineEdit.text().toUInt();
         unsigned int height = heightLineEdit.text().toUInt();
         unsigned int bombs = bombsLineEdit.text().toUInt();
 
-        set_difficulty(CUSTOM, width, height, bombs);
-        start();
-        create_tiles();
-
-        dialog.close();
+        try
+        {
+            set_difficulty(CUSTOM, width, height, bombs);
+            start();
+            create_tiles();
+        }
+        catch (std::invalid_argument& e)
+        {
+            custom_difficulty_dialog(e.what()); // ask user again if entered parameters were invalid
+        }
     });
 
     dialog.setLayout(&formLayout);

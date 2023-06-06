@@ -7,11 +7,14 @@
 #include <QJsonObject>
 #include <QStandardPaths>
 #include <QTimer>
+#include <QDialog>
+#include <QFormLayout>
+#include <QLineEdit>
+#include <QPushButton>
 #include "position.hpp"
 #include "tile.hpp"
 #include "board.hpp"
 #include "minesweeper_ui.hpp"
-
 
 enum Difficulty
 {
@@ -43,7 +46,7 @@ private:
     Difficulty difficulty;
 
 public:
-    // Default constructor
+    // constructor
     Game() : with_gui(false) {}
 
     // Getters
@@ -69,11 +72,10 @@ public:
 
     // Setters
     void set_difficulty(
-            Difficulty difficulty_to_set,
-            unsigned int width = 0,
-            unsigned int height = 0,
-            unsigned int bombs = 0
-        );
+        Difficulty difficulty_to_set,
+        unsigned int width = 0,
+        unsigned int height = 0,
+        unsigned int bombs = 0);
 
     void set_tool_uncover();
 

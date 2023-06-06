@@ -1,6 +1,5 @@
 #include "tile.hpp"
 
-#include <QDebug>
 
 void Tile::cover()
 {

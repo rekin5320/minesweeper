@@ -184,7 +184,7 @@ void Game::setupUi(QMainWindow &MainWindow)
                                           });
 
                          dialog.setLayout(&formLayout);
-                         dialog.setWindowTitle("Ustawienia");
+                         dialog.setWindowTitle("Custom parameters");
                          dialog.exec(); // Show dialog window
                      });
     QObject::connect(ui.mainbutton, &QPushButton::released, [this]()

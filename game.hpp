@@ -1,11 +1,4 @@
 #pragma once
-#include <QDebug>
-#include <QDir>
-#include <QFile>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QStandardPaths>
 #include <QTimer>
 #include <QDialog>
 #include <QFormLayout>
@@ -14,15 +7,8 @@
 #include "position.hpp"
 #include "tile.hpp"
 #include "board.hpp"
+#include "difficulty.hpp"
 #include "minesweeper_ui.hpp"
-
-enum Difficulty
-{
-    BEGINNER,
-    INTERMEDIATE,
-    EXPERT,
-    CUSTOM
-};
 
 enum Tool
 {
@@ -109,6 +95,4 @@ public:
     std::string get_formatted_elapsed_time() const;
 
     static QString difficultyToString(Difficulty difficulty_input);
-
-    void save_game_result() const;
 };

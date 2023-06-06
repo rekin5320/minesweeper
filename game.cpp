@@ -1,5 +1,6 @@
 #include <iomanip>
 #include "emoji.hpp"
+#include "statistics.hpp"
 #include "game.hpp"
 
 // Getters
@@ -331,7 +332,7 @@ bool Game::is_game_won()
             return false;
         }
     }
-    save_game_result();
+    save_game_result(difficulty, game_time_seconds, board.width, board.height, num_bombs);
     return true;
 }
 
@@ -358,52 +359,4 @@ QString Game::difficultyToString(Difficulty difficulty_input)
     default:
         return "Unknown";
     }
-}
-
-void Game::save_game_result() const
-{
-    QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    if (!QDir().mkpath(dataDir))
-    {
-        std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";
-        return;
-    }
-
-    QString filePath = dataDir + "/game_results.json";
-
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-    {
-        std::cerr << "Failed to open file for writing: " << file.errorString().toStdString() << "\n";
-        return;
-    }
-
-    QByteArray fileData = file.readAll();
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(fileData);
-
-    QJsonObject gameResult;
-
-    gameResult["difficulty"] = difficulty; // save enum value
-
-    if (difficulty == CUSTOM)
-    {
-        gameResult["width"] = static_cast<int>(board.width);
-        gameResult["height"] = static_cast<int>(board.height);
-        gameResult["bombs"] = static_cast<int>(num_bombs);
-    }
-
-    gameResult["time"] = static_cast<int>(game_time_seconds);
-
-    QJsonArray gameResultsArray;
-    if (jsonDocument.isArray())
-    {
-        gameResultsArray = jsonDocument.array();
-    }
-    gameResultsArray.append(gameResult);
-
-    QJsonDocument newJsonDocument(gameResultsArray);
-
-    file.resize(0);
-    file.write(newJsonDocument.toJson());
-    file.close();
 }

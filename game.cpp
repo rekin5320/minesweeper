@@ -204,15 +204,21 @@ void Game::update_timer()
     }
 }
 
-void Game::custom_difficulty_dialog()
+void Game::custom_difficulty_dialog(const QString& error_message)
 {
     QDialog dialog;
     QFormLayout formLayout(&dialog);
+    QLabel label;
     QLineEdit widthLineEdit;
     QLineEdit heightLineEdit;
     QLineEdit bombsLineEdit;
     QPushButton startButton("Start");
 
+    if (error_message.length())
+    {
+        label.setText(error_message);
+        formLayout.addRow("Error:", &label);
+    }
     formLayout.addRow("Width:", &widthLineEdit);
     formLayout.addRow("Height:", &heightLineEdit);
     formLayout.addRow("Bombs:", &bombsLineEdit);
@@ -232,9 +238,9 @@ void Game::custom_difficulty_dialog()
             start();
             create_tiles();
         }
-        catch (...)
+        catch (std::invalid_argument& e)
         {
-            custom_difficulty_dialog(); // ask user again if entered parameters were invalid
+            custom_difficulty_dialog(e.what()); // ask user again if entered parameters were invalid
         }
     });
 

@@ -1,6 +1,46 @@
 #include <iomanip>
 #include "game.hpp"
 
+// Getters
+Board &Game::get_board() {
+    return board;
+}
+
+unsigned int Game::get_num_bombs() const {
+    return num_bombs;
+}
+
+bool Game::get_with_gui() const {
+    return with_gui;
+}
+
+bool Game::get_has_ended() const {
+    return has_ended;
+}
+
+bool Game::get_has_started() const {
+    return has_started;
+}
+
+bool Game::get_first_click() const {
+    return first_click;
+}
+
+Ui::MainWindow &Game::get_ui() {
+    return ui;
+}
+
+int Game::get_game_time_seconds() const {
+    return game_time_seconds;
+}
+
+Tool Game::get_tool() const {
+    return tool;
+}
+
+Difficulty Game::get_difficulty() const {
+    return difficulty;
+}
 
 void Game::set_level(Difficulty difficulty_to_set, unsigned int width, unsigned int height, unsigned int bombs) {
     switch (difficulty_to_set)
@@ -31,6 +71,24 @@ void Game::set_level(Difficulty difficulty_to_set, unsigned int width, unsigned 
             break;
         default:
             throw std::invalid_argument("Invalid difficulty");
+    }
+}
+
+void Game::set_tool_uncover() {
+    tool = UNCOVER;
+    if (with_gui)
+    {
+        ui.uncoverButton->setEnabled(false);
+        ui.flagButton->setEnabled(true);
+    }
+}
+
+void Game::set_tool_flag() {
+    tool = FLAG;
+    if (with_gui)
+    {
+        ui.uncoverButton->setEnabled(true);
+        ui.flagButton->setEnabled(false);
     }
 }
 
@@ -121,24 +179,6 @@ void Game::create_tiles() {
                     flag_or_unflag_tile(x, y);
                 }
             } });
-    }
-}
-
-void Game::set_tool_uncover() {
-    tool = UNCOVER;
-    if (with_gui)
-    {
-        ui.uncoverButton->setEnabled(false);
-        ui.flagButton->setEnabled(true);
-    }
-}
-
-void Game::set_tool_flag() {
-    tool = FLAG;
-    if (with_gui)
-    {
-        ui.uncoverButton->setEnabled(true);
-        ui.flagButton->setEnabled(false);
     }
 }
 

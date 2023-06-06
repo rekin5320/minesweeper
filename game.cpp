@@ -218,7 +218,7 @@ void Game::custom_difficulty_dialog()
     formLayout.addRow("Bombs:", &bombsLineEdit);
     formLayout.addWidget(&startButton);
 
-    QObject::connect(&startButton, &QPushButton::clicked, [&]()
+    QObject::connect(&startButton, &QPushButton::released, [&]()
     {
         unsigned int width = widthLineEdit.text().toUInt();
         unsigned int height = heightLineEdit.text().toUInt();

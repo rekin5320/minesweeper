@@ -1,3 +1,4 @@
+#include <sstream>
 #include "catch.hpp"
 #include "../board.hpp"
 

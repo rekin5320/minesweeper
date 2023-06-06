@@ -4,10 +4,7 @@
 #include <QString>
 
 
-class Tile
-{
-private:
-    const QString stylesheet_covered = R"(
+const QString stylesheet_covered = R"(
 QPushButton {
     border: 1px solid darkgray;
     border-radius: 1px;
@@ -18,7 +15,8 @@ QPushButton:hover {
     background-color: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(221, 221, 221, 0.8), stop: 1 rgba(184, 184, 184, 0.8));
 }
 )";
-    const QString stylesheet_uncovered = R"(
+
+const QString stylesheet_uncovered = R"(
 QPushButton {
 	color: %1;
     font-size: 18px;
@@ -26,6 +24,11 @@ QPushButton {
 	border: 1px solid lightgray;
 };
 )";
+
+
+class Tile
+{
+private:
     bool with_gui;
 
 public:

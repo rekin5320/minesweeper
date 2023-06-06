@@ -10,6 +10,13 @@
 #include <QPushButton>
 #include <QRandomGenerator>
 #include <QTimer>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStandardPaths>
+#include <QFile>
+#include <QJsonArray>
+#include <QDebug>
+#include <QDir>
 #include "minesweeper_ui.hpp"
 
 struct Position
@@ -425,6 +432,7 @@ public:
     int game_time_seconds;
     QTimer timer{};
     Tool tool = UNCOVER;
+    Difficulty difficulty;
 
     Game() : with_gui(false) {}
 
@@ -435,14 +443,17 @@ public:
         case BEGINNER:
             board = Board(9, 9);
             num_bombs = 10;
+            Game::difficulty = BEGINNER;
             break;
         case INTERMEDIATE:
             board = Board(16, 16);
             num_bombs = 40;
+            Game::difficulty = INTERMEDIATE;
             break;
         case EXPERT:
             board = Board(30, 16);
             num_bombs = 99;
+            Game::difficulty = EXPERT;
             break;
         case CUSTOM:
             if (width == 0 || height == 0 || bombs == 0)
@@ -451,6 +462,7 @@ public:
             }
             board = Board(width, height);
             num_bombs = bombs;
+            Game::difficulty = CUSTOM;
             break;
         default:
             throw std::invalid_argument("Invalid difficulty");
@@ -667,6 +679,7 @@ public:
                 return false;
             }
         }
+        save_game_result();
         return true;
     }
 
@@ -676,5 +689,67 @@ public:
         oss << std::setfill('0') << std::setw(2) << game_time_seconds / 60 << ":";
         oss << std::setfill('0') << std::setw(2) << game_time_seconds % 60;
         return oss.str();
+    }
+
+    QString difficultyToString(Difficulty difficulty) const
+    {
+        switch (difficulty)
+        {
+        case BEGINNER:
+            return "Beginner";
+        case INTERMEDIATE:
+            return "Intermediate";
+        case EXPERT:
+            return "Expert";
+        case CUSTOM:
+            return "Custom";
+        default:
+            return "Unknown";
+        }
+    }
+
+    void save_game_result() const
+    {
+        QDir dir;
+        if (!dir.exists(QStandardPaths::writableLocation(QStandardPaths::DataLocation)))
+            dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+
+        QString filePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/game_results.json";
+
+        QFile file(filePath);
+        if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
+        {
+            qDebug() << "Failed to open file for writing:" << file.errorString();
+            return;
+        }
+
+        QByteArray fileData = file.readAll();
+        QJsonDocument jsonDocument = QJsonDocument::fromJson(fileData);
+
+        QJsonObject gameResult;
+
+        gameResult["level"] = difficultyToString(difficulty);
+
+        if (difficulty == CUSTOM)
+        {
+            gameResult["width"] = static_cast<int>(board.WIDTH);
+            gameResult["height"] = static_cast<int>(board.HEIGHT);
+            gameResult["bombs"] = static_cast<int>(num_bombs);
+        }
+
+        gameResult["time"] = static_cast<int>(game_time_seconds);
+
+        QJsonArray gameResultsArray;
+        if (jsonDocument.isArray())
+        {
+            gameResultsArray = jsonDocument.array();
+        }
+        gameResultsArray.append(gameResult);
+
+        QJsonDocument newJsonDocument(gameResultsArray);
+
+        file.resize(0);
+        file.write(newJsonDocument.toJson());
+        file.close();
     }
 };

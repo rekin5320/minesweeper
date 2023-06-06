@@ -1,4 +1,5 @@
 #include "tile.hpp"
+#include "emoji.h"
 
 const QString stylesheet_covered = R"(
 QPushButton {
@@ -52,7 +53,7 @@ void Tile::uncover()
             }
             else
             {
-                button->setText("💣");
+                button->setText(QString::fromStdString(Emoji::Bomb));
             }
         }
     }
@@ -77,7 +78,7 @@ void Tile::flag()
         is_flagged = true;
         if (with_gui)
         {
-            button->setText("🚩");
+            button->setText(QString::fromStdString(Emoji::Flag));
         }
     }
 }

@@ -1,7 +1,6 @@
 #include "catch.hpp"
 #include "../tile.hpp"
 
-
 TEST_CASE("Tile")
 {
     Tile tile(1, 3);

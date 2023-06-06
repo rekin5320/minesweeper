@@ -1,7 +1,6 @@
 #include "catch.hpp"
 #include "../game.hpp"
 
-
 TEST_CASE("Game")
 {
     SECTION("BEGINNER")
@@ -65,9 +64,12 @@ TEST_CASE("Game")
         REQUIRE(game.get_first_click());
 
         unsigned int count = 0;
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_bomb)
+                {
                     count++;
                 }
             }
@@ -84,9 +86,12 @@ TEST_CASE("Game")
         REQUIRE(game.left_bombs() == 40);
 
         int count = 0;
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_bomb)
+                {
                     game.get_board().get_tile(x, y).flag();
                     REQUIRE(game.left_bombs() == 40 - ++count);
                 }
@@ -95,9 +100,12 @@ TEST_CASE("Game")
 
         REQUIRE(game.left_bombs() == 0);
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_flagged) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_flagged)
+                {
                     game.get_board().get_tile(x, y).unflag();
                     REQUIRE(game.left_bombs() == 40 - --count);
                 }
@@ -111,9 +119,12 @@ TEST_CASE("Game")
         game.set_difficulty(Difficulty::INTERMEDIATE);
         game.start();
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_bomb)
+                {
                     REQUIRE(game.get_board().get_tile(x, y).is_covered);
                 }
             }
@@ -121,9 +132,12 @@ TEST_CASE("Game")
 
         REQUIRE_FALSE(game.is_game_over());
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_bomb)
+                {
                     game.get_board().get_tile(x, y).uncover();
                     break;
                 }
@@ -131,9 +145,12 @@ TEST_CASE("Game")
         }
         REQUIRE(game.is_game_over());
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (game.get_board().get_tile(x, y).is_bomb)
+                {
                     REQUIRE_FALSE(game.get_board().get_tile(x, y).is_covered);
                 }
             }
@@ -148,9 +165,12 @@ TEST_CASE("Game")
 
         REQUIRE_FALSE(game.is_game_won());
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
-                if (!game.get_board().get_tile(x, y).is_bomb) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
+                if (!game.get_board().get_tile(x, y).is_bomb)
+                {
                     game.get_board().get_tile(x, y).uncover();
                 }
             }
@@ -166,8 +186,10 @@ TEST_CASE("Game")
 
         game.get_board().get_tile(0, 0).flag();
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
                 game.uncover_tile(x, y);
             }
         }
@@ -180,8 +202,10 @@ TEST_CASE("Game")
         game.play_again();
         REQUIRE(game.get_has_started());
 
-        for (unsigned int x = 0; x < game.get_board().height; x++) {
-            for (unsigned int y = 0; y < game.get_board().width; y++) {
+        for (unsigned int x = 0; x < game.get_board().height; x++)
+        {
+            for (unsigned int y = 0; y < game.get_board().width; y++)
+            {
                 REQUIRE(game.get_board().get_tile(x, y).is_covered);
                 REQUIRE(!game.get_board().get_tile(x, y).is_flagged);
             }

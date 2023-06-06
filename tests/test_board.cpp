@@ -2,7 +2,6 @@
 #include "catch.hpp"
 #include "../board.hpp"
 
-
 TEST_CASE("Board")
 {
     SECTION("3×2 (invalid)")
@@ -19,9 +18,11 @@ TEST_CASE("Board")
 
         SECTION("tiles initial state")
         {
-            for (unsigned int x = 0; x < 3; x++) {
-                for (unsigned int y = 0; y < 2; y++) {
-                    Tile& tile = board.get_tile(x, y);
+            for (unsigned int x = 0; x < 3; x++)
+            {
+                for (unsigned int y = 0; y < 2; y++)
+                {
+                    Tile &tile = board.get_tile(x, y);
                     REQUIRE(tile.x == x);
                     REQUIRE(tile.y == y);
                     REQUIRE(!tile.is_bomb);
@@ -109,9 +110,12 @@ TEST_CASE("Board")
             {
                 board.generate_bombs(7);
                 unsigned int count = 0;
-                for (unsigned int x = 0; x < 5; x++) {
-                    for (unsigned int y = 0; y < 4; y++) {
-                        if (board.get_tile(x, y).is_bomb) {
+                for (unsigned int x = 0; x < 5; x++)
+                {
+                    for (unsigned int y = 0; y < 4; y++)
+                    {
+                        if (board.get_tile(x, y).is_bomb)
+                        {
                             count++;
                         }
                     }
@@ -131,9 +135,12 @@ TEST_CASE("Board")
             board.generate_bombs(2);
             board.clear_bombs();
             unsigned int count = 0;
-            for (unsigned int x = 0; x < 5; x++) {
-                for (unsigned int y = 0; y < 4; y++) {
-                    if (board.get_tile(x, y).is_bomb) {
+            for (unsigned int x = 0; x < 5; x++)
+            {
+                for (unsigned int y = 0; y < 4; y++)
+                {
+                    if (board.get_tile(x, y).is_bomb)
+                    {
                         count++;
                     }
                 }

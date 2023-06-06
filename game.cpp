@@ -154,7 +154,8 @@ void Game::setupUi(QMainWindow &MainWindow)
         set_difficulty(EXPERT);
         start();
         create_tiles(); });
-    QObject::connect(ui.customButton, &QPushButton::released, [this](){custom_difficulty_dialog();});
+    QObject::connect(ui.customButton, &QPushButton::released, [this]()
+                     { custom_difficulty_dialog(); });
     QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
                      { play_again(); });
     QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()
@@ -204,7 +205,7 @@ void Game::update_timer()
     }
 }
 
-void Game::custom_difficulty_dialog(const QString& error_message)
+void Game::custom_difficulty_dialog(const QString &error_message)
 {
     QDialog dialog;
     QFormLayout formLayout(&dialog);
@@ -225,7 +226,7 @@ void Game::custom_difficulty_dialog(const QString& error_message)
     formLayout.addWidget(&startButton);
 
     QObject::connect(&startButton, &QPushButton::released, [&]()
-    {
+                     {
         dialog.close();
 
         unsigned int width = widthLineEdit.text().toUInt();
@@ -241,14 +242,12 @@ void Game::custom_difficulty_dialog(const QString& error_message)
         catch (std::invalid_argument& e)
         {
             custom_difficulty_dialog(e.what()); // ask user again if entered parameters were invalid
-        }
-    });
+        } });
 
     dialog.setLayout(&formLayout);
     dialog.setWindowTitle("Custom parameters");
     dialog.exec();
 }
-
 
 void Game::uncover_tile(unsigned int x, unsigned int y)
 {

@@ -94,7 +94,7 @@ public:
 
     void update_timer();
 
-    void custom_difficulty_dialog(const QString& error_message = "");
+    void custom_difficulty_dialog(const QString &error_message = "");
 
     void uncover_tile(unsigned int x, unsigned int y);
 

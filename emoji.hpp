@@ -1,6 +1,4 @@
-#ifndef EMOJI_H
-#define EMOJI_H
-
+#pragma once
 #include <string>
 
 namespace Emoji
@@ -12,5 +10,3 @@ namespace Emoji
     extern const std::string Pickaxe;
     extern const std::string Bomb;
 }
-
-#endif // EMOJI_H

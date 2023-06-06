@@ -27,8 +27,16 @@ set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-pedantic" "-fsanitize=undefine
 add_compile_options(${COMPILE_OPTIONS})
 add_link_options(${COMPILE_OPTIONS})
 
-add_executable(${PROJECT_NAME} ${QT_RESOURCES} main.cpp position.cpp position.hpp tile.cpp tile.hpp board.cpp board.hpp game.cpp game.hpp)
-target_link_libraries(${PROJECT_NAME} ${QT_LIBS})
+add_library(minesweeper_lib SHARED
+    position.hpp position.cpp
+    tile.hpp tile.cpp
+    board.hpp board.cpp
+    game.hpp game.cpp
+)
+target_link_libraries(minesweeper_lib ${QT_LIBS})
 
-add_executable(test tests/test_root.cpp position.hpp position.cpp tile.cpp tile.hpp tests/test_tile.cpp board.cpp board.hpp tests/test_board.cpp game.cpp game.hpp tests/test_game.cpp)
-target_link_libraries(test ${QT_LIBS})
+add_executable(${PROJECT_NAME} ${QT_RESOURCES} main.cpp)
+target_link_libraries(${PROJECT_NAME} ${QT_LIBS} minesweeper_lib)
+
+add_executable(test tests/test_root.cpp tests/test_tile.cpp tests/test_board.cpp tests/test_game.cpp)
+target_link_libraries(test ${QT_LIBS} minesweeper_lib)

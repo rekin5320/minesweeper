@@ -32,6 +32,7 @@ add_library(minesweeper_lib SHARED
     tile.hpp tile.cpp
     board.hpp board.cpp
     game.hpp game.cpp
+    emoji.h emoji.cpp
 )
 target_link_libraries(minesweeper_lib ${QT_LIBS})
 

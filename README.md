@@ -1,5 +1,6 @@
-# Minesweeper
-Work in progress...
+<a id="top"></a>
+![Minesweeper logo](resources/images/MINESWEEPER.png)
+
 
 [![Github Releases](https://img.shields.io/badge/release-v1.0-brightgreen)](https://gitlab-stud.elka.pw.edu.pl/mmachnik/minesweeper)
 

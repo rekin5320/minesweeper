@@ -294,4 +294,14 @@ TEST_CASE("Board")
             REQUIRE(oss.str() == expectedOutput);
         }
     }
+
+    SECTION("41×20 (invalid)")
+    {
+        REQUIRE_THROWS_AS((Board{41, 20}), std::invalid_argument);
+    }
+
+    SECTION("40×21 (invalid)")
+    {
+        REQUIRE_THROWS_AS((Board{40, 21}), std::invalid_argument);
+    }
 }

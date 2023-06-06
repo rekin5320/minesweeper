@@ -297,7 +297,7 @@ QString Game::difficultyToString(Difficulty difficulty_input) {
 }
 
 void Game::save_game_result() const {
-    QString dataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+    QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (!QDir().mkpath(dataDir))
     {
         std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";

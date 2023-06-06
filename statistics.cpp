@@ -7,17 +7,20 @@
 #include <QStandardPaths>
 #include "statistics.hpp"
 
-const QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-const QString filePath = dataDir + "/game_results.json";
-
-void ensure_data_dir_exists()
+QString get_data_dir()
 {
+    QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (!QDir().mkpath(dataDir))
     {
         std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";
         exit(1);
     }
+    return dataDir;
+}
+
+QString get_file_path()
+{
+    return get_data_dir() + "/game_results.json";
 }
 
 void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, unsigned int width, unsigned int height, unsigned int num_bombs)
@@ -39,8 +42,7 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
      * }
      */
 
-    ensure_data_dir_exists();
-
+    QString filePath = get_file_path();
     QFile file(filePath);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
     {

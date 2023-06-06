@@ -106,22 +106,15 @@ void Board::clear_bombs() {
 void Board::count_adjacent_bombs() {
     for (auto &tile : Tiles)
     {
-        if (!tile.is_bomb)
+        unsigned int count = 0;
+        for (auto &position : tile_neighbours(tile))
         {
-            unsigned int count = 0;
-            for (auto &position : tile_neighbours(tile))
+            if (get_tile(position).is_bomb)
             {
-                if (get_tile(position).is_bomb)
-                {
-                    count++;
-                }
+                count++;
             }
-            tile.num_adjacent_bombs = count;
         }
-        else
-        {
-            tile.num_adjacent_bombs = 0;
-        }
+        tile.num_adjacent_bombs = count;
     }
 }
 

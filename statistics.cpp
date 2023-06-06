@@ -16,7 +16,6 @@ void ensure_data_dir_exists()
     if (!QDir().mkpath(dataDir))
     {
         std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";
-        return;
     }
 }
 

@@ -4,12 +4,12 @@ Board::Board(unsigned int width, unsigned int height) : width(width), height(hei
 {
     if (width < 4 || height < 4)
     {
-        throw std::invalid_argument("Board dimensions must be at least 4x4.");
+        throw std::invalid_argument("Board dimensions must be at least 4×4.");
     }
 
     if (width > 40 || height > 20)
     {
-        throw std::invalid_argument("Board dimensions must be at most 40x20.");
+        throw std::invalid_argument("Board dimensions can be at most 40×20.");
     }
 
     Tiles.reserve(width * height);

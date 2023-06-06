@@ -4,27 +4,9 @@
 #include <QString>
 
 
-const QString stylesheet_covered = R"(
-QPushButton {
-    border: 1px solid darkgray;
-    border-radius: 1px;
-    background: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(255, 255, 255, 0.8), stop: 1 rgba(197, 197, 197, 0.8));
-}
+extern const QString stylesheet_covered;
 
-QPushButton:hover {
-    background-color: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(221, 221, 221, 0.8), stop: 1 rgba(184, 184, 184, 0.8));
-}
-)";
-
-const QString stylesheet_uncovered = R"(
-QPushButton {
-	color: %1;
-    font-size: 18px;
-	font-weight: bold;
-	border: 1px solid lightgray;
-    background-color: rgba(150, 150, 150, 0.65);
-};
-)";
+extern const QString stylesheet_uncovered;
 
 const std::map<unsigned int, QString> tile_colors {
     {1, "blue"},

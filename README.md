@@ -1,6 +1,6 @@
-<a id="top"></a>
-![Minesweeper logo](resources/images/MINESWEEPER.png)
-
+<div align="center">
+  <img src="resources/images/MINESWEEPER.png" alt="Minesweeper logo">
+</div>
 
 [![Github Releases](https://img.shields.io/badge/release-v1.0-brightgreen)](https://gitlab-stud.elka.pw.edu.pl/mmachnik/minesweeper)
 

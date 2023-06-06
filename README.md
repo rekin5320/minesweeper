@@ -52,7 +52,7 @@ Enjoy playing Minesweeper and have fun!
 mkdir build
 cd build
 cmake ..
-make minesweeper
+cmake --build . -j$(nproc) --target minesweeper
 ```
 
 ## Running tests
@@ -60,7 +60,7 @@ make minesweeper
 mkdir build
 cd build
 cmake ..
-make test
+cmake --build . -j$(nproc) --target test
 ./test
 ```
 

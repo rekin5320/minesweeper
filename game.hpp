@@ -29,7 +29,7 @@ enum Tool
 
 class Game
 {
-public:
+private:
     Board board;
     unsigned int num_bombs;
     bool with_gui;
@@ -41,11 +41,45 @@ public:
     QTimer timer{};
     Tool tool = UNCOVER;
     Difficulty difficulty;
+public:
 
+    // Default constructor
     Game() : with_gui(false) {}
 
-    void set_level(Difficulty difficulty_to_set, unsigned int width = 0, unsigned int height = 0, unsigned int bombs = 0);
+    // Getters
+    Board &get_board();
 
+    unsigned int get_num_bombs() const;
+
+    bool get_with_gui() const;
+
+    bool get_has_ended() const;
+
+    bool get_has_started() const;
+
+    bool get_first_click() const;
+
+    Ui::MainWindow &get_ui();
+
+    int get_game_time_seconds() const;
+
+    Tool get_tool() const;
+
+    Difficulty get_difficulty() const;
+
+    // Setters
+    void set_level(
+            Difficulty difficulty_to_set,
+            unsigned int width = 0,
+            unsigned int height = 0,
+            unsigned int bombs = 0
+        );
+
+    void set_tool_uncover();
+
+    void set_tool_flag();
+
+    // Methods
     void start();
 
     void play_again();
@@ -53,10 +87,6 @@ public:
     void setupUi(QMainWindow &MainWindow);
 
     void create_tiles();
-
-    void set_tool_uncover();
-
-    void set_tool_flag();
 
     void update_bombs_left();
 

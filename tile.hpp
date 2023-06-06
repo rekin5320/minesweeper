@@ -25,6 +25,17 @@ QPushButton {
 };
 )";
 
+const std::map<unsigned int, QString> tile_colors {
+    {1, "blue"},
+    {2, "red"},
+    {3, "red"},
+    {4, "midnightblue"},
+    {5, "maroon"},
+    {6, "darkcyan"},
+    {7, "black"},
+    {8, "grey"}
+};
+
 
 class Tile
 {

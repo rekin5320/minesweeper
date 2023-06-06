@@ -16,7 +16,6 @@
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -49,7 +48,6 @@ public:
     QPushButton *intermediateButton;
     QPushButton *expertButton;
     QPushButton *customButton;
-    QMenuBar *menubar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -273,10 +271,6 @@ public:
         verticalLayout_2->addLayout(buttonLayout);
 
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 650, 21));
-        MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);
 

@@ -27,7 +27,7 @@ QPushButton {
 
 const std::map<unsigned int, QString> tile_colors {
     {1, "blue"},
-    {2, "red"},
+    {2, "green"},
     {3, "red"},
     {4, "midnightblue"},
     {5, "maroon"},

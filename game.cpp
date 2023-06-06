@@ -2,79 +2,91 @@
 #include "game.hpp"
 
 // Getters
-Board &Game::get_board() {
+Board &Game::get_board()
+{
     return board;
 }
 
-unsigned int Game::get_num_bombs() const {
+unsigned int Game::get_num_bombs() const
+{
     return num_bombs;
 }
 
-bool Game::get_with_gui() const {
+bool Game::get_with_gui() const
+{
     return with_gui;
 }
 
-bool Game::get_has_ended() const {
+bool Game::get_has_ended() const
+{
     return has_ended;
 }
 
-bool Game::get_has_started() const {
+bool Game::get_has_started() const
+{
     return has_started;
 }
 
-bool Game::get_first_click() const {
+bool Game::get_first_click() const
+{
     return first_click;
 }
 
-Ui::MainWindow &Game::get_ui() {
+Ui::MainWindow &Game::get_ui()
+{
     return ui;
 }
 
-int Game::get_game_time_seconds() const {
+int Game::get_game_time_seconds() const
+{
     return game_time_seconds;
 }
 
-Tool Game::get_tool() const {
+Tool Game::get_tool() const
+{
     return tool;
 }
 
-Difficulty Game::get_difficulty() const {
+Difficulty Game::get_difficulty() const
+{
     return difficulty;
 }
 
-void Game::set_difficulty(Difficulty difficulty_to_set, unsigned int width, unsigned int height, unsigned int bombs) {
+void Game::set_difficulty(Difficulty difficulty_to_set, unsigned int width, unsigned int height, unsigned int bombs)
+{
     switch (difficulty_to_set)
     {
-        case BEGINNER:
-            board = Board(9, 9);
-            num_bombs = 10;
-            difficulty = BEGINNER;
-            break;
-        case INTERMEDIATE:
-            board = Board(16, 16);
-            num_bombs = 40;
-            difficulty = INTERMEDIATE;
-            break;
-        case EXPERT:
-            board = Board(30, 16);
-            num_bombs = 99;
-            difficulty = EXPERT;
-            break;
-        case CUSTOM:
-            if (width == 0 || height == 0 || bombs == 0)
-            {
-                throw std::invalid_argument("Missing parameters for custom difficulty");
-            }
-            board = Board(width, height);
-            num_bombs = bombs;
-            difficulty = CUSTOM;
-            break;
-        default:
-            throw std::invalid_argument("Invalid difficulty");
+    case BEGINNER:
+        board = Board(9, 9);
+        num_bombs = 10;
+        difficulty = BEGINNER;
+        break;
+    case INTERMEDIATE:
+        board = Board(16, 16);
+        num_bombs = 40;
+        difficulty = INTERMEDIATE;
+        break;
+    case EXPERT:
+        board = Board(30, 16);
+        num_bombs = 99;
+        difficulty = EXPERT;
+        break;
+    case CUSTOM:
+        if (width == 0 || height == 0 || bombs == 0)
+        {
+            throw std::invalid_argument("Missing parameters for custom difficulty");
+        }
+        board = Board(width, height);
+        num_bombs = bombs;
+        difficulty = CUSTOM;
+        break;
+    default:
+        throw std::invalid_argument("Invalid difficulty");
     }
 }
 
-void Game::set_tool_uncover() {
+void Game::set_tool_uncover()
+{
     tool = UNCOVER;
     if (with_gui)
     {
@@ -83,7 +95,8 @@ void Game::set_tool_uncover() {
     }
 }
 
-void Game::set_tool_flag() {
+void Game::set_tool_flag()
+{
     tool = FLAG;
     if (with_gui)
     {
@@ -92,7 +105,8 @@ void Game::set_tool_flag() {
     }
 }
 
-void Game::start() {
+void Game::start()
+{
     has_ended = false;
     has_started = true;
     first_click = true;
@@ -106,7 +120,8 @@ void Game::start() {
     }
 }
 
-void Game::play_again() {
+void Game::play_again()
+{
     if (has_started)
     {
         board.clear_bombs();
@@ -120,46 +135,71 @@ void Game::play_again() {
     }
 }
 
-void Game::setupUi(QMainWindow& MainWindow) {
+void Game::setupUi(QMainWindow &MainWindow)
+{
     ui.setupUi(&MainWindow);
     QObject::connect(ui.beginnerButton, &QPushButton::released, [this]()
-    {
+                     {
         set_difficulty(BEGINNER);
         start();
         create_tiles(); });
     QObject::connect(ui.intermediateButton, &QPushButton::released, [this]()
-    {
+                     {
         set_difficulty(INTERMEDIATE);
         start();
         create_tiles(); });
     QObject::connect(ui.expertButton, &QPushButton::released, [this]()
-    {
+                     {
         set_difficulty(EXPERT);
         start();
         create_tiles(); });
     QObject::connect(ui.customButton, &QPushButton::released, [this]()
-    {
-        unsigned int width;
-        unsigned int height;
-        unsigned int bombs;
-        std::cout << "Enter width: ";
-        std::cin >> width;
-        std::cout << "Enter height: ";
-        std::cin >> height;
-        std::cout << "Enter bombs: ";
-        std::cin >> bombs;
-        set_difficulty(CUSTOM, width, height, bombs);
-        start();
-        create_tiles(); });
-    QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again(); });
-    QObject::connect(ui.uncoverButton, &QPushButton::released, [this](){set_tool_uncover(); });
-    QObject::connect(ui.flagButton, &QPushButton::released, [this](){set_tool_flag(); });
-    QObject::connect(&timer, &QTimer::timeout, [this](){update_timer(); });
+                     {
+                         // Create dialog window
+                         QDialog dialog;
+                         QFormLayout formLayout(&dialog);
+                         QLineEdit widthLineEdit;
+                         QLineEdit heightLineEdit;
+                         QLineEdit bombsLineEdit;
+                         QPushButton startButton("Start");
+
+                         formLayout.addRow("Width:", &widthLineEdit);
+                         formLayout.addRow("Height:", &heightLineEdit);
+                         formLayout.addRow("Bombs:", &bombsLineEdit);
+                         formLayout.addWidget(&startButton);
+
+                         // Connect start button to lambda function
+                         QObject::connect(&startButton, &QPushButton::clicked, [&]()
+                                          {
+                                              unsigned int width = widthLineEdit.text().toUInt();
+                                              unsigned int height = heightLineEdit.text().toUInt();
+                                              unsigned int bombs = bombsLineEdit.text().toUInt();
+
+                                              set_difficulty(CUSTOM, width, height, bombs);
+                                              start();
+                                              create_tiles();
+
+                                              dialog.close(); // Close dialog window
+                                          });
+
+                         dialog.setLayout(&formLayout);
+                         dialog.setWindowTitle("Ustawienia");
+                         dialog.exec(); // Show dialog window
+                     });
+    QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
+                     { play_again(); });
+    QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()
+                     { set_tool_uncover(); });
+    QObject::connect(ui.flagButton, &QPushButton::released, [this]()
+                     { set_tool_flag(); });
+    QObject::connect(&timer, &QTimer::timeout, [this]()
+                     { update_timer(); });
     with_gui = true;
     set_tool_uncover();
 }
 
-void Game::create_tiles() {
+void Game::create_tiles()
+{
     for (auto &tile : board.Tiles)
     {
         unsigned int x = tile.x, y = tile.y;
@@ -167,7 +207,7 @@ void Game::create_tiles() {
         ui.gridLayout->addWidget(tile.button.get(), static_cast<int>(y), static_cast<int>(x));
         tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
-        {
+                         {
             if (tool == UNCOVER)
             {
                 uncover_tile(x, y);
@@ -182,18 +222,21 @@ void Game::create_tiles() {
     }
 }
 
-void Game::update_bombs_left() {
+void Game::update_bombs_left()
+{
     ui.lcdNumber_left->display(static_cast<int>(left_bombs()));
 }
 
-void Game::update_timer() {
+void Game::update_timer()
+{
     if (!first_click && !has_ended)
     {
         ui.lcdNumber_right->display(++game_time_seconds);
     }
 }
 
-void Game::uncover_tile(unsigned int x, unsigned int y) {
+void Game::uncover_tile(unsigned int x, unsigned int y)
+{
     if (first_click)
     {
         while ((board.get_tile(x, y).is_bomb || board.get_tile(x, y).num_adjacent_bombs > 0))
@@ -202,7 +245,8 @@ void Game::uncover_tile(unsigned int x, unsigned int y) {
             board.generate_bombs(num_bombs);
             board.count_adjacent_bombs();
         }
-        if (with_gui) {
+        if (with_gui)
+        {
             timer.start(1000); // update every 1000 milliseconds (1 second)}
         }
         first_click = false;
@@ -232,12 +276,14 @@ void Game::uncover_tile(unsigned int x, unsigned int y) {
     }
 }
 
-void Game::flag_or_unflag_tile(unsigned int x, unsigned int y) {
+void Game::flag_or_unflag_tile(unsigned int x, unsigned int y)
+{
     board.flag_or_unflag_tile(x, y);
     update_bombs_left();
 }
 
-int Game::left_bombs() {
+int Game::left_bombs()
+{
     int count = static_cast<int>(num_bombs);
     for (auto &tile : board.Tiles)
     {
@@ -249,7 +295,8 @@ int Game::left_bombs() {
     return count;
 }
 
-bool Game::is_game_over() {
+bool Game::is_game_over()
+{
     for (auto &tile : board.Tiles)
     {
         if (tile.is_bomb && !tile.is_covered)
@@ -261,7 +308,8 @@ bool Game::is_game_over() {
     return false;
 }
 
-bool Game::is_game_won() {
+bool Game::is_game_won()
+{
     for (auto &tile : board.Tiles)
     {
         if (!tile.is_bomb && tile.is_covered)
@@ -273,30 +321,33 @@ bool Game::is_game_won() {
     return true;
 }
 
-std::string Game::get_formatted_elapsed_time() const {
+std::string Game::get_formatted_elapsed_time() const
+{
     std::ostringstream oss;
     oss << std::setfill('0') << std::setw(2) << game_time_seconds / 60 << ":";
     oss << std::setfill('0') << std::setw(2) << game_time_seconds % 60;
     return oss.str();
 }
 
-QString Game::difficultyToString(Difficulty difficulty_input) {
+QString Game::difficultyToString(Difficulty difficulty_input)
+{
     switch (difficulty_input)
     {
-        case BEGINNER:
-            return "Beginner";
-        case INTERMEDIATE:
-            return "Intermediate";
-        case EXPERT:
-            return "Expert";
-        case CUSTOM:
-            return "Custom";
-        default:
-            return "Unknown";
+    case BEGINNER:
+        return "Beginner";
+    case INTERMEDIATE:
+        return "Intermediate";
+    case EXPERT:
+        return "Expert";
+    case CUSTOM:
+        return "Custom";
+    default:
+        return "Unknown";
     }
 }
 
-void Game::save_game_result() const {
+void Game::save_game_result() const
+{
     QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     if (!QDir().mkpath(dataDir))
     {
@@ -318,7 +369,7 @@ void Game::save_game_result() const {
 
     QJsonObject gameResult;
 
-    gameResult["difficulty"] = difficulty;  // save enum value
+    gameResult["difficulty"] = difficulty; // save enum value
 
     if (difficulty == CUSTOM)
     {

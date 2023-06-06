@@ -202,7 +202,9 @@ void Game::uncover_tile(unsigned int x, unsigned int y) {
             board.generate_bombs(num_bombs);
             board.count_adjacent_bombs();
         }
-        timer.start(1000); // update every 1000 milliseconds (1 second)
+        if (with_gui) {
+            timer.start(1000); // update every 1000 milliseconds (1 second)}
+        }
         first_click = false;
     }
 

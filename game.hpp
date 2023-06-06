@@ -94,6 +94,8 @@ public:
 
     void update_timer();
 
+    void custom_difficulty_dialog();
+
     void uncover_tile(unsigned int x, unsigned int y);
 
     void flag_or_unflag_tile(unsigned int x, unsigned int y);

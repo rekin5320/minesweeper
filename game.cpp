@@ -154,39 +154,7 @@ void Game::setupUi(QMainWindow &MainWindow)
         set_difficulty(EXPERT);
         start();
         create_tiles(); });
-    QObject::connect(ui.customButton, &QPushButton::released, [this]()
-                     {
-                         // Create dialog window
-                         QDialog dialog;
-                         QFormLayout formLayout(&dialog);
-                         QLineEdit widthLineEdit;
-                         QLineEdit heightLineEdit;
-                         QLineEdit bombsLineEdit;
-                         QPushButton startButton("Start");
-
-                         formLayout.addRow("Width:", &widthLineEdit);
-                         formLayout.addRow("Height:", &heightLineEdit);
-                         formLayout.addRow("Bombs:", &bombsLineEdit);
-                         formLayout.addWidget(&startButton);
-
-                         // Connect start button to lambda function
-                         QObject::connect(&startButton, &QPushButton::clicked, [&]()
-                                          {
-                                              unsigned int width = widthLineEdit.text().toUInt();
-                                              unsigned int height = heightLineEdit.text().toUInt();
-                                              unsigned int bombs = bombsLineEdit.text().toUInt();
-
-                                              set_difficulty(CUSTOM, width, height, bombs);
-                                              start();
-                                              create_tiles();
-
-                                              dialog.close(); // Close dialog window
-                                          });
-
-                         dialog.setLayout(&formLayout);
-                         dialog.setWindowTitle("Custom parameters");
-                         dialog.exec(); // Show dialog window
-                     });
+    QObject::connect(ui.customButton, &QPushButton::released, [this](){custom_difficulty_dialog();});
     QObject::connect(ui.mainbutton, &QPushButton::released, [this]()
                      { play_again(); });
     QObject::connect(ui.uncoverButton, &QPushButton::released, [this]()
@@ -235,6 +203,39 @@ void Game::update_timer()
         ui.lcdNumber_right->display(++game_time_seconds);
     }
 }
+
+void Game::custom_difficulty_dialog()
+{
+    QDialog dialog;
+    QFormLayout formLayout(&dialog);
+    QLineEdit widthLineEdit;
+    QLineEdit heightLineEdit;
+    QLineEdit bombsLineEdit;
+    QPushButton startButton("Start");
+
+    formLayout.addRow("Width:", &widthLineEdit);
+    formLayout.addRow("Height:", &heightLineEdit);
+    formLayout.addRow("Bombs:", &bombsLineEdit);
+    formLayout.addWidget(&startButton);
+
+    QObject::connect(&startButton, &QPushButton::clicked, [&]()
+    {
+        unsigned int width = widthLineEdit.text().toUInt();
+        unsigned int height = heightLineEdit.text().toUInt();
+        unsigned int bombs = bombsLineEdit.text().toUInt();
+
+        set_difficulty(CUSTOM, width, height, bombs);
+        start();
+        create_tiles();
+
+        dialog.close();
+    });
+
+    dialog.setLayout(&formLayout);
+    dialog.setWindowTitle("Custom parameters");
+    dialog.exec();
+}
+
 
 void Game::uncover_tile(unsigned int x, unsigned int y)
 {

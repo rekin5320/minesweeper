@@ -22,6 +22,23 @@ void ensure_data_dir_exists()
 
 void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, unsigned int width, unsigned int height, unsigned int num_bombs)
 {
+    /*
+     * File has following structure:
+     * {
+     *     "history": [
+     *         {…},
+     *         {…},
+     *         {…}
+     *     ],
+     *
+     *     "highscores": {
+     *         "0": …,
+     *         "1": …,
+     *         "2": …
+     *     }
+     * }
+     */
+
     ensure_data_dir_exists();
 
     QFile file(filePath);
@@ -34,29 +51,50 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
     QByteArray fileData = file.readAll();
     QJsonDocument jsonDocument = QJsonDocument::fromJson(fileData);
 
-    QJsonObject gameResult;
-
-    gameResult["difficulty"] = difficulty; // save enum value
-
+    QJsonObject gameResultEntry;
+    gameResultEntry["difficulty"] = difficulty; // save enum value
     if (difficulty == CUSTOM)
     {
-        gameResult["width"] = static_cast<int>(width);
-        gameResult["height"] = static_cast<int>(height);
-        gameResult["bombs"] = static_cast<int>(num_bombs);
+        gameResultEntry["width"] = static_cast<int>(width);
+        gameResultEntry["height"] = static_cast<int>(height);
+        gameResultEntry["bombs"] = static_cast<int>(num_bombs);
+    }
+    gameResultEntry["time"] = static_cast<int>(game_time_seconds);
+
+    QJsonObject jsonGameData;
+    if (jsonDocument.isObject()) {
+        jsonGameData = jsonDocument.object();
     }
 
-    gameResult["time"] = static_cast<int>(game_time_seconds);
+    QJsonArray historyArray;
+    if (jsonGameData.contains("history")) {
+        QJsonValue historyValue = jsonGameData.value("history");
+        if (historyValue.isArray()) {
+            historyArray = historyValue.toArray();
+        }
+    }
+    historyArray.append(gameResultEntry);
 
-    QJsonArray gameResultsArray;
-    if (jsonDocument.isArray())
+    QJsonObject highscoresObject;
+    if (jsonGameData.contains("highscores"))
     {
-        gameResultsArray = jsonDocument.array();
+        QJsonValue highscoresValue = jsonGameData.value("highscores");
+        if (highscoresValue.isObject())
+        {
+            highscoresObject = highscoresValue.toObject();
+        }
     }
-    gameResultsArray.append(gameResult);
 
-    QJsonDocument newJsonDocument(gameResultsArray);
+    highscoresObject[QString::number(static_cast<int>(difficulty))] = static_cast<int>(game_time_seconds);  // TODO choose lower time
+
+    QJsonObject outGameData;
+    outGameData["history"] = historyArray;
+    outGameData["highscores"] = highscoresObject;
+
+    QJsonDocument outJsonDocument;
+    outJsonDocument.setObject(outGameData);
 
     file.resize(0);
-    file.write(newJsonDocument.toJson());
+    file.write(outJsonDocument.toJson());
     file.close();
 }

@@ -7,5 +7,6 @@ namespace Emoji
     const std::string CoolFace = "😎";
     const std::string Flag = "🚩";
     const std::string Pickaxe = "⛏️";
+    const std::string Bomb = "💣";
 
 }

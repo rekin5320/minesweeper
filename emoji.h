@@ -10,6 +10,7 @@ namespace Emoji
     extern const std::string CoolFace;
     extern const std::string Flag;
     extern const std::string Pickaxe;
+    extern const std::string Bomb;
 }
 
 #endif // EMOJI_H

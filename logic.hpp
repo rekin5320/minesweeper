@@ -177,21 +177,21 @@ private:
     QRandomGenerator random{};
 
 public:
-    unsigned int WIDTH, HEIGHT;
+    unsigned int width, height;
     std::vector<Tile> Tiles;
-    Board() : WIDTH(0), HEIGHT(0){};
+    Board() : width(0), height(0){};
 
-    Board(unsigned int width, unsigned int height) : WIDTH(width), HEIGHT(height)
+    Board(unsigned int width, unsigned int height) : width(width), height(height)
     {
         if (width < 4 || height < 4)
         {
             throw std::invalid_argument("Board dimensions must be at least 4x4.");
         }
 
-        Tiles.reserve(WIDTH * HEIGHT);
-        for (unsigned int i = 0; i < WIDTH * HEIGHT; i++)
+        Tiles.reserve(width * height);
+        for (unsigned int i = 0; i < width * height; i++)
         {
-            Tiles.emplace_back(i % WIDTH, i / WIDTH);
+            Tiles.emplace_back(i % width, i / width);
         }
         set_seed(std::random_device()());
     }
@@ -203,11 +203,11 @@ public:
 
     Tile &get_tile(unsigned int x, unsigned int y)
     {
-        if (x >= WIDTH || y >= HEIGHT)
+        if (x >= width || y >= height)
         {
             throw std::invalid_argument("Invalid coordinates");
         }
-        return Tiles[y * WIDTH + x];
+        return Tiles[y * width + x];
     }
 
     Tile &get_tile(Position position)
@@ -217,8 +217,8 @@ public:
 
     Tile &random_tile()
     {
-        unsigned int rand_x = random.bounded(WIDTH);
-        unsigned int rand_y = random.bounded(HEIGHT);
+        unsigned int rand_x = random.bounded(width);
+        unsigned int rand_y = random.bounded(height);
         return get_tile(rand_x, rand_y);
     }
 
@@ -233,7 +233,7 @@ public:
         {
             neighbours.push_back({x, y - 1});
         }
-        if (y > 0 && x < WIDTH - 1)
+        if (y > 0 && x < width - 1)
         {
             neighbours.push_back({x + 1, y - 1});
         }
@@ -241,19 +241,19 @@ public:
         {
             neighbours.push_back({x - 1, y});
         }
-        if (x < WIDTH - 1)
+        if (x < width - 1)
         {
             neighbours.push_back({x + 1, y});
         }
-        if (x > 0 && y < HEIGHT - 1)
+        if (x > 0 && y < height - 1)
         {
             neighbours.push_back({x - 1, y + 1});
         }
-        if (y < HEIGHT - 1)
+        if (y < height - 1)
         {
             neighbours.push_back({x, y + 1});
         }
-        if (x < WIDTH - 1 && y < HEIGHT - 1)
+        if (x < width - 1 && y < height - 1)
         {
             neighbours.push_back({x + 1, y + 1});
         }
@@ -268,7 +268,7 @@ public:
     void generate_bombs(unsigned int num_bombs)
     {
         // to make sure that there is a least one empty tile
-        if (num_bombs > WIDTH * HEIGHT / 2)
+        if (num_bombs > width * height / 2)
         {
             throw std::invalid_argument("Too many bombs");
         }
@@ -397,7 +397,7 @@ public:
             {
                 std::cout << tile.num_adjacent_bombs << " ";
             }
-            if (tile.x == WIDTH - 1)
+            if (tile.x == width - 1)
             {
                 std::cout << "\n";
             }
@@ -732,8 +732,8 @@ public:
 
         if (difficulty == CUSTOM)
         {
-            gameResult["width"] = static_cast<int>(board.WIDTH);
-            gameResult["height"] = static_cast<int>(board.HEIGHT);
+            gameResult["width"] = static_cast<int>(board.width);
+            gameResult["height"] = static_cast<int>(board.height);
             gameResult["bombs"] = static_cast<int>(num_bombs);
         }
 

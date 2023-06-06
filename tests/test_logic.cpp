@@ -40,8 +40,8 @@ TEST_CASE("Board")
     {
         Board board{5, 4};
 
-        REQUIRE(board.WIDTH == 5);
-        REQUIRE(board.HEIGHT == 4);
+        REQUIRE(board.width == 5);
+        REQUIRE(board.height == 4);
 
         SECTION("tiles initial state")
         {
@@ -310,8 +310,8 @@ TEST_CASE("Game")
         Game game;
         game.set_level(Difficulty::BEGINNER);
 
-        REQUIRE(game.board.WIDTH == 9);
-        REQUIRE(game.board.HEIGHT == 9);
+        REQUIRE(game.board.width == 9);
+        REQUIRE(game.board.height == 9);
         REQUIRE(game.num_bombs == 10);
     }
 
@@ -320,8 +320,8 @@ TEST_CASE("Game")
         Game game;
         game.set_level(Difficulty::INTERMEDIATE);
 
-        REQUIRE(game.board.WIDTH == 16);
-        REQUIRE(game.board.HEIGHT == 16);
+        REQUIRE(game.board.width == 16);
+        REQUIRE(game.board.height == 16);
         REQUIRE(game.num_bombs == 40);
     }
 
@@ -330,8 +330,8 @@ TEST_CASE("Game")
         Game game;
         game.set_level(Difficulty::EXPERT);
 
-        REQUIRE(game.board.WIDTH == 30);
-        REQUIRE(game.board.HEIGHT == 16);
+        REQUIRE(game.board.width == 30);
+        REQUIRE(game.board.height == 16);
         REQUIRE(game.num_bombs == 99);
     }
 
@@ -340,8 +340,8 @@ TEST_CASE("Game")
         Game game;
         game.set_level(Difficulty::CUSTOM, 5, 4, 7);
 
-        REQUIRE(game.board.WIDTH == 5);
-        REQUIRE(game.board.HEIGHT == 4);
+        REQUIRE(game.board.width == 5);
+        REQUIRE(game.board.height == 4);
         REQUIRE(game.num_bombs == 7);
     }
 
@@ -366,9 +366,9 @@ TEST_CASE("Game")
         REQUIRE(game.first_click);
 
         unsigned int count = 0;
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_bomb)
                 {
@@ -388,9 +388,9 @@ TEST_CASE("Game")
         REQUIRE(game.left_bombs() == 40);
 
         int count = 0;
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_bomb)
                 {
@@ -402,9 +402,9 @@ TEST_CASE("Game")
 
         REQUIRE(game.left_bombs() == 0);
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_flagged)
                 {
@@ -421,9 +421,9 @@ TEST_CASE("Game")
         game.set_level(Difficulty::INTERMEDIATE);
         game.start();
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_bomb)
                 {
@@ -434,9 +434,9 @@ TEST_CASE("Game")
 
         REQUIRE_FALSE(game.is_game_over());
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_bomb)
                 {
@@ -447,9 +447,9 @@ TEST_CASE("Game")
         }
         REQUIRE(game.is_game_over());
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (game.board.get_tile(x, y).is_bomb)
                 {
@@ -467,9 +467,9 @@ TEST_CASE("Game")
 
         REQUIRE_FALSE(game.is_game_won());
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 if (!game.board.get_tile(x, y).is_bomb)
                 {
@@ -488,9 +488,9 @@ TEST_CASE("Game")
 
         game.board.get_tile(0, 0).flag();
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 game.uncover_tile(x, y);
             }
@@ -504,9 +504,9 @@ TEST_CASE("Game")
         game.play_again();
         REQUIRE(game.has_started);
 
-        for (unsigned int x = 0; x < game.board.HEIGHT; x++)
+        for (unsigned int x = 0; x < game.board.height; x++)
         {
-            for (unsigned int y = 0; y < game.board.WIDTH; y++)
+            for (unsigned int y = 0; y < game.board.width; y++)
             {
                 REQUIRE(game.board.get_tile(x, y).is_covered);
                 REQUIRE(!game.board.get_tile(x, y).is_flagged);

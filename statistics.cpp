@@ -16,6 +16,7 @@ void ensure_data_dir_exists()
     if (!QDir().mkpath(dataDir))
     {
         std::cerr << "Error when trying to create data directory: " << dataDir.toStdString() << "\n";
+        exit(1);
     }
 }
 
@@ -27,7 +28,7 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         std::cerr << "Failed to open file for writing: " << file.errorString().toStdString() << "\n";
-        return;
+        exit(1);
     }
 
     QByteArray fileData = file.readAll();

@@ -7,7 +7,7 @@ TEST_CASE("Game")
     SECTION("BEGINNER")
     {
         Game game;
-        game.set_level(Difficulty::BEGINNER);
+        game.set_difficulty(Difficulty::BEGINNER);
 
         REQUIRE(game.get_board().width == 9);
         REQUIRE(game.get_board().height == 9);
@@ -17,7 +17,7 @@ TEST_CASE("Game")
     SECTION("INTERMEDIATE")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
 
         REQUIRE(game.get_board().width == 16);
         REQUIRE(game.get_board().height == 16);
@@ -27,7 +27,7 @@ TEST_CASE("Game")
     SECTION("EXPERT")
     {
         Game game;
-        game.set_level(Difficulty::EXPERT);
+        game.set_difficulty(Difficulty::EXPERT);
 
         REQUIRE(game.get_board().width == 30);
         REQUIRE(game.get_board().height == 16);
@@ -37,7 +37,7 @@ TEST_CASE("Game")
     SECTION("CUSTOM")
     {
         Game game;
-        game.set_level(Difficulty::CUSTOM, 5, 4, 7);
+        game.set_difficulty(Difficulty::CUSTOM, 5, 4, 7);
 
         REQUIRE(game.get_board().width == 5);
         REQUIRE(game.get_board().height == 4);
@@ -48,14 +48,14 @@ TEST_CASE("Game")
     {
         Game game1;
         Game game2;
-        REQUIRE_THROWS_AS(game1.set_level(CUSTOM, 6, 7), std::invalid_argument);
-        REQUIRE_THROWS_AS(game2.set_level(CUSTOM), std::invalid_argument);
+        REQUIRE_THROWS_AS(game1.set_difficulty(CUSTOM, 6, 7), std::invalid_argument);
+        REQUIRE_THROWS_AS(game2.set_difficulty(CUSTOM), std::invalid_argument);
     }
 
     SECTION("start()")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
 
         REQUIRE(!game.get_has_started());
         game.start();
@@ -78,7 +78,7 @@ TEST_CASE("Game")
     SECTION("left_bombs()")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
         game.start();
 
         REQUIRE(game.left_bombs() == 40);
@@ -108,7 +108,7 @@ TEST_CASE("Game")
     SECTION("is_game_over()")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
         game.start();
 
         for (unsigned int x = 0; x < game.get_board().height; x++) {
@@ -143,7 +143,7 @@ TEST_CASE("Game")
     SECTION("is_game_won()")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
         game.start();
 
         REQUIRE_FALSE(game.is_game_won());
@@ -161,7 +161,7 @@ TEST_CASE("Game")
     SECTION("play_again()")
     {
         Game game;
-        game.set_level(Difficulty::INTERMEDIATE);
+        game.set_difficulty(Difficulty::INTERMEDIATE);
         game.start();
 
         game.get_board().get_tile(0, 0).flag();

@@ -68,7 +68,7 @@ public:
     Difficulty get_difficulty() const;
 
     // Setters
-    void set_level(
+    void set_difficulty(
             Difficulty difficulty_to_set,
             unsigned int width = 0,
             unsigned int height = 0,

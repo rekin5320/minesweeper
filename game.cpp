@@ -42,7 +42,7 @@ Difficulty Game::get_difficulty() const {
     return difficulty;
 }
 
-void Game::set_level(Difficulty difficulty_to_set, unsigned int width, unsigned int height, unsigned int bombs) {
+void Game::set_difficulty(Difficulty difficulty_to_set, unsigned int width, unsigned int height, unsigned int bombs) {
     switch (difficulty_to_set)
     {
         case BEGINNER:
@@ -63,7 +63,7 @@ void Game::set_level(Difficulty difficulty_to_set, unsigned int width, unsigned 
         case CUSTOM:
             if (width == 0 || height == 0 || bombs == 0)
             {
-                throw std::invalid_argument("Missing parameters for custom level");
+                throw std::invalid_argument("Missing parameters for custom difficulty");
             }
             board = Board(width, height);
             num_bombs = bombs;
@@ -124,17 +124,17 @@ void Game::setupUi(QMainWindow& MainWindow) {
     ui.setupUi(&MainWindow);
     QObject::connect(ui.beginnerButton, &QPushButton::released, [this]()
     {
-        set_level(BEGINNER);
+        set_difficulty(BEGINNER);
         start();
         create_tiles(); });
     QObject::connect(ui.intermediateButton, &QPushButton::released, [this]()
     {
-        set_level(INTERMEDIATE);
+        set_difficulty(INTERMEDIATE);
         start();
         create_tiles(); });
     QObject::connect(ui.expertButton, &QPushButton::released, [this]()
     {
-        set_level(EXPERT);
+        set_difficulty(EXPERT);
         start();
         create_tiles(); });
     QObject::connect(ui.customButton, &QPushButton::released, [this]()
@@ -148,7 +148,7 @@ void Game::setupUi(QMainWindow& MainWindow) {
         std::cin >> height;
         std::cout << "Enter bombs: ";
         std::cin >> bombs;
-        set_level(CUSTOM, width, height, bombs);
+        set_difficulty(CUSTOM, width, height, bombs);
         start();
         create_tiles(); });
     QObject::connect(ui.mainbutton, &QPushButton::released, [this](){play_again(); });
@@ -318,7 +318,7 @@ void Game::save_game_result() const {
 
     QJsonObject gameResult;
 
-    gameResult["level"] = difficulty;  // save enum value
+    gameResult["difficulty"] = difficulty;  // save enum value
 
     if (difficulty == CUSTOM)
     {

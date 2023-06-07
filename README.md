@@ -68,7 +68,7 @@ cmake --build . -j$(nproc) --target test
 
 ## Regenerating UI `.hpp` file after modifications in Qt Designer
 ```sh
-uic-qt5 minesweeperUI.ui -o minesweeperUI.hpp
+uic minesweeper_ui.ui -o minesweeper_ui.hpp
 ```
 
 ## Credits

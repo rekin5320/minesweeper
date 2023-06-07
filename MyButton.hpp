@@ -1,30 +1,18 @@
-// TODO split to header and source files; temporarily for convenience it's together
 #pragma once
 #include <QMouseEvent>
 #include <QPushButton>
-
 
 class MyButton : public QPushButton {
     // Allows detection of right mouse button press in comparison to regular QPushButton
     Q_OBJECT
 
 public:
-    explicit MyButton(QWidget *parent = nullptr) : QPushButton(parent) {}
+    explicit MyButton(QWidget *parent = nullptr);
 
 signals:
     void leftButtonClicked();
     void rightButtonClicked();
 
 protected:
-    void mouseReleaseEvent(QMouseEvent *event) override {
-        if (event->button() == Qt::LeftButton) {
-            emit leftButtonClicked();
-        }
-        else if (event->button() == Qt::RightButton) {
-            emit rightButtonClicked();
-        }
-        else {
-            QPushButton::mouseReleaseEvent(event);
-        }
-    }
+    void mouseReleaseEvent(QMouseEvent *event) override;
 };

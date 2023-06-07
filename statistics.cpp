@@ -108,7 +108,7 @@ void save_game_result(Difficulty difficulty, int game_time_seconds, unsigned int
     file.close();
 }
 
-std::vector<int> get_highscores()
+QVector<int> get_highscores()
 {
     QString filePath = get_file_path();
     QFile file(filePath);
@@ -133,7 +133,7 @@ std::vector<int> get_highscores()
         highscoresObject = highscoresValue.toObject();
     }
 
-    std::vector<int> highscores;
+    QVector<int> highscores;
     for (auto difficulty_key : {"0", "1", "2"})
     {
         if (highscoresObject.contains(difficulty_key))

@@ -342,6 +342,26 @@ void Game::statistics_window() {
     QFormLayout formLayout(&dialog);
     QLabel blank, label_beginner, label_intermediate, label_expert;
 
+    auto highscores = get_highscores();
+    if (highscores[0] > 0) {
+        label_beginner.setText(QString::number(highscores[0]) + " s");
+    }
+    else {
+        label_beginner.setText("none");
+    }
+    if (highscores[1] > 0) {
+        label_intermediate.setText(QString::number(highscores[1]) + " s");
+    }
+    else {
+        label_intermediate.setText("none");
+    }
+    if (highscores[2] > 0) {
+        label_expert.setText(QString::number(highscores[2]) + " s");
+    }
+    else {
+        label_expert.setText("none");
+    }
+
     formLayout.addRow("HIGHSCORES", &blank);
     formLayout.addRow("Beginner:", &label_beginner);
     formLayout.addRow("Intermediate:", &label_intermediate);

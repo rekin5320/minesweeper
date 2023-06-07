@@ -107,3 +107,44 @@ void save_game_result(Difficulty difficulty, int game_time_seconds, unsigned int
     file.write(outJsonDocument.toJson());
     file.close();
 }
+
+std::vector<int> get_highscores()
+{
+    QString filePath = get_file_path();
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        std::cerr << "Failed to open file for reading: " << file.errorString().toStdString() << "\n";
+        exit(1);
+    }
+
+    QByteArray fileData = file.readAll();
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(fileData);
+
+    QJsonObject jsonGameData;
+    if (jsonDocument.isObject()) {
+        jsonGameData = jsonDocument.object();
+    }
+
+    QJsonObject highscoresObject;
+    if (jsonGameData.contains("highscores"))
+    {
+        QJsonValue highscoresValue = jsonGameData.value("highscores");
+        highscoresObject = highscoresValue.toObject();
+    }
+
+    std::vector<int> highscores;
+    for (auto difficulty_key : {"0", "1", "2"})
+    {
+        if (highscoresObject.contains(difficulty_key))
+        {
+            int difficulty_highscore = highscoresObject.value(difficulty_key).toInt();
+            highscores.push_back(difficulty_highscore);
+        }
+        else {
+            highscores.push_back(-1);
+        }
+    }
+
+    return highscores;
+}

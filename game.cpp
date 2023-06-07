@@ -163,6 +163,7 @@ void Game::setupUi(QMainWindow &MainWindow)
                      { set_tool_uncover(); });
     QObject::connect(ui.flagButton, &QPushButton::released, [this]()
                      { set_tool_flag(); });
+    QObject::connect(ui.statisticsButton, &QPushButton::released, [this](){statistics_window();});
     QObject::connect(&timer, &QTimer::timeout, [this]()
                      { update_timer(); });
     with_gui = true;

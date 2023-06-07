@@ -23,7 +23,7 @@ QString get_file_path()
     return get_data_dir() + "/game_results.json";
 }
 
-void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, unsigned int width, unsigned int height, unsigned int num_bombs)
+void save_game_result(Difficulty difficulty, int game_time_seconds, unsigned int width, unsigned int height, unsigned int num_bombs)
 {
     /*
      * File has following structure:
@@ -82,7 +82,19 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
         highscoresObject = highscoresValue.toObject();
     }
 
-    highscoresObject[QString::number(static_cast<int>(difficulty))] = static_cast<int>(game_time_seconds);  // TODO choose lower time
+    QString difficulty_key = QString::number(static_cast<int>(difficulty));
+    if (highscoresObject.contains(difficulty_key))
+    { // choose lower time if highscore exists
+        int difficulty_highscore = highscoresObject.value(difficulty_key).toInt();
+        if (game_time_seconds < difficulty_highscore)
+        {
+            highscoresObject[difficulty_key] = game_time_seconds;
+        }
+    }
+    else
+    {
+        highscoresObject[difficulty_key] = game_time_seconds;
+    }
 
     QJsonObject outGameData;
     outGameData["history"] = historyArray;

@@ -332,7 +332,7 @@ bool Game::is_game_won()
             return false;
         }
     }
-    save_game_result(difficulty, game_time_seconds, board.width, board.height, num_bombs);
+    save_game_result(difficulty, static_cast<int>(game_time_seconds), board.width, board.height, num_bombs);
     return true;
 }
 

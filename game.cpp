@@ -336,6 +336,21 @@ bool Game::is_game_won()
     return true;
 }
 
+void Game::statistics_window() {
+    QDialog dialog;
+    QFormLayout formLayout(&dialog);
+    QLabel blank, label_beginner, label_intermediate, label_expert;
+
+    formLayout.addRow("HIGHSCORES", &blank);
+    formLayout.addRow("Beginner:", &label_beginner);
+    formLayout.addRow("Intermediate:", &label_intermediate);
+    formLayout.addRow("Expert:", &label_expert);
+
+    dialog.setLayout(&formLayout);
+    dialog.setWindowTitle("Statistics");
+    dialog.exec();
+}
+
 std::string Game::get_formatted_elapsed_time() const
 {
     std::ostringstream oss;

@@ -11,8 +11,10 @@ Minesweeper is a classic single-player puzzle game where the objective is to cle
 The game starts with a board of covered cells. The player can uncover a cell by clicking on it. If the clicked cell contains a mine, the game ends. Otherwise, the cell is uncovered, and it reveals a number indicating the number of adjacent cells that contain mines. The player can then use this information to deduce the location of the mines and continue uncovering more cells. The game is won when all the non-mine cells are uncovered.
 
 ### Controls
-- Click on the button with a pickaxe icon: start uncovering cells
-- Click on the button with a flag icon: start flagging cells
+- Left click on tile: uncover (default) or flag (depending on selected tool)
+- Right click on tile: flag or unflag
+- Click on the button with a pickaxe icon: start uncovering cells with left click
+- Click on the button with a flag icon: start flagging cells with left click
 - Click on the button with an emoji icon: play again
 
 ### Difficulty Levels

@@ -1,4 +1,3 @@
-#include <iomanip>
 #include "emoji.hpp"
 #include "statistics.hpp"
 #include "game.hpp"

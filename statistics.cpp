@@ -20,7 +20,7 @@ QString get_data_dir()
 
 QString get_file_path()
 {
-    return get_data_dir() + "/game_results.json";
+    return get_data_dir() + "/data.json";
 }
 
 void save_game_result(Difficulty difficulty, int game_time_seconds, unsigned int width, unsigned int height, unsigned int num_bombs)

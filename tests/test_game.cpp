@@ -8,6 +8,7 @@ TEST_CASE("Game")
         Game game;
         game.set_difficulty(Difficulty::BEGINNER);
 
+        REQUIRE(game.get_difficulty() == Difficulty::BEGINNER);
         REQUIRE(game.get_board().width == 9);
         REQUIRE(game.get_board().height == 9);
         REQUIRE(game.get_num_bombs() == 10);
@@ -18,6 +19,7 @@ TEST_CASE("Game")
         Game game;
         game.set_difficulty(Difficulty::INTERMEDIATE);
 
+        REQUIRE(game.get_difficulty() == Difficulty::INTERMEDIATE);
         REQUIRE(game.get_board().width == 16);
         REQUIRE(game.get_board().height == 16);
         REQUIRE(game.get_num_bombs() == 40);
@@ -28,6 +30,7 @@ TEST_CASE("Game")
         Game game;
         game.set_difficulty(Difficulty::EXPERT);
 
+        REQUIRE(game.get_difficulty() == Difficulty::EXPERT);
         REQUIRE(game.get_board().width == 30);
         REQUIRE(game.get_board().height == 16);
         REQUIRE(game.get_num_bombs() == 99);
@@ -38,6 +41,7 @@ TEST_CASE("Game")
         Game game;
         game.set_difficulty(Difficulty::CUSTOM, 5, 4, 7);
 
+        REQUIRE(game.get_difficulty() == Difficulty::CUSTOM);
         REQUIRE(game.get_board().width == 5);
         REQUIRE(game.get_board().height == 4);
         REQUIRE(game.get_num_bombs() == 7);
@@ -49,6 +53,25 @@ TEST_CASE("Game")
         Game game2;
         REQUIRE_THROWS_AS(game1.set_difficulty(CUSTOM, 6, 7), std::invalid_argument);
         REQUIRE_THROWS_AS(game2.set_difficulty(CUSTOM), std::invalid_argument);
+    }
+
+    SECTION("set_tool_uncover()")
+    {
+        Game game;
+        game.set_tool_uncover();
+
+        REQUIRE(game.get_tool() == Tool::UNCOVER);
+    }
+
+    SECTION("set_tool_flag()")
+    {
+        Game game;
+
+        REQUIRE(game.get_tool() == Tool::UNCOVER);
+
+        game.set_tool_flag();
+
+        REQUIRE(game.get_tool() == Tool::FLAG);
     }
 
     SECTION("start()")
@@ -75,6 +98,15 @@ TEST_CASE("Game")
             }
         }
         REQUIRE(count == 40);
+    }
+
+    SECTION("uncover_tile()")
+    {
+        Game game;
+        game.set_difficulty(Difficulty::INTERMEDIATE);
+        game.start();
+        game.uncover_tile(12, 5);
+        REQUIRE(game.get_board().get_tile(12, 5).num_adjacent_bombs == 0);
     }
 
     SECTION("left_bombs()")

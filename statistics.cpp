@@ -71,9 +71,7 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
     QJsonArray historyArray;
     if (jsonGameData.contains("history")) {
         QJsonValue historyValue = jsonGameData.value("history");
-        if (historyValue.isArray()) {
-            historyArray = historyValue.toArray();
-        }
+        historyArray = historyValue.toArray();
     }
     historyArray.append(gameResultEntry);
 
@@ -81,10 +79,7 @@ void save_game_result(Difficulty difficulty, unsigned int game_time_seconds, uns
     if (jsonGameData.contains("highscores"))
     {
         QJsonValue highscoresValue = jsonGameData.value("highscores");
-        if (highscoresValue.isObject())
-        {
-            highscoresObject = highscoresValue.toObject();
-        }
+        highscoresObject = highscoresValue.toObject();
     }
 
     highscoresObject[QString::number(static_cast<int>(difficulty))] = static_cast<int>(game_time_seconds);  // TODO choose lower time

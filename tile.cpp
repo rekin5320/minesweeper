@@ -61,7 +61,7 @@ void Tile::uncover()
 
 QString Tile::get_color() const
 {
-    if (tile_colors.contains(num_adjacent_bombs))
+    if (tile_colors.contains(num_adjacent_bombs) && !is_bomb)
     {
         return tile_colors.at(num_adjacent_bombs);
     }

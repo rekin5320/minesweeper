@@ -185,10 +185,7 @@ void Game::create_tiles()
             }
             else if (tool == FLAG)
             {
-                if (!first_click)
-                {
-                    flag_or_unflag_tile(x, y);
-                }
+                flag_or_unflag_tile(x, y);
             } });
         QObject::connect(tile.button.get(), &MyButton::rightButtonClicked, [this, x, y](){flag_or_unflag_tile(x, y);});
     }
@@ -294,8 +291,11 @@ void Game::uncover_tile(unsigned int x, unsigned int y)
 
 void Game::flag_or_unflag_tile(unsigned int x, unsigned int y)
 {
-    board.flag_or_unflag_tile(x, y);
-    update_bombs_left();
+    if (!first_click)
+    {
+        board.flag_or_unflag_tile(x, y);
+        update_bombs_left();
+    }
 }
 
 int Game::left_bombs()

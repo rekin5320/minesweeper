@@ -1,6 +1,8 @@
 #pragma once
 #include "difficulty.hpp"
 
+std::string get_formatted_time(int time_seconds);
+
 QString get_data_dir();
 
 QString get_file_path();

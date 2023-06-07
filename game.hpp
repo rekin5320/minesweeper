@@ -94,7 +94,5 @@ public:
 
     void statistics_window();
 
-    std::string get_formatted_time(int time_seconds) const;
-
     static QString difficultyToString(Difficulty difficulty_input);
 };

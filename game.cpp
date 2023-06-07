@@ -372,14 +372,6 @@ void Game::statistics_window() {
     dialog.exec();
 }
 
-std::string Game::get_formatted_time(int time_seconds) const
-{
-    std::ostringstream oss;
-    oss << std::setfill('0') << std::setw(2) << time_seconds / 60 << ":";
-    oss << std::setfill('0') << std::setw(2) << time_seconds % 60;
-    return oss.str();
-}
-
 QString Game::difficultyToString(Difficulty difficulty_input)
 {
     switch (difficulty_input)

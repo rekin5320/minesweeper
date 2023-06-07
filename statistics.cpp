@@ -7,6 +7,14 @@
 #include <QStandardPaths>
 #include "statistics.hpp"
 
+std::string get_formatted_time(int time_seconds)
+{
+    std::ostringstream oss;
+    oss << std::setfill('0') << std::setw(2) << time_seconds / 60 << ":";
+    oss << std::setfill('0') << std::setw(2) << time_seconds % 60;
+    return oss.str();
+}
+
 QString get_data_dir()
 {
     QString dataDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);

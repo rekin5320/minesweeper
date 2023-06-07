@@ -30,6 +30,7 @@ add_link_options(${COMPILE_OPTIONS})
 add_library(minesweeper_lib SHARED
     position.hpp position.cpp
     emoji.hpp emoji.cpp
+    MyButton.hpp
     tile.hpp tile.cpp
     board.hpp board.cpp
     difficulty.hpp

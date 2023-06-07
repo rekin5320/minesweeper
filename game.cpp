@@ -178,7 +178,7 @@ void Game::create_tiles()
         tile.create_button();
         ui.gridLayout->addWidget(tile.button.get(), static_cast<int>(y), static_cast<int>(x));
         tile.button->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        QObject::connect(tile.button.get(), &QPushButton::released, [this, x, y]()
+        QObject::connect(tile.button.get(), &MyButton::leftButtonClicked, [this, x, y]()
                          {
             if (tool == UNCOVER)
             {
@@ -191,6 +191,7 @@ void Game::create_tiles()
                     flag_or_unflag_tile(x, y);
                 }
             } });
+        QObject::connect(tile.button.get(), &MyButton::rightButtonClicked, [this, x, y](){flag_or_unflag_tile(x, y);});
     }
 }
 

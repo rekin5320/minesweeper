@@ -1,4 +1,5 @@
 // TODO split to header and source files; temporarily for convenience it's together
+#pragma once
 #include <QMouseEvent>
 #include <QPushButton>
 

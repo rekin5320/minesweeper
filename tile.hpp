@@ -2,6 +2,7 @@
 #include <memory>
 #include <QPushButton>
 #include <QString>
+#include "MyButton.hpp"
 
 extern const QString stylesheet_covered;
 
@@ -29,7 +30,7 @@ public:
     bool is_covered;
     bool is_flagged;
     unsigned int num_adjacent_bombs;
-    std::unique_ptr<QPushButton> button;
+    std::unique_ptr<MyButton> button;
 
     Tile(unsigned int x, unsigned y) : with_gui(false), x(x), y(y), is_bomb(false), is_covered(true), is_flagged(false), num_adjacent_bombs(0){};
 

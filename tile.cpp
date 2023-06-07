@@ -2,7 +2,7 @@
 #include "emoji.hpp"
 
 const QString stylesheet_covered = R"(
-QPushButton {
+MyButton {
     border: 1px solid darkgray;
     border-radius: 1px;
     background: qradialgradient(cx: 0.4, cy: -0.1, fx: 0.4, fy: -0.1, radius: 1.35, stop: 0 rgba(255, 255, 255, 0.8), stop: 1 rgba(197, 197, 197, 0.8));
@@ -14,7 +14,7 @@ QPushButton:hover {
 )";
 
 const QString stylesheet_uncovered = R"(
-QPushButton {
+MyButton {
 	color: %1;
     font-size: 18px;
 	font-weight: bold;
@@ -95,7 +95,7 @@ void Tile::unflag()
 void Tile::create_button()
 {
     with_gui = true;
-    button = std::make_unique<QPushButton>();
+    button = std::make_unique<MyButton>();
     button->setFixedSize(30, 30);
     button->setStyleSheet(stylesheet_covered);
 }

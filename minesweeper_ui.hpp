@@ -192,10 +192,10 @@ public:
         buttonLayout->setObjectName(QString::fromUtf8("buttonLayout"));
         statisticsButton = new QPushButton(centralwidget);
         statisticsButton->setObjectName(QString::fromUtf8("statisticsButton"));
-        statisticsButton->setMinimumSize(QSize(45, 45));
-        statisticsButton->setMaximumSize(QSize(45, 45));
+        statisticsButton->setMinimumSize(QSize(50, 50));
+        statisticsButton->setMaximumSize(QSize(50, 50));
         QFont font1;
-        font1.setPointSize(20);
+        font1.setPointSize(22);
         statisticsButton->setFont(font1);
         statisticsButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: white;\n"

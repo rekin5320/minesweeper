@@ -44,6 +44,7 @@ public:
     QGridLayout *gridLayout;
     QSpacerItem *verticalSpacer_2;
     QHBoxLayout *buttonLayout;
+    QPushButton *statisticsButton;
     QPushButton *beginnerButton;
     QPushButton *intermediateButton;
     QPushButton *expertButton;
@@ -189,6 +190,24 @@ public:
 
         buttonLayout = new QHBoxLayout();
         buttonLayout->setObjectName(QString::fromUtf8("buttonLayout"));
+        statisticsButton = new QPushButton(centralwidget);
+        statisticsButton->setObjectName(QString::fromUtf8("statisticsButton"));
+        statisticsButton->setMinimumSize(QSize(45, 45));
+        statisticsButton->setMaximumSize(QSize(45, 45));
+        QFont font1;
+        font1.setPointSize(20);
+        statisticsButton->setFont(font1);
+        statisticsButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: white;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #ddd;\n"
+"}\n"
+""));
+
+        buttonLayout->addWidget(statisticsButton);
+
         beginnerButton = new QPushButton(centralwidget);
         beginnerButton->setObjectName(QString::fromUtf8("beginnerButton"));
         sizePolicy.setHeightForWidth(beginnerButton->sizePolicy().hasHeightForWidth());
@@ -196,12 +215,12 @@ public:
         beginnerButton->setMinimumSize(QSize(135, 32));
         beginnerButton->setMaximumSize(QSize(135, 32));
         beginnerButton->setBaseSize(QSize(150, 30));
-        QFont font1;
-        font1.setPointSize(12);
-        beginnerButton->setFont(font1);
+        QFont font2;
+        font2.setPointSize(12);
+        beginnerButton->setFont(font2);
         beginnerButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: white;\n"
-"    border-radius: 10px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #ddd;\n"
@@ -217,10 +236,10 @@ public:
         intermediateButton->setMinimumSize(QSize(135, 32));
         intermediateButton->setMaximumSize(QSize(135, 32));
         intermediateButton->setBaseSize(QSize(100, 30));
-        intermediateButton->setFont(font1);
+        intermediateButton->setFont(font2);
         intermediateButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: white;\n"
-"    border-radius: 10px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #ddd;\n"
@@ -236,10 +255,10 @@ public:
         expertButton->setMinimumSize(QSize(135, 32));
         expertButton->setMaximumSize(QSize(135, 32));
         expertButton->setBaseSize(QSize(150, 30));
-        expertButton->setFont(font1);
+        expertButton->setFont(font2);
         expertButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: white;\n"
-"    border-radius: 10px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #ddd;\n"
@@ -255,10 +274,10 @@ public:
         customButton->setMinimumSize(QSize(135, 32));
         customButton->setMaximumSize(QSize(135, 32));
         customButton->setBaseSize(QSize(100, 30));
-        customButton->setFont(font1);
+        customButton->setFont(font2);
         customButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    background-color: white;\n"
-"    border-radius: 10px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #ddd;\n"
@@ -302,6 +321,7 @@ public:
 "                    border-radius: 10px;\n"
 "                }\n"
 "            ", nullptr));
+        statisticsButton->setText(QCoreApplication::translate("MainWindow", "\360\237\223\212", nullptr));
         beginnerButton->setText(QCoreApplication::translate("MainWindow", "BEGINNER", nullptr));
         intermediateButton->setText(QCoreApplication::translate("MainWindow", "INTERMEDIATE", nullptr));
         expertButton->setText(QCoreApplication::translate("MainWindow", "EXPERT", nullptr));

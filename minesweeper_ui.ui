@@ -334,6 +334,40 @@ QPushButton:hover {
     <item>
      <layout class="QHBoxLayout" name="buttonLayout">
       <item>
+       <widget class="QPushButton" name="statisticsButton">
+        <property name="minimumSize">
+         <size>
+          <width>45</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>45</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: white;
+    border-radius: 8px;
+}
+QPushButton:hover {
+    background-color: #ddd;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>📊</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="beginnerButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -367,7 +401,7 @@ QPushButton:hover {
         <property name="styleSheet">
          <string notr="true">QPushButton {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 QPushButton:hover {
     background-color: #ddd;
@@ -413,7 +447,7 @@ QPushButton:hover {
         <property name="styleSheet">
          <string notr="true">QPushButton {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 QPushButton:hover {
     background-color: #ddd;
@@ -459,7 +493,7 @@ QPushButton:hover {
         <property name="styleSheet">
          <string notr="true">QPushButton {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 QPushButton:hover {
     background-color: #ddd;
@@ -505,7 +539,7 @@ QPushButton:hover {
         <property name="styleSheet">
          <string notr="true">QPushButton {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 QPushButton:hover {
     background-color: #ddd;

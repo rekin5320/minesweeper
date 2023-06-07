@@ -92,7 +92,7 @@ public:
 
     bool is_game_won();
 
-    std::string get_formatted_elapsed_time() const;
+    void statistics_window();
 
     static QString difficultyToString(Difficulty difficulty_input);
 };

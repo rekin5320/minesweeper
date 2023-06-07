@@ -163,6 +163,7 @@ void Game::setupUi(QMainWindow &MainWindow)
                      { set_tool_uncover(); });
     QObject::connect(ui.flagButton, &QPushButton::released, [this]()
                      { set_tool_flag(); });
+    QObject::connect(ui.statisticsButton, &QPushButton::released, [this](){statistics_window();});
     QObject::connect(&timer, &QTimer::timeout, [this]()
                      { update_timer(); });
     with_gui = true;
@@ -273,7 +274,7 @@ void Game::uncover_tile(unsigned int x, unsigned int y)
         if (is_game_over())
         {
             has_ended = true;
-            std::cout << "Game over! You lost the game in: " << get_formatted_elapsed_time() << "!\n";
+            std::cout << "Game over! You lost the game in: " << get_formatted_time(game_time_seconds) << "!\n";
             if (with_gui)
             {
                 ui.mainbutton->setText(Emoji::SadFace);
@@ -282,7 +283,7 @@ void Game::uncover_tile(unsigned int x, unsigned int y)
         else if (is_game_won())
         {
             has_ended = true;
-            std::cout << "Congratulations! You won the game in: " << get_formatted_elapsed_time() << "!\n";
+            std::cout << "Congratulations! You won the game in: " << get_formatted_time(game_time_seconds) << "!\n";
             if (with_gui)
             {
                 ui.mainbutton->setText(Emoji::CoolFace);
@@ -332,16 +333,43 @@ bool Game::is_game_won()
             return false;
         }
     }
-    save_game_result(difficulty, static_cast<int>(game_time_seconds), board.width, board.height, num_bombs);
+    save_game_result(difficulty, game_time_seconds, board.width, board.height, num_bombs);
     return true;
 }
 
-std::string Game::get_formatted_elapsed_time() const
-{
-    std::ostringstream oss;
-    oss << std::setfill('0') << std::setw(2) << game_time_seconds / 60 << ":";
-    oss << std::setfill('0') << std::setw(2) << game_time_seconds % 60;
-    return oss.str();
+void Game::statistics_window() {
+    QDialog dialog;
+    QFormLayout formLayout(&dialog);
+    QLabel blank, label_beginner, label_intermediate, label_expert;
+
+    auto highscores = get_highscores();
+    if (highscores[0] > 0) {
+        label_beginner.setText(QString::fromStdString(get_formatted_time(highscores[0])));
+    }
+    else {
+        label_beginner.setText("none");
+    }
+    if (highscores[1] > 0) {
+        label_intermediate.setText(QString::fromStdString(get_formatted_time(highscores[1])));
+    }
+    else {
+        label_intermediate.setText("none");
+    }
+    if (highscores[2] > 0) {
+        label_expert.setText(QString::fromStdString(get_formatted_time(highscores[2])));
+    }
+    else {
+        label_expert.setText("none");
+    }
+
+    formLayout.addRow("HIGHSCORES", &blank);
+    formLayout.addRow("Beginner:", &label_beginner);
+    formLayout.addRow("Intermediate:", &label_intermediate);
+    formLayout.addRow("Expert:", &label_expert);
+
+    dialog.setLayout(&formLayout);
+    dialog.setWindowTitle("Statistics");
+    dialog.exec();
 }
 
 QString Game::difficultyToString(Difficulty difficulty_input)

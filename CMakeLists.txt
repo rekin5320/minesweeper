@@ -27,7 +27,7 @@ set(COMPILE_OPTIONS "-Wall" "-Wextra" "-Werror" "-pedantic" "-fsanitize=undefine
 add_compile_options(${COMPILE_OPTIONS})
 add_link_options(${COMPILE_OPTIONS})
 
-add_library(minesweeper_lib SHARED
+add_library(minesweeper_lib STATIC
     position.hpp position.cpp
     emoji.hpp emoji.cpp
     MyButton.hpp MyButton.cpp
